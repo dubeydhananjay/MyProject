@@ -1,0 +1,7 @@
+com\webdesign\controller\DesignController.class
+com\webdesign\controller\CategoryController.class
+com\webdesign\model\Category.class
+com\webdesign\model\Person.class
+com\webdesign\daoimpl\CategoryDAOImpl.class
+com\webdesign\service\CategoryService.class
+com\webdesign\dao\CategoryDao.class
