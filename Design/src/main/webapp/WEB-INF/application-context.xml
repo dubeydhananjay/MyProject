@@ -22,7 +22,7 @@
 		<property name="username" value="demo" />
 		<property name="password" value="" />
 	</bean>
-	<!-- Hibernate 4 SessionFactory Bean definition -->
+	<!-- Hibernate 5 SessionFactory Bean definition -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -50,5 +50,7 @@
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	
 	<mvc:annotation-driven />
 </beans>
