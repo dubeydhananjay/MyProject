@@ -27,47 +27,60 @@
       </button>
       <div class="collapse navbar-collapse" id="myNewNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/Design/categories">Categories</a></li>
-        <li><a href="/Design/subCategories">SubCategories</a></li>
-        <li><a href="/Design/suppliers">Suppliers</a></li>
-        <li><a href="/Design/products">Products</a></li>
-        <li><a href="/Design/registration">Registration</a></li>
-        <li><a href="/Design">Home</a></li>
+        <li class="active"><a href="categories">Categories</a></li>
+        <li><a href="subCategories">SubCategories</a></li>
+        <li><a href="suppliers">Suppliers</a></li>
+        <li><a href="products">Products</a></li>
+        <li><a href="registration">Registration</a></li>
+        <li><a href="home">Home</a></li>
       </ul>
       </div>
     </div>
   </nav>
 <br>
-          <form:form method="POST" action="product" commandName="products" modelAttribute="products" >
+          <form:form method="POST" action="product" commandName="products" modelAttribute="products" enctype="multipart/form-data" >
    			<form:input path="productId" hidden="true" />
    <table>
    <tr>
   <td><label>select supplier</label></td>
    <td><form:select path="supplier.supplierName" items="${supplierList}" itemValue="supplierName" itemName="supplierName" itemLabel="supplierName"></form:select></td>
-    <!--  <td><form:input path="supplier.supplierName" items="${supplierList}" itemValue="supplierName" itemName="supplierName" itemLabel="${supplierName}" hidden="true"/></td>-->  
+      
    </tr>
    <tr>
   <td><label>select subcategory</label></td>
    <td><form:select path="subCategory.subCategoryName" items="${subCategoryList}" itemValue="subCategoryName" itemName="subCategoryName" itemLabel="subCategoryName"></form:select></td>
-  <!-- <td><form:input path="subCategory.subCategoryName" items="${subCategoryList}" itemValue="subCategoryName" itemName="subCategoryName" itemLabel="subCategoryName" hidden="true"/></td>--> 
+   
    </tr>
    
+ 
     <tr>
         <td><form:label path="productName">Product Name</form:label></td>
         <td><form:input path="productName" /></td>
         <td><form:errors path="productName"></form:errors>
     </tr>
-    
-    <tr>
+   <tr>
+   <td><label>select file</label></td>
+   <td><form:input type="file" name="file" path="uploadFiles"></form:input></td>
+   </tr> 
+   <tr>
+   <td><label>name</label></td>
+   <td><input type="text" name="name"></td>
+   </tr> 
+   <tr>
+   
+   <td colspan="2"><input type="submit" value="Upload"/></td>
+   </tr>
+   
+    <%-- <tr>
         <td colspan="2">
             <input type="submit" value="Submit"/>
         </td>
-    </tr>
+    </tr>--%>
 </table>  
 </form:form>
           
         <br><br>
-<!-- ------------------------------------------------------------------------------------------ -->
+       <!-- ------------------------------------------------------------------------------------------ -->
           <div ng-app="getProducts" ng-controller="productController">
           <table><tr><td>Search</td>
         <td><input type="text" ng-model="test"></td></tr></table><br>

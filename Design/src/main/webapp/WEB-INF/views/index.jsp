@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page isELIgnored="false" %>
  
 <html>
 <head>
@@ -67,6 +71,8 @@ input[type=text]:focus {
   
   </style></head>
     <body>
+    
+    
     <div class="container-fluid">
     <div class="col-sm-9">
   <h2>Welcome to web Design Demo</h2></div>
@@ -91,19 +97,34 @@ input[type=text]:focus {
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="/Design/categories">Categories <span class="caret"></span></a>
+        <c:forEach items="${categoriesList}"></c:forEach>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Essential Oils</a></li>
             <li><a href="#">Organic Soaps</a></li>
             <li><a href="#">Diffuser</a></li>
           </ul>
         </li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact Us</a></li>
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#mySignUpModal"> Sign Up</button></a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myLoginModal"> Login</button></a></li>
+      <c:if test="${pageContext.request.userPrincipal.name!=null}">
+       <li>Welcome
+       <sec:authorize access="isAuthenticated()">  
+        <strong><sec:authentication property="principal.username"/></strong>
+        </sec:authorize>
+        </li>
+        </c:if>
+        
+        <c:if test="${pageContext.request.userPrincipal.name!=null}">
+        <sec:authorize access="isAuthenticated()"> 
+        <li><a href="perform_logout">Logout</a></li>
+        </sec:authorize>
+        
+        </c:if>
+        <c:if test="${pageContext.request.userPrincipal.name==null}">
+        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </c:if>
       </ul>
     </div>
     </div>
@@ -117,11 +138,13 @@ input[type=text]:focus {
       </button>
       <div class="collapse navbar-collapse" id="myNewNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/Design/categories">Categories</a></li>
-        <li><a href="/Design/subCategories">SubCategories</a></li>
-        <li><a href="/Design/suppliers">Suppliers</a></li>
-        <li><a href="/Design/products">Products</a></li>
-        <li><a href="/Design/registration">Registration</a></li>
+        <li class="active"><a href="categories">Categories</a></li>
+        <li><a href="subCategories">SubCategories</a></li>
+        <li><a href="suppliers">Suppliers</a></li>
+        <li><a href="products">Products</a></li>
+        <li><a href="registration">Registration</a></li>
+        
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#mySignUpModal"> Sign Up</button></a></li>
       </ul>
       </div>
     </div>
@@ -163,7 +186,7 @@ input[type=text]:focus {
         </div>
       </div>
       </div> </div> 
-      <!-- ------------------Login Modal--------------------------------------------- -->
+      <%--  ------------------Login Modal--------------------------------------------- 
 <div class="modal fade" id="myLoginModal" role="dialog">
     <div class="modal-dialog">
     
@@ -194,7 +217,7 @@ input[type=text]:focus {
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
-      </div></div>
+      </div></div>--%>
 
   <%-- ----------------------------------CAROUSEL------------------------------------- --%>
   
@@ -210,19 +233,19 @@ input[type=text]:focus {
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img class="img-responsive" src="image/Beach.jpg"  alt="Beach" >
+        <img class="img-responsive" src="image/bath-powder.jpg"  alt="Beach" >
       </div>
 
       <div class="item">
-        <img class="img-responsive" src="image/Elephant.jpg" alt="Elephant">
+        <img class="img-responsive" src="image/Essential-Oil-Diffuser.jpg" alt="Elephant">
       </div>
     
       <div class="item">
-        <img class="img-responsive" src="image/mountain.jpg" alt="mountain">
+        <img class="img-responsive" src="image/herbaloils.jpg" alt="mountain">
       </div>
 
       <div class="item">
-        <img class="img-responsive" src="image/river_mountain.jpg">
+        <img class="img-responsive" src="image/Home-Fragrance.jpg">
       </div>
     </div>
 
@@ -241,12 +264,12 @@ input[type=text]:focus {
   <div class="row">
   
     <div class="col-sm-4">
-      <img id="div1" src="image/Eminem.jpg" class="img-responsive" style="width:100%" alt="Eminem">
+      <img id="div1" src="image/essential-oil-diffuser1.jpg" class="img-responsive" style="width:100%" alt="Eminem">
       <p>Current Project</p>
     </div>
     
     <div class="col-sm-4" >
-      <img id="div2" src="image/tile.jpg" class="img-responsive" style="width:100%" alt="tile">
+      <img id="div2" src="image/essentialoils.jpg" class="img-responsive" style="width:100%" alt="tile">
       <p>Project</p>
     </div>
     <div class="col-sm-4">

@@ -1,9 +1,15 @@
 package com.webdesign.model;
 import javax.persistence.Id;
+
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
+
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +24,18 @@ private int productId;
 private String productName;
 private int subCategoryId;
 private int supplierId;
+@Transient
+private MultipartFile uploadFiles;
+
+
+
+public MultipartFile getUploadFiles() {
+	return uploadFiles;
+}
+
+public void setUploadFiles(MultipartFile uploadFiles) {
+	this.uploadFiles = uploadFiles;
+}
 
 @ManyToOne
 @JoinColumn(name ="subCategoryId" ,nullable=false,insertable=false, updatable=false)

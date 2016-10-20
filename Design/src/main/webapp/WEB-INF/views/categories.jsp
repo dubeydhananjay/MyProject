@@ -28,12 +28,12 @@
       </button>
       <div class="collapse navbar-collapse" id="myNewNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/Design/categories">Categories</a></li>
-        <li><a href="/Design/subCategories">SubCategories</a></li>
-        <li><a href="/Design/suppliers">Suppliers</a></li>
-        <li><a href="/Design/products">Products</a></li>
-        <li><a href="/Design/registration">Registration</a></li>
-        <li><a href="/Design">Home</a></li>
+        <li class="active"><a href="categories">Categories</a></li>
+        <li><a href="subCategories">SubCategories</a></li>
+        <li><a href="suppliers">Suppliers</a></li>
+        <li><a href="products">Products</a></li>
+        <li><a href="registration">Registration</a></li>
+        <li><a href="home">Home</a></li>
       </ul>
       </div>
     </div>

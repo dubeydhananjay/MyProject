@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+   <!-- We will be adding all security related configurations -->
+   
+   <authentication-manager>
+   <authentication-provider>
+   <jdbc-user-service data-source-ref="dataSource"
+   users-by-username-query="select username, password, enabled from user where username=?;"
+   authorities-by-username-query="select u.username,r.role from user u,userrole ur,role r where u.userid=ur.userid and r.roleid=ur.roleid and u.username=?;" />
+   </authentication-provider>
+   </authentication-manager>
+   
+   <http auto-config="true">
+   <csrf disabled="true"/>
+   <intercept-url pattern="/" access="permitAll"/>
+   <form-login login-page="/login" default-target-url="/" login-processing-url="/perform_login"
+   authentication-failure-url="/login?error" username-parameter="username"
+   password-parameter="password"/>
+   <logout logout-success-url="/perform_logout"/>
+   </http>
+    </beans:beans>  
