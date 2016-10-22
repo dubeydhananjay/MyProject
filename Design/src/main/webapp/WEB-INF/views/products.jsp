@@ -27,10 +27,10 @@
       </button>
       <div class="collapse navbar-collapse" id="myNewNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="categories">Categories</a></li>
+        <li ><a href="categories">Categories</a></li>
         <li><a href="subCategories">SubCategories</a></li>
         <li><a href="suppliers">Suppliers</a></li>
-        <li><a href="products">Products</a></li>
+        <li class="active"><a href="products">Products</a></li>
         <li><a href="registration">Registration</a></li>
         <li><a href="home">Home</a></li>
       </ul>
@@ -101,8 +101,12 @@
 				  <td>{{list.productName}}</td>
 				  <td>{{list.subCategoryId}}</td>
 				  <td>{{list.supplierId}}</td>
+				  
 				  <td><a href="editProduct-{{list.productId}}">edit</a></td>
-				  <td><a href="deleteProduct-{{list.productId}}">delete</a></td></tr></tbody></table>
+				  <td><a href="deleteProduct-{{list.productId}}">delete</a></td>
+				  <td><img src="resources/image/{{list.productId}}.jpg" width="100px" height="100px"></td>
+				  <td><a href="viewproduct-{{list.productId}}-product">View</a>
+				  </tr></tbody></table>
 				  </div>
 				  <script type="text/javascript">
 				  angular.module('getProducts',[]).controller('productController',function($scope)

@@ -9,7 +9,7 @@ import javax.persistence.Transient;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.google.gson.annotations.Expose;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +19,14 @@ import javax.persistence.GenerationType;
 public class Product {
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
+@Expose
 private int productId;
-@NotEmpty(message="Product name cannot be empty") 
+@NotEmpty(message="Product name cannot be empty")
+@Expose
 private String productName;
+@Expose
 private int subCategoryId;
+@Expose
 private int supplierId;
 @Transient
 private MultipartFile uploadFiles;

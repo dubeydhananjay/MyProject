@@ -96,17 +96,24 @@ input[type=text]:focus {
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
+        <c:forEach items="${categoriesList}" var="category">
         <li class="dropdown">
-        <c:forEach items="${categoriesList}"></c:forEach>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Essential Oils</a></li>
-            <li><a href="#">Organic Soaps</a></li>
-            <li><a href="#">Diffuser</a></li>
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#">${category.categoryName} <span class="caret"></span></a>
+          <ul class="dropdown-menu"><c:forEach items="${category.subCategory}" var="subCategory">
+           
+            <li class="dropdown">
+            	<a class="dropdown-toggle" data-toggle="dropdown" href="#">${subCategory.subCategoryName} <span class="caret"></span></a>
+            	
+            	<ul class="dropdown-menu"><c:forEach items="${subCategory.product}" var="product">
+            	<li><a href="#">${product.productName}</a></li>        	
+            	</c:forEach>
+            </ul>
+            	
+            	</li>
+            </c:forEach>
           </ul>
-        </li>
-        
-      </ul>
+        </li></c:forEach>
+        </ul>
       <ul class="nav navbar-nav navbar-right">
       <c:if test="${pageContext.request.userPrincipal.name!=null}">
        <li>Welcome
@@ -138,7 +145,7 @@ input[type=text]:focus {
       </button>
       <div class="collapse navbar-collapse" id="myNewNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="categories">Categories</a></li>
+        <li ><a href="categories">Categories</a></li>
         <li><a href="subCategories">SubCategories</a></li>
         <li><a href="suppliers">Suppliers</a></li>
         <li><a href="products">Products</a></li>

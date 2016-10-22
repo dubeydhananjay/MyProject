@@ -27,6 +27,7 @@ public class CategoryController
 	public String listCategories(Model model) {
 		model.addAttribute("categories", new Category());
 		model.addAttribute("categoriesList", this.categoryService.listCategories());
+		//model.addAttribute("categoriesList", this.categoryService.listCategory());
 		return "categories";
 	}
 	@RequestMapping("/category")

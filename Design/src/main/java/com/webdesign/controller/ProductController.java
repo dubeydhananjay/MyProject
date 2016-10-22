@@ -20,8 +20,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.webdesign.model.Supplier;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.webdesign.model.Product;
 import com.webdesign.model.SubCategoryModel;
 
@@ -120,40 +123,18 @@ public class ProductController {
 		return "redirect:/products";
 	}
 	
-	
-	/*@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	
-	public String uploadFileHandler(@RequestParam("name") String name, @RequestParam("file") Product product) {
 
-		if (!product.getUploadFiles().isEmpty()) {
-			try {
-				byte[] bytes = ((MultipartFile) product.getUploadFiles()).getBytes();
-
-				// Creating the directory to store file
-				String rootPath = System.getProperty("C://Users//Dhananjay//Documents//Eclipse_Proj//Design//src//main//webapp//image");
-				//String rootPath = "C:\\Users\\Dhananjay\\Documents\\Eclipse_Proj\\Design\\src\\main\\webapp\\image";
-				File dir = new File(rootPath + File.separator + "tmpFiles");
-				if (!dir.exists())
-					dir.mkdirs();
-
-				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath()
-						+ File.separator + name);
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
-
-				
-				return "You successfully uploaded file=" + name;
-			} catch (Exception e) {
-				return "You failed to upload " + name + " => " + e.getMessage();
-			}
-		} else {
-			return "You failed to upload " + name
-					+ " because the file was empty.";
-		}
+	@RequestMapping("/viewproduct-{productId}-product")
+	public ModelAndView productData(@ModelAttribute("product") @PathVariable("productId")  int productId, Product product) {
+		Gson pGson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		product=productService.getById(productId);
+		String pJson=pGson.toJson(product);
 		
-	}*/
+		ModelAndView model = new ModelAndView("viewproduct");
+		model.addObject("product", pJson);
+		return model;
+		
+	}
+
 
 }

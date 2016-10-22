@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.webdesign.dao.CategoryDao;
 import com.webdesign.model.Category;
 @Repository
@@ -36,7 +37,7 @@ public class CategoryDAOImpl implements CategoryDao
 		@SuppressWarnings({  "unchecked" })
 		List<Category> categoryList=this.sessionFactory.getCurrentSession().createQuery("from Category").getResultList();
 		//return categoryList;
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		String json = gson.toJson(categoryList);
 		return json;
 	}

@@ -1,14 +1,12 @@
 package com.webdesign.daoimpl;
 
 import java.util.List;
-
-
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.webdesign.dao.SubCategoryDao;
 
 import com.webdesign.model.SubCategoryModel;
@@ -28,9 +26,9 @@ public class SubCategoryDAOImpl implements SubCategoryDao
 		@SuppressWarnings({  "unchecked" })
 		List<SubCategoryModel> listSubCategories=this.sessionFactory.getCurrentSession().createQuery("from SubCategoryModel").getResultList();
 		//return categoryList;
-		Gson gs = new Gson();
-		String js = gs.toJson(listSubCategories);
-		return js;
+		Gson gs=new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String subcategoriesjson=gs.toJson(listSubCategories);
+		return subcategoriesjson;
 		
 	}
 	public List<SubCategoryModel> listSubCategory() {
