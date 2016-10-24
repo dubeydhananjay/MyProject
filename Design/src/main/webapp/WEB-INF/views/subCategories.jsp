@@ -34,6 +34,7 @@
         <li><a href="products">Products</a></li>
         <li><a href="registration">Registration</a></li>
         <li><a href="home">Home</a></li>
+        <li><a href="productSpecification">Product Specification</a></li>
       </ul>
       </div>
     </div>

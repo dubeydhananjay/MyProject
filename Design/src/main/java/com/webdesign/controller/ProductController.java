@@ -29,6 +29,7 @@ import com.webdesign.model.Product;
 import com.webdesign.model.SubCategoryModel;
 
 import com.webdesign.service.ProductService;
+import com.webdesign.service.ProductSpecificationService;
 import com.webdesign.service.SubCategoryService;
 import com.webdesign.service.SupplierService;
 
@@ -43,6 +44,8 @@ public class ProductController {
 	@Autowired
 	private SubCategoryService subCategoryService;
 	
+	@Autowired
+	private ProductSpecificationService productSpecificationService;
 	@RequestMapping( "/products")
 	public String listProducts(Model model) {
 		model.addAttribute("products", new Product());
@@ -125,13 +128,14 @@ public class ProductController {
 	
 
 	@RequestMapping("/viewproduct-{productId}-product")
-	public ModelAndView productData(@ModelAttribute("product") @PathVariable("productId")  int productId, Product product) {
+	public ModelAndView productData(@ModelAttribute("product") @PathVariable("productId")  int productId, Product product, Model newModel) {
 		Gson pGson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		product=productService.getById(productId);
 		String pJson=pGson.toJson(product);
-		
+		//newModel.addAttribute("listProductSpecifications",this.productSpecificationService.listProductSpecifications());
 		ModelAndView model = new ModelAndView("viewproduct");
 		model.addObject("product", pJson);
+		model.addObject("listProductSpecifications",this.productSpecificationService.listProductSpecifications());
 		return model;
 		
 	}

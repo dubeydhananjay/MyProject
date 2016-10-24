@@ -11,8 +11,10 @@
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="resources/css/megamenu.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="resources/js/bootstrap.min.js"></script>
+  <script src="resources/js/megamenu.js"></script>
   <style>
   .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
@@ -71,8 +73,6 @@ input[type=text]:focus {
   
   </style></head>
     <body>
-    
-    
     <div class="container-fluid">
     <div class="col-sm-9">
   <h2>Welcome to web Design Demo</h2></div>
@@ -83,59 +83,64 @@ input[type=text]:focus {
         
 </form></div></div>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
+  <nav class="navbar navbar-inverse">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Simple WEB DESIGN</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <c:forEach items="${categoriesList}" var="category">
-        <li class="dropdown">
-         <a class="dropdown-toggle" data-toggle="dropdown" href="#">${category.categoryName} <span class="caret"></span></a>
-          <ul class="dropdown-menu"><c:forEach items="${category.subCategory}" var="subCategory">
-           
-            <li class="dropdown">
-            	<a class="dropdown-toggle" data-toggle="dropdown" href="#">${subCategory.subCategoryName} <span class="caret"></span></a>
-            	
-            	<ul class="dropdown-menu"><c:forEach items="${subCategory.product}" var="product">
-            	<li><a href="#">${product.productName}</a></li>        	
-            	</c:forEach>
-            </ul>
-            	
-            	</li>
-            </c:forEach>
-          </ul>
-        </li></c:forEach>
-        </ul>
-      <ul class="nav navbar-nav navbar-right">
-      <c:if test="${pageContext.request.userPrincipal.name!=null}">
-       <li>Welcome
-       <sec:authorize access="isAuthenticated()">  
-        <strong><sec:authentication property="principal.username"/></strong>
-        </sec:authorize>
-        </li>
-        </c:if>
-        
-        <c:if test="${pageContext.request.userPrincipal.name!=null}">
-        <sec:authorize access="isAuthenticated()"> 
-        <li><a href="perform_logout">Logout</a></li>
-        </sec:authorize>
-        
-        </c:if>
-        <c:if test="${pageContext.request.userPrincipal.name==null}">
-        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        </c:if>
-      </ul>
-    </div>
-    </div>
+    	<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#">My Store</a>
+	</div>
+	
+	<div class="collapse navbar-collapse js-navbar-collapse">
+		<ul class="nav navbar-nav">
+			<!-- Start c:ForEach here -->
+			<c:forEach items="${categoriesList}" var="category">
+            <li class="dropdown mega-dropdown">
+    			<a href="#" class="dropdown-toggle" data-toggle="dropdown">${category.categoryName}<span class="caret"></span></a>				
+				
+				<ul class="dropdown-menu mega-dropdown-menu">
+					<c:forEach items="${category.subCategory}" var="subCategory">
+					<li class="col-sm-3">
+    					<ul>
+							<li class="dropdown-header">${subCategory.subCategoryName}</li>
+							<c:forEach items="${subCategory.product}" var="product">
+							<li><a href="#">${product.productName}</a></li>
+							
+							</c:forEach><!-- End of third c:forEach -->
+                            <li class="divider"></li>
+						</ul>
+						
+					</li>
+					</c:forEach><!-- End of second c:forEach -->
+			
+                  </ul></li></c:forEach><!-- End of first c:forEach -->
+                 
+                  <c:if test="${pageContext.request.userPrincipal.name!=null}">
+       			  <li><h6>Welcome
+       			  <sec:authorize access="isAuthenticated()">  
+        		  <strong><sec:authentication property="principal.username"/></strong>
+        		  </sec:authorize></h6>
+       			  </li>
+       			  </c:if>
+                
+       			 <c:if test="${pageContext.request.userPrincipal.name==null}">
+       			 <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        		 </c:if>
+                  
+        		 <c:if test="${pageContext.request.userPrincipal.name!=null}">
+        		<sec:authorize access="isAuthenticated()"> 
+        		<li><a href="perform_logout">Logout</a></li>
+        		</sec:authorize></c:if>
+                 </ul>
+                  
+	</div><!-- /.nav-collapse -->
   </nav>
+
+
+<!-- ----------------------------Second Navbar--------------------------------------------------------- -->
 <nav class="navbar navbar-inverse">
 <div class="navbar-header">
 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNewNavbar">
@@ -150,6 +155,7 @@ input[type=text]:focus {
         <li><a href="suppliers">Suppliers</a></li>
         <li><a href="products">Products</a></li>
         <li><a href="registration">Registration</a></li>
+        <li><a href="productSpecification">Product Specification</a></li>
         
         <li><a href="#"><span class="glyphicon glyphicon-user"></span><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#mySignUpModal"> Sign Up</button></a></li>
       </ul>
@@ -240,19 +246,19 @@ input[type=text]:focus {
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img class="img-responsive" src="image/bath-powder.jpg"  alt="Beach" >
+        <img class="img-responsive" src="resources/image/bath-powder.jpg"  alt="Beach" >
       </div>
 
       <div class="item">
-        <img class="img-responsive" src="image/Essential-Oil-Diffuser.jpg" alt="Elephant">
+        <img class="img-responsive" src="resources/image/Essential-Oil-Diffuser.jpg" alt="Elephant">
       </div>
     
       <div class="item">
-        <img class="img-responsive" src="image/herbaloils.jpg" alt="mountain">
+        <img class="img-responsive" src="resources/image/herbaloils.jpg" alt="mountain">
       </div>
 
       <div class="item">
-        <img class="img-responsive" src="image/Home-Fragrance.jpg">
+        <img class="img-responsive" src="resources/image/Home-Fragrance.jpg">
       </div>
     </div>
 
@@ -271,12 +277,12 @@ input[type=text]:focus {
   <div class="row">
   
     <div class="col-sm-4">
-      <img id="div1" src="image/essential-oil-diffuser1.jpg" class="img-responsive" style="width:100%" alt="Eminem">
+      <img id="div1" src="resources/image/essential-oil-diffuser1.jpg" class="img-responsive" style="width:100%" alt="Eminem">
       <p>Current Project</p>
     </div>
     
     <div class="col-sm-4" >
-      <img id="div2" src="image/essentialoils.jpg" class="img-responsive" style="width:100%" alt="tile">
+      <img id="div2" src="resources/image/essentialoils.jpg" class="img-responsive" style="width:100%" alt="tile">
       <p>Project</p>
     </div>
     <div class="col-sm-4">

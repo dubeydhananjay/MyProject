@@ -10,17 +10,49 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>View Product</title>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="resources/js/bootstrap.min.js"></script>
+ 
+<style type="text/css">
+#div2 {
+    width: 100px;
+    height: 100px;
+    background: red;
+    -webkit-transition: width 2s, height 4s; /* For Safari 3.1 to 6.0 */
+    transition: width 2s, height 4s;
+}
+
+#div2:hover {
+    width: 300px;
+    height: 300px;
+}
+
+</style>
 </head>
 <body ng-app="getProducts" ng-controller="productController">
+<table>
+<tr>
+<td><a href="home">Home</a></td>
+<td>|</td>
+<td><a href="products">Products</a></td></tr></table>
 <h1>{{productList.productName}}</h1>
+<div class="col-sm-6">
+<img id="div2" src="resources/image/{{productList.productId}}.jpg">
+</div>
+<div class="col-sm-6">
+<h6>Product ID: {{productList.productId}}</h6>
+<h6>Product Name:{{productList.productName}}</h6>
+<h6>SubCategory ID: {{productList.subCategoryId}}</h6>
 
- <script type="text/javascript">
+<h6> Weight: {{productSpecificationList.productWeight}}</h6>
+
+</div>
+  <script type="text/javascript">
 				  angular.module('getProducts',[]).controller('productController',function($scope)
 						  {
 					  $scope.productList=${product};
-					  $scope.orderByMe = function(productList) {
-					        $scope.myOrderBy =productList;}
+				      $scope.productSpecificationList=${listProductSpecifications};
 						  });
 				  </script>
 

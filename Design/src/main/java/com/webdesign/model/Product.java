@@ -4,6 +4,7 @@ import javax.persistence.Id;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -40,7 +41,16 @@ public MultipartFile getUploadFiles() {
 public void setUploadFiles(MultipartFile uploadFiles) {
 	this.uploadFiles = uploadFiles;
 }
+@OneToOne
+public ProductSpecification productSpecification;
 
+public ProductSpecification getProductSpecification() {
+	return productSpecification;
+}
+
+public void setProductSpecification(ProductSpecification productSpecification) {
+	this.productSpecification = productSpecification;
+}
 @ManyToOne
 @JoinColumn(name ="subCategoryId" ,nullable=false,insertable=false, updatable=false)
 SubCategoryModel subCategory;
