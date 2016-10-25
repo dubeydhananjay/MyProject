@@ -1,11 +1,14 @@
 package com.webdesign.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+@SuppressWarnings("serial")
 @Entity
-public class UserDetail {
+public class UserDetail implements Serializable{
 
 	@Id
 	private int userId;

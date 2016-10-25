@@ -1,5 +1,6 @@
 package com.webdesign.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,8 +20,9 @@ import com.google.gson.annotations.Expose;
 //import org.springframework.beans.factory.annotation.Autowired;
 
 
+@SuppressWarnings("serial")
 @Entity
-public class SubCategoryModel 
+public class SubCategoryModel  implements Serializable
 {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)

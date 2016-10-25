@@ -1,10 +1,13 @@
 package com.webdesign.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@SuppressWarnings("serial")
 @Entity
-public class Person {
+public class Person implements Serializable {
 	@Id
 	String username;
 	

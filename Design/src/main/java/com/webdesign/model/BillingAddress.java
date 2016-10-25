@@ -1,5 +1,7 @@
 package com.webdesign.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
@@ -8,8 +10,9 @@ import javax.persistence.Id;
 
 import javax.persistence.OneToOne;
 
+@SuppressWarnings("serial")
 @Entity
-public class BillingAddress {
+public class BillingAddress implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int billingAddressId;

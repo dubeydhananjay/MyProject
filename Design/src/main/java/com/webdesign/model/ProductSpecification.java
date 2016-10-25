@@ -1,5 +1,7 @@
 package com.webdesign.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -7,8 +9,9 @@ import javax.persistence.OneToOne;
 
 import com.google.gson.annotations.Expose;
 
+@SuppressWarnings("serial")
 @Entity
-public class ProductSpecification {
+public class ProductSpecification implements Serializable {
 @Id
 @Expose
 private int productId;

@@ -1,5 +1,6 @@
 package com.webdesign.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,8 +16,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.google.gson.annotations.Expose;
 
+@SuppressWarnings("serial")
 @Entity
-public class Category {
+public class Category implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Expose

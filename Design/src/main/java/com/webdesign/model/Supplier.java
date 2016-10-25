@@ -3,12 +3,15 @@ import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+@SuppressWarnings("serial")
 @Entity
-public class Supplier 
+public class Supplier implements Serializable 
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

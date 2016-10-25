@@ -12,12 +12,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+@SuppressWarnings("serial")
 @Entity
-public class Product {
+public class Product implements Serializable {
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
 @Expose
