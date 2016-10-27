@@ -1,5 +1,7 @@
 package com.webdesign.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -19,4 +21,11 @@ public void savOrUpdateUser(UserDetail userDetail)
 {
 	userDAOImpl.savOrUpdateUser(userDetail);
 }
+@Transactional
+public List<UserDetail> userDetailList() 
+{
+	return this.userDAOImpl.userDetailList();
+}
+
+
 }

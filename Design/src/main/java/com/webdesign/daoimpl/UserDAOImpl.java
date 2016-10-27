@@ -1,5 +1,8 @@
 package com.webdesign.daoimpl;
 
+import java.util.List;
+
+
 import org.hibernate.Session;
 
 
@@ -54,6 +57,17 @@ public class UserDAOImpl implements UserDAO {
 		
 		
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<UserDetail> userDetailList() {
+		List<UserDetail> userDetailList = this.sessionFactory.getCurrentSession().createQuery("from UserDetail").getResultList();
+		
+		return userDetailList;
+	}
 	
+	
+
+	
+
 
 }

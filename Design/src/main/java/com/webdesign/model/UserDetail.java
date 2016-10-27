@@ -2,9 +2,11 @@ package com.webdesign.model;
 
 import java.io.Serializable;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+
 import javax.persistence.OneToOne;
 @SuppressWarnings("serial")
 @Entity
@@ -32,6 +34,8 @@ public class UserDetail implements Serializable{
 	@JoinColumn(name ="billingAddressId")
 	public BillingAddress billingAddress;
 	
+	
+	
 	@OneToOne
 	@JoinColumn(name ="cartId" ,nullable=false,insertable=false, updatable=false)
 	public Cart cart;
@@ -44,8 +48,10 @@ public class UserDetail implements Serializable{
 	@JoinColumn(name ="userId" ,nullable=false,insertable=false, updatable=false)
 	private UserRole userRole;
 	
+	@OneToOne
+	@JoinColumn(name="supplierAddressId")
+	public Supplier supplier;
 
-	
 	public int getUserId() {
 		return userId;
 	}
@@ -164,6 +170,14 @@ public class UserDetail implements Serializable{
 
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
 	

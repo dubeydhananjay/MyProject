@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<h2>Registration</h2>
+<h2>Supplier Registration</h2>
 <nav class="navbar navbar-inverse">
 <div class="navbar-header">
 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNewNavbar">

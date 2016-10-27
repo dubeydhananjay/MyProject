@@ -3,6 +3,8 @@ package com.webdesign.controller;
 import java.io.BufferedOutputStream;
 
 
+
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,27 +24,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.webdesign.model.Supplier;
+
+import com.webdesign.model.UserDetail;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.webdesign.model.Product;
 import com.webdesign.model.SubCategoryModel;
-
+import com.webdesign.service.NewSupplierService;
 import com.webdesign.service.ProductService;
 import com.webdesign.service.ProductSpecificationService;
 import com.webdesign.service.SubCategoryService;
-import com.webdesign.service.SupplierService;
+
 
 @Controller
 public class ProductController {
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private SupplierService supplierService;
-	/*@Autowired
-	private SubCategoryController subCategoryController;*/
+	
 	@Autowired
 	private SubCategoryService subCategoryService;
+	@Autowired
+	private NewSupplierService newSupplierService; 
 	
 	@Autowired
 	private ProductSpecificationService productSpecificationService;
@@ -51,7 +53,7 @@ public class ProductController {
 		model.addAttribute("products", new Product());
 		model.addAttribute("subCategoryList",subCategoryService.listSubCategory());
 		
-		model.addAttribute("supplierList", supplierService.listSuppliers());
+		model.addAttribute("listSupplier",this.newSupplierService.listSupplier());
 		model.addAttribute("productsList", this.productService.listProduct());
 		return "products";
 	}
@@ -63,7 +65,7 @@ public class ProductController {
 		if(result.hasErrors())
 		{
 			model.addAttribute("subCategoryList",subCategoryService.listSubCategory());
-			model.addAttribute("supplierList", supplierService.listSuppliers());
+			model.addAttribute("listSupplier",this.newSupplierService.listSupplier());
 			model.addAttribute("productsList", this.productService.listProduct());
 			return "/products";
 		}
@@ -76,10 +78,11 @@ public class ProductController {
 		product.setSubCategoryId(subCategory.getSubCategoryId());
 		
 		
-		Supplier supplier=supplierService.getByName(product.getSupplier().getSupplierName());
-		supplierService.createSupplier(supplier);
-		product.setSupplier(supplier);
-		product.setSupplierId(supplier.getSupplierId());
+		UserDetail userDetail=newSupplierService.getByName(product.getUserDetail().getUsername());
+		newSupplierService.savOrUpdateSupplier(userDetail);;
+		product.getUserDetail();
+		product.setUserId(userDetail.getUserId());
+		product.setUserDetail(userDetail);
 		this.productService.createProduct(product);
 		
 		String path="C://Users//Dhananjay//Documents//Eclipse_Proj//Design//src//main//webapp//image";
@@ -114,7 +117,7 @@ public class ProductController {
 		
 		model.addAttribute("subCategoryList",subCategoryService.listSubCategory());
 		
-		model.addAttribute("supplierList", supplierService.listSuppliers());
+		model.addAttribute("listSupplier",this.newSupplierService.listSupplier());
 		model.addAttribute("productsList", this.productService.listProduct());
 		model.addAttribute("products", this.productService.getById(productId));
 		return "products";

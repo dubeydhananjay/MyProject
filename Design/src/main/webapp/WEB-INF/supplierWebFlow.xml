@@ -11,7 +11,7 @@
 	</on-start>
  
 	 <!-- if not specified the first view state is the starting state -->
-	<view-state id="start" view="webflowregister" model="flowScope.userDetail">
+	<view-state id="start" view="newsupplierwebflow" model="flowScope.userDetail">
 	   <transition on="submit" to="validate"/>
 	</view-state>
 	
@@ -28,40 +28,24 @@
 	</action-state>
 	
 	<view-state id="confirmdetails" view="confirmdetails" model="flowScope.userDetail">
-	   <transition on="submit" to="shippingaddress"/>
+	   <transition on="submit" to="supplieraddress"/>
 	   <transition on="edit" to="start"/>
 	</view-state>
 	
-	<view-state id="shippingaddress" view="shippingaddress" model="shippingAddress">
-	   <transition on="submit" to="addShippingAddress"/>
+	<view-state id="supplieraddress" view="supplieraddress" model="supplierAddress">
+	   <transition on="submit" to="addSupplierAddress"/>
 	   <transition on="edit" to="start"/>
 	</view-state>
 	
-	<action-state id="addShippingAddress">
-		<evaluate expression="demoHandler.addShippingAddress()"></evaluate>
-		<transition on="success" to="billingaddress" />
+	<action-state id="addSupplierAddress">
+		<evaluate expression="demoHandler.addSupplierAddress()"></evaluate>
+		<transition on="success" to="save" />
 		
 	</action-state>
 
-   	<!-- <view-state id="confirmdetails"> 
-		<evaluate expression="demoHandler.validateDetails(userDetail,messageContext)"></evaluate>
-		<transition on="success" to="confirmdetails" />
-		<transition on="failure" to="start" /> 
- 	</view-state> -->
- 
-	<view-state id="billingaddress" view="billingaddress" model="billingAddress">
-		<transition on="edit" to="start" />
-		<transition on="submit" to="addBillingAddress" />
-	</view-state>
-	
-	<action-state id="addBillingAddress">
-		<evaluate expression="demoHandler.addBillingAddress()"></evaluate>
-		<transition on="success" to="save" />
-		</action-state>
-		
-		<action-state id="save">
-		<evaluate expression="demoHandler.saveOrUpdateUser(userDetail)"></evaluate>
-		<transition on="success" to="index" />
+   			<action-state id="save">
+		<evaluate expression="demoHandler.savOrUpdateSupplier(userDetail)"></evaluate>
+		<transition on="success" to="externalRedirect:contextRelative:/" />
 		</action-state>
  
 	<end-state id="index" view="index" />

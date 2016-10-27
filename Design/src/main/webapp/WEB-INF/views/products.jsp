@@ -44,7 +44,7 @@
    <table>
    <tr>
   <td><label>select supplier</label></td>
-   <td><form:select path="supplier.supplierName" items="${supplierList}" itemValue="supplierName" itemName="supplierName" itemLabel="supplierName"></form:select></td>
+   <td><form:select path="userDetail.username" items="${listSupplier}" itemValue="username" itemName="username" itemLabel="username"></form:select></td>
       
    </tr>
    <tr>
@@ -101,7 +101,7 @@
 				  <td>{{list.productId}}</td>
 				  <td>{{list.productName}}</td>
 				  <td>{{list.subCategoryId}}</td>
-				  <td>{{list.supplierId}}</td>
+				  <td>{{list.userId}}</td>
 				  
 				  <td><a href="editProduct-{{list.productId}}">edit</a></td>
 				  <td><a href="deleteProduct-{{list.productId}}">delete</a></td>

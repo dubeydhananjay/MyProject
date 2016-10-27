@@ -32,6 +32,7 @@ public class UserController {
 		userDetail.setShippingAddress(shippingAddress);
 		userDetail.setBillingAddress(billingAddress);
 		model.addAttribute("registration", userDetail);
+		
 		return "redirect:/reg";
 	}
 	

@@ -26,13 +26,13 @@ public class NewSupplierController {
 		userDetail.setShippingAddress(shippingAddress);
 		userDetail.setBillingAddress(billingAddress);
 		model.addAttribute("newsupplier", userDetail);
-		return "newsuppliers";
+		return "redirect:/sup";
 	}
 	
 	@RequestMapping("/newsupplier")
 	 public String addUser(@ModelAttribute("newsupplier") UserDetail userDetail)
 	 {
-		this.newSupplierService.saveOrUpdate(userDetail);
+		this.newSupplierService.savOrUpdateSupplier(userDetail);
 		return "redirect:/registration";
 	 }
 

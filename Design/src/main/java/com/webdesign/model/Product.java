@@ -2,6 +2,7 @@ package com.webdesign.model;
 import javax.persistence.Id;
 
 
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -31,7 +32,7 @@ private String productName;
 @Expose
 private int subCategoryId;
 @Expose
-private int supplierId;
+private int userId;
 @Transient
 private MultipartFile uploadFiles;
 
@@ -59,8 +60,16 @@ public void setProductSpecification(ProductSpecification productSpecification) {
 SubCategoryModel subCategory;
 
 @ManyToOne
-@JoinColumn(name ="supplierId" ,nullable=false,insertable=false, updatable=false)
-Supplier supplier;
+@JoinColumn(name ="userId" ,nullable=false,insertable=false, updatable=false)
+public UserDetail userDetail;
+
+public UserDetail getUserDetail() {
+	return userDetail;
+}
+
+public void setUserDetail(UserDetail userDetail) {
+	this.userDetail = userDetail;
+}
 
 public int getProductId() {
 	return productId;
@@ -86,12 +95,14 @@ public void setSubCategoryId(int subCategoryId) {
 	this.subCategoryId = subCategoryId;
 }
 
-public int getSupplierId() {
-	return supplierId;
+
+
+public int getUserId() {
+	return userId;
 }
 
-public void setSupplierId(int supplierId) {
-	this.supplierId = supplierId;
+public void setUserId(int userId) {
+	this.userId = userId;
 }
 
 public SubCategoryModel getSubCategory() {
@@ -100,14 +111,6 @@ public SubCategoryModel getSubCategory() {
 
 public void setSubCategory(SubCategoryModel subCategory) {
 	this.subCategory = subCategory;
-}
-
-public Supplier getSupplier() {
-	return supplier;
-}
-
-public void setSupplier(Supplier supplier) {
-	this.supplier = supplier;
 }
 
 

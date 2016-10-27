@@ -1,5 +1,7 @@
 package com.webdesign.daoimpl;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,18 +42,38 @@ public class NewSupplierDAOImpl {
 			userDetail.setRoleId(2);
 			userDetail.setUserId(user.getUserId());
 			userDetail.setCartId(cart.getCartId());
-			userDetail.getBillingAddress().setUserDetail(userDetail);
-			userDetail.getShippingAddress().setUserDetail(userDetail);
-			session.saveOrUpdate(userDetail.getShippingAddress());
-			session.saveOrUpdate(userDetail.getBillingAddress());
 			
+			
+			userDetail.getSupplier().setUserdetail(userDetail);
+			session.saveOrUpdate(userDetail.getSupplier());
 			session.saveOrUpdate(userDetail);
-			
 			session.flush();
 			
 			
 		}
-		
+		public List<UserDetail> listSupplier() {
+			@SuppressWarnings("unchecked")
+			List<UserDetail> listSupplier = this.sessionFactory.getCurrentSession().createQuery("from UserDetail where roleId=2").getResultList();
+			
+			return listSupplier;
+		}
+		public UserDetail getByRoleId() {
+			String editQuery="from UserDetail where roleId=2";
+			@SuppressWarnings({  "unchecked" })
+			List<UserDetail> listSupplier=this.sessionFactory.getCurrentSession().createQuery(editQuery).getResultList();
+		    if(listSupplier!=null && !listSupplier.isEmpty())
+		    	return listSupplier.get(0);
+		    else return null;
+			
+		}
 
-
+		public UserDetail getByName(String username)
+		{
+			String query=" from UserDetail where username= '"+username+"'";
+			@SuppressWarnings({  "unchecked" })
+			List<UserDetail> listSupplier=this.sessionFactory.getCurrentSession().createQuery(query).getResultList();
+		    if(listSupplier!=null && !listSupplier.isEmpty())
+		    	return listSupplier.get(0);
+		    else return null;
+		}
 }
