@@ -6,8 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.webdesign.model.BillingAddress;
-import com.webdesign.model.ShippingAddress;
+import com.webdesign.model.Supplier;
 import com.webdesign.model.UserDetail;
 import com.webdesign.service.NewSupplierService;
 
@@ -20,19 +19,16 @@ public class NewSupplierController {
 	public String listUser(Model model)
 	{
 		UserDetail userDetail = new UserDetail();
-		ShippingAddress shippingAddress = new  ShippingAddress();
-		BillingAddress billingAddress = new BillingAddress();
-		
-		userDetail.setShippingAddress(shippingAddress);
-		userDetail.setBillingAddress(billingAddress);
+		Supplier supplier = new Supplier();
+		userDetail.setSupplier(supplier);
 		model.addAttribute("newsupplier", userDetail);
-		return "redirect:/sup";
+		return "redirect:/reg";
 	}
 	
 	@RequestMapping("/newsupplier")
 	 public String addUser(@ModelAttribute("newsupplier") UserDetail userDetail)
 	 {
-		this.newSupplierService.savOrUpdateSupplier(userDetail);
+		this.newSupplierService.saveOrUpdateSupplier(userDetail);
 		return "redirect:/registration";
 	 }
 

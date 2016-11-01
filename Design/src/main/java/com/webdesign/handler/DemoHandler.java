@@ -2,7 +2,8 @@ package com.webdesign.handler;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
@@ -30,7 +31,9 @@ public class DemoHandler {
 	@Autowired
 	public NewSupplierService newSupplierService;
 	@Autowired
-	private SessionFactory sessionFactory; 
+	public UserDetail userDetail;
+	
+	
 	public UserDetail initFlow()
 	{
 		return new UserDetail();
@@ -38,7 +41,7 @@ public class DemoHandler {
 	
 	public String validateDetails(UserDetail userDetail,MessageContext messageContext){
 		String status = "success";
-		String emailPttern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+		String emailPattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 
 		if(userDetail.getUsername().isEmpty()){
 			messageContext.addMessage(new MessageBuilder().error().source(
@@ -51,7 +54,7 @@ public class DemoHandler {
 			
 			status = "failure";
 		}
-		else if(userDetail.getEmailId().matches(emailPttern))
+		else if(userDetail.getEmailId().matches(emailPattern))
 		{
 			return "success";
 			
@@ -88,7 +91,7 @@ public class DemoHandler {
 	
 	public String duplicateUser(UserDetail userDetail, MessageContext messageContext)
 	{
-		//UserDetail userDetail= new UserDetail(); 
+		
 		String status="success";
 		List<UserDetail> userDetailList =userService.userDetailList();
 		for(UserDetail k:userDetailList)
@@ -119,8 +122,8 @@ public class DemoHandler {
 		return status;
 			
 	}
-	@Transactional
-		public String addShippingAddress()
+	
+		public String addShippingAddress(ShippingAddress shippingAddress)
 		{
 			this.shippingAddress.setCity(shippingAddress.getCity());
 			this.shippingAddress.setDistrict(shippingAddress.getDistrict());
@@ -129,12 +132,10 @@ public class DemoHandler {
 			this.shippingAddress.setState(shippingAddress.getState());
 			this.shippingAddress.setStreetAddress1(shippingAddress.getStreetAddress1());
 			this.shippingAddress.setStreetAddress2(shippingAddress.getStreetAddress2());
-			
-			this.sessionFactory.getCurrentSession().saveOrUpdate(shippingAddress);
 			return "success";
 		}
-	@Transactional
-		public String addBillingAddress()
+	
+		public String addBillingAddress(BillingAddress billingAddress)
 		{
 			this.billingAddress.setCity(billingAddress.getCity());
 			this.billingAddress.setDistrict(billingAddress.getDistrict());
@@ -143,13 +144,11 @@ public class DemoHandler {
 			this.billingAddress.setState(billingAddress.getState());
 			this.billingAddress.setStreetAddress1(billingAddress.getStreetAddress1());
 			this.billingAddress.setStreetAddress2(billingAddress.getStreetAddress2());
-			
-			this.sessionFactory.getCurrentSession().saveOrUpdate(billingAddress);
 			return "success";
 		}
 	
-	@Transactional
-	public String addSupplierAddress()
+
+	public String addSupplierAddress(Supplier supplier)
 	{
 		this.supplier.setSupplierCity(supplier.getSupplierCity());
 		this.supplier.setSupplierCompanyAddress1(supplier.getSupplierCompanyAddress1());
@@ -159,31 +158,40 @@ public class DemoHandler {
 		this.supplier.setSupplierDistrict(supplier.getSupplierDistrict());
 		this.supplier.setSupplierPinCode(supplier.getSupplierPinCode());
 		this.supplier.setSupplierState(supplier.getSupplierState());
-		
-		this.sessionFactory.getCurrentSession().saveOrUpdate(supplier);
-		return "success";
+
+				return "success";
 	}
-	@Transactional
-		public String saveOrUpdateUser(UserDetail userDetail)
+	
+		public String saveOrUpdateUser(UserDetail userDetail, ShippingAddress shippingAddress,BillingAddress billingAddress )
 		{
+			userService.saveOrUpdateUser(userDetail);
+			shippingAddress.setUserDetail(userDetail);
+			this.userDetail.setShippingAddress(shippingAddress);
 			this.shippingAddress.setUserDetail(userDetail);
-		    userDetail.setShippingAddress(shippingAddress);
 			//this.userService.savOrUpdateUser(userDetail);
 			
+			billingAddress.setUserDetail(userDetail);
+			this.userDetail.setBillingAddress(billingAddress);
 			this.billingAddress.setUserDetail(userDetail);
-			userDetail.setBillingAddress(billingAddress);
-			this.userService.savOrUpdateUser(userDetail);
+			
+			userService.addBillingAddress(billingAddress);
+			userService.addShippingAddress(shippingAddress);
+			
 			
 			return "success";
 		}
 	
 	
 	@Transactional
-	public String savOrUpdateSupplier(UserDetail userDetail)
+	public String saveOrUpdateSupplier(UserDetail userDetail, Supplier supplier)
 	{
-		this.supplier.setUserdetail(userDetail);
-		userDetail.setSupplier(supplier);
-		this.newSupplierService.savOrUpdateSupplier(userDetail);
+		
+		newSupplierService.saveOrUpdateSupplier(userDetail);
+		supplier.setUserDetail(userDetail);
+		this.userDetail.setSupplier(supplier);
+		this.supplier.setUserDetail(userDetail);
+		newSupplierService.addSupplierAddress(supplier);
+		//newSupplierService.savOrUpdateSupplier(userDetail);
 	
 		return "success";
 	}

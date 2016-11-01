@@ -28,8 +28,13 @@
 	</action-state>
 	
 	<view-state id="confirmdetails" view="confirmdetails" model="flowScope.userDetail">
-	   <transition on="submit" to="shippingaddress"/>
+	   <transition on="submit" to="decide"/>
 	   <transition on="edit" to="start"/>
+	</view-state>
+	
+	<view-state id="decide" view="decide" model="userDetail">
+	   <transition on="submit" to="supplieraddress"/>
+	   <transition on="edit" to="shippingaddress"/>
 	</view-state>
 	
 	<view-state id="shippingaddress" view="shippingaddress" model="shippingAddress">
@@ -38,7 +43,7 @@
 	</view-state>
 	
 	<action-state id="addShippingAddress">
-		<evaluate expression="demoHandler.addShippingAddress()"></evaluate>
+		<evaluate expression="demoHandler.addShippingAddress(shippingAddress)"></evaluate>
 		<transition on="success" to="billingaddress" />
 		
 	</action-state>
@@ -55,17 +60,42 @@
 	</view-state>
 	
 	<action-state id="addBillingAddress">
-		<evaluate expression="demoHandler.addBillingAddress()"></evaluate>
-		<transition on="success" to="save" />
+		<evaluate expression="demoHandler.addBillingAddress(billingAddress)"></evaluate>
+		<transition on="success" to="saveUser" />
 		</action-state>
 		
-		<action-state id="save">
-		<evaluate expression="demoHandler.saveOrUpdateUser(userDetail)"></evaluate>
-		<transition on="success" to="index" />
+		<view-state id="supplieraddress" view="supplieraddress" model="supplier">
+	   <transition on="submit" to="addSupplierAddress"/>
+	   <transition on="edit" to="start"/>
+	</view-state>
+	
+	<action-state id="addSupplierAddress">
+		<evaluate expression="demoHandler.addSupplierAddress(supplier)"></evaluate>
+		<transition on="success" to="saveSupplier" />
+		</action-state>
+		
+		<action-state id="saveUser">
+		<evaluate expression="demoHandler.saveOrUpdateUser(flowScope.userDetail,shippingAddress,billingAddress)"></evaluate>
+		<transition on="success" to="actionUser" />
+		</action-state>
+		
+		<action-state id="actionUser">
+		<evaluate expression="userService.saveOrUpdateUser(userDetail)" result="flowScope.userDetail"></evaluate>
+		<transition on="success" to="toHome" />
+		</action-state>
+		
+		<action-state id="saveSupplier">
+		<evaluate expression="demoHandler.saveOrUpdateSupplier(flowScope.userDetail, supplier)"></evaluate>
+		<transition on="success" to="actionSupplier" />
+		</action-state>
+		
+		<action-state id="actionSupplier">
+		<evaluate expression="newSupplierService.saveOrUpdateSupplier(userDetail)" result="flowScope.userDetail"></evaluate>
+		<transition on="success" to="toHome" />
 		</action-state>
  
 	<end-state id="index" view="index" />
-	<end-state id="toHome" view="externalRedirect:contextRelative:index.jsp" />
+	<end-state id="toHome" view="externalRedirect:contextRelative:/" />
 	<end-state id="toException" view="externalRedirect:contextRelative:exception.jsp" />
  
 	<!-- these events are available in every state-->

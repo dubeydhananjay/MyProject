@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.webdesign.daoimpl.NewSupplierDAOImpl;
+import com.webdesign.model.Supplier;
 import com.webdesign.model.UserDetail;
 
 @Service
@@ -15,9 +16,9 @@ public class NewSupplierService {
 @Autowired
 public NewSupplierDAOImpl newSupplierDAOImpl;
 @Transactional
-public void savOrUpdateSupplier(UserDetail userDetail)
+public void saveOrUpdateSupplier(UserDetail userDetail)
 {
-	newSupplierDAOImpl.savOrUpdateSupplier(userDetail);
+	this.newSupplierDAOImpl.saveOrUpdateSupplier(userDetail);
 }
 @Transactional
 public List<UserDetail> listSupplier() {
@@ -32,5 +33,10 @@ public UserDetail getByRoleId()
 public UserDetail getByName(String username)
 {
 	return this.newSupplierDAOImpl.getByName(username);
+}
+@Transactional
+public void addSupplierAddress(Supplier supplier)
+{
+	this.newSupplierDAOImpl.addSupplierAddress(supplier);
 }
 }

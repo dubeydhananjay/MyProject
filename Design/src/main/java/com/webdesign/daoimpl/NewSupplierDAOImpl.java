@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.webdesign.model.Cart;
+import com.webdesign.model.Supplier;
 import com.webdesign.model.User;
 import com.webdesign.model.UserDetail;
 import com.webdesign.model.UserRole;
@@ -19,7 +20,7 @@ public class NewSupplierDAOImpl {
 		@Autowired
 		private SessionFactory sessionFactory;
 
-		public void savOrUpdateSupplier(UserDetail userDetail) {
+		public void saveOrUpdateSupplier(UserDetail userDetail) {
 			Session session =this.sessionFactory.getCurrentSession();
 			
 			User user  = new User();
@@ -27,6 +28,7 @@ public class NewSupplierDAOImpl {
 			user.setUsername(userDetail.getUsername());
 			user.setPassword(userDetail.getPassword());
 			user.setEnabled(true);
+			user.setUserId(userDetail.getUserId());
 			session.saveOrUpdate(user);
 			
 			UserRole userRole  = new  UserRole();
@@ -43,9 +45,8 @@ public class NewSupplierDAOImpl {
 			userDetail.setUserId(user.getUserId());
 			userDetail.setCartId(cart.getCartId());
 			
-			
-			userDetail.getSupplier().setUserdetail(userDetail);
-			session.saveOrUpdate(userDetail.getSupplier());
+			/*userDetail.getSupplier().setUserDetail(userDetail);
+			session.saveOrUpdate(userDetail.getSupplier());*/
 			session.saveOrUpdate(userDetail);
 			session.flush();
 			
@@ -75,5 +76,10 @@ public class NewSupplierDAOImpl {
 		    if(listSupplier!=null && !listSupplier.isEmpty())
 		    	return listSupplier.get(0);
 		    else return null;
+		}
+		public void addSupplierAddress(Supplier supplier)
+		{
+			this.sessionFactory.getCurrentSession().saveOrUpdate(supplier);
+
 		}
 }

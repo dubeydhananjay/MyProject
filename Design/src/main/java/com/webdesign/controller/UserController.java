@@ -39,7 +39,7 @@ public class UserController {
 	@RequestMapping("/addRegistration")
 	 public String addUser(@ModelAttribute("registration") UserDetail userDetail)
 	 {
-		this.userService.savOrUpdateUser(userDetail);
+		this.userService.saveOrUpdateUser(userDetail);
 		return "redirect:/registration";
 	 }
 

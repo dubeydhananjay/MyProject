@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.webdesign.dao.UserDAO;
-
+import com.webdesign.model.BillingAddress;
 import com.webdesign.model.Cart;
-
+import com.webdesign.model.ShippingAddress;
 import com.webdesign.model.User;
 import com.webdesign.model.UserDetail;
 import com.webdesign.model.UserRole;
@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public void savOrUpdateUser(UserDetail userDetail) {
+	public void saveOrUpdateUser(UserDetail userDetail) {
 		Session session =this.sessionFactory.getCurrentSession();
 		
 		User user  = new User();
@@ -31,6 +31,7 @@ public class UserDAOImpl implements UserDAO {
 		user.setUsername(userDetail.getUsername());
 		user.setPassword(userDetail.getPassword());
 		user.setEnabled(true);
+		user.setUserId(userDetail.getUserId());
 		session.saveOrUpdate(user);
 		
 		UserRole userRole  = new  UserRole();
@@ -46,10 +47,11 @@ public class UserDAOImpl implements UserDAO {
 		userDetail.setRoleId(1);
 		userDetail.setUserId(user.getUserId());
 		userDetail.setCartId(cart.getCartId());
-		userDetail.getBillingAddress().setUserDetail(userDetail);
+		
+		/*userDetail.getBillingAddress().setUserDetail(userDetail);
 		userDetail.getShippingAddress().setUserDetail(userDetail);
 		session.saveOrUpdate(userDetail.getShippingAddress());
-		session.saveOrUpdate(userDetail.getBillingAddress());
+		session.saveOrUpdate(userDetail.getBillingAddress());*/
 		
 		session.saveOrUpdate(userDetail);
 		
@@ -65,9 +67,14 @@ public class UserDAOImpl implements UserDAO {
 		return userDetailList;
 	}
 	
+	public void addShippingAddress(ShippingAddress shippingAddress)
+	{	
+		this.sessionFactory.getCurrentSession().saveOrUpdate(shippingAddress);
+	}
+
+	public void addBillingAddress(BillingAddress billingAddress)
+	{
+		this.sessionFactory.getCurrentSession().saveOrUpdate(billingAddress);
+	}
 	
-
-	
-
-
 }

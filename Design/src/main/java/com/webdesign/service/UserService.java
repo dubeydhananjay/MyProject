@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.webdesign.daoimpl.UserDAOImpl;
+import com.webdesign.model.BillingAddress;
+import com.webdesign.model.ShippingAddress;
 import com.webdesign.model.UserDetail;
 
 
@@ -17,15 +19,23 @@ public class UserService {
 	@Autowired
 private UserDAOImpl  userDAOImpl;
 @Transactional
-public void savOrUpdateUser(UserDetail userDetail)
+public void saveOrUpdateUser(UserDetail userDetail)
 {
-	userDAOImpl.savOrUpdateUser(userDetail);
+	userDAOImpl.saveOrUpdateUser(userDetail);
 }
 @Transactional
 public List<UserDetail> userDetailList() 
 {
 	return this.userDAOImpl.userDetailList();
 }
-
-
+@Transactional
+public void addShippingAddress(ShippingAddress shippingAddress)
+{
+	 this.userDAOImpl.addShippingAddress(shippingAddress);
+}
+@Transactional
+public void addBillingAddress(BillingAddress billingAddress)
+{
+	this.userDAOImpl.addBillingAddress(billingAddress);
+}
 }

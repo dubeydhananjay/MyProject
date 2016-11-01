@@ -63,7 +63,7 @@ public class ProductController {
 	public String addcategory(@Validated @ModelAttribute("products") Product product, BindingResult result, Model model, MultipartFile file,HttpServletRequest request) throws  IOException
 	{
 		if(result.hasErrors())
-		{
+		{model.addAttribute("listProductSpecifications",this.productSpecificationService.listProductSpecifications());
 			model.addAttribute("subCategoryList",subCategoryService.listSubCategory());
 			model.addAttribute("listSupplier",this.newSupplierService.listSupplier());
 			model.addAttribute("productsList", this.productService.listProduct());
@@ -77,15 +77,14 @@ public class ProductController {
 		product.setSubCategory(subCategory);
 		product.setSubCategoryId(subCategory.getSubCategoryId());
 		
-		
 		UserDetail userDetail=newSupplierService.getByName(product.getUserDetail().getUsername());
-		newSupplierService.savOrUpdateSupplier(userDetail);;
-		product.getUserDetail();
-		product.setUserId(userDetail.getUserId());
+		newSupplierService.saveOrUpdateSupplier(userDetail);
 		product.setUserDetail(userDetail);
-		this.productService.createProduct(product);
+		product.setUserId(userDetail.getUserId());
 		
-		String path="C://Users//Dhananjay//Documents//Eclipse_Proj//Design//src//main//webapp//image";
+		productService.createProduct(product);
+		
+		String path="C://Users//Dhananjay//Documents//Eclipse_Proj//Design//src//main//webapp//resources//image";
 		file=product.getUploadFiles();
         path=path+String.valueOf("//"+product.getProductId()+".jpg");
         File imageFile = new File(path);
@@ -116,8 +115,8 @@ public class ProductController {
 	{
 		
 		model.addAttribute("subCategoryList",subCategoryService.listSubCategory());
-		
 		model.addAttribute("listSupplier",this.newSupplierService.listSupplier());
+		model.addAttribute("listProductSpecifications",this.productSpecificationService.listProductSpecifications());
 		model.addAttribute("productsList", this.productService.listProduct());
 		model.addAttribute("products", this.productService.getById(productId));
 		return "products";

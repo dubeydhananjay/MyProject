@@ -25,8 +25,14 @@ public class Supplier implements Serializable
 	private String supplierState;
     
 	@ManyToOne
-	public UserDetail userdetail;
+	public UserDetail userDetail;
 	
+	public UserDetail getUserDetail() {
+		return userDetail;
+	}
+	public void setUserDetail(UserDetail userDetail) {
+		this.userDetail = userDetail;
+	}
 	public int getSupplierAddressId() {
 		return supplierAddressId;
 	}
@@ -82,11 +88,6 @@ public class Supplier implements Serializable
 	public void setSupplierState(String supplierState) {
 		this.supplierState = supplierState;
 	}
-	public UserDetail getUserdetail() {
-		return userdetail;
-	}
-	public void setUserdetail(UserDetail userdetail) {
-		this.userdetail = userdetail;
-	}
+	
 	
 }

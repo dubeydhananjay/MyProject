@@ -52,6 +52,7 @@ public class UserDetail implements Serializable{
 	@JoinColumn(name="supplierAddressId")
 	public Supplier supplier;
 
+	
 	public int getUserId() {
 		return userId;
 	}

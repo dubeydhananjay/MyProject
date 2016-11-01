@@ -152,7 +152,7 @@ input[type=text]:focus {
       <ul class="nav navbar-nav">
         <li ><a href="categories">Categories</a></li>
         <li><a href="subCategories">SubCategories</a></li>
-        <li><a href="suppliers">Suppliers</a></li>
+        
         <li><a href="products">Products</a></li>
         <li><a href="registration">Registration</a></li>
         <li><a href="productSpecification">Product Specification</a></li>

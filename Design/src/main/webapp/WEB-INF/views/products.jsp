@@ -29,7 +29,7 @@
       <ul class="nav navbar-nav">
         <li ><a href="categories">Categories</a></li>
         <li><a href="subCategories">SubCategories</a></li>
-        <li><a href="suppliers">Suppliers</a></li>
+        
         <li class="active"><a href="products">Products</a></li>
         <li><a href="registration">Registration</a></li>
         <li><a href="home">Home</a></li>
@@ -69,7 +69,7 @@
    </tr> 
    <tr>
    
-   <td colspan="2"><input type="submit" value="Upload"/></td>
+   <td colspan="2"><input type="submit" value="Submit"/></td>
    </tr>
    
     <%-- <tr>

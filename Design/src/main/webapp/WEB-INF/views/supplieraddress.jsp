@@ -9,9 +9,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Supplier Address</title>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="resources/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
 </head>
 <body>
-<form:form method="POST"  modelAttribute="supplierAddress"  commandName="supplierAddress">
+<nav class="navbar navbar-inverse">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNewNavbar">
+ <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="myNewNavbar">
+      <ul class="nav navbar-nav">
+        <li ><a href="categories">Categories</a></li>
+        <li><a href="subCategories">SubCategories</a></li>
+        
+        <li><a href="products">Products</a></li>
+        <li class="active"><a href="registration">Registration</a></li>
+        <li><a href="home">Home</a></li>
+        <li><a href="productSpecification">Product Specification</a></li>
+      </ul>
+      </div>
+    </div>
+  </nav>
+  <br>
+
+<form:form method="POST"  modelAttribute="supplier"  commandName="supplier">
       <h2>Supplier Address</h2>         
    <div class="form-group">
     <label> Company Name:</label>
