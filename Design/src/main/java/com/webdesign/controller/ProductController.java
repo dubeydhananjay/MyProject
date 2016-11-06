@@ -2,14 +2,9 @@ package com.webdesign.controller;
 
 import java.io.BufferedOutputStream;
 
-
-
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +24,11 @@ import com.webdesign.model.UserDetail;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.webdesign.model.Product;
+import com.webdesign.model.ProductView;
 import com.webdesign.model.SubCategoryModel;
 import com.webdesign.service.NewSupplierService;
 import com.webdesign.service.ProductService;
-import com.webdesign.service.ProductSpecificationService;
+
 import com.webdesign.service.SubCategoryService;
 
 
@@ -46,8 +42,6 @@ public class ProductController {
 	@Autowired
 	private NewSupplierService newSupplierService; 
 	
-	@Autowired
-	private ProductSpecificationService productSpecificationService;
 	@RequestMapping( "/products")
 	public String listProducts(Model model) {
 		model.addAttribute("products", new Product());
@@ -60,10 +54,11 @@ public class ProductController {
 	
 	@RequestMapping("/product")
 
-	public String addcategory(@Validated @ModelAttribute("products") Product product, BindingResult result, Model model, MultipartFile file,HttpServletRequest request) throws  IOException
+	public String addcategory(@Validated @ModelAttribute("products") Product product, BindingResult result, Model model, MultipartFile file) throws  IOException
 	{
 		if(result.hasErrors())
-		{model.addAttribute("listProductSpecifications",this.productSpecificationService.listProductSpecifications());
+		{
+			//model.addAttribute("listProductSpecifications",this.productSpecificationService.listProductSpecifications());
 			model.addAttribute("subCategoryList",subCategoryService.listSubCategory());
 			model.addAttribute("listSupplier",this.newSupplierService.listSupplier());
 			model.addAttribute("productsList", this.productService.listProduct());
@@ -116,7 +111,7 @@ public class ProductController {
 		
 		model.addAttribute("subCategoryList",subCategoryService.listSubCategory());
 		model.addAttribute("listSupplier",this.newSupplierService.listSupplier());
-		model.addAttribute("listProductSpecifications",this.productSpecificationService.listProductSpecifications());
+		
 		model.addAttribute("productsList", this.productService.listProduct());
 		model.addAttribute("products", this.productService.getById(productId));
 		return "products";
@@ -130,14 +125,14 @@ public class ProductController {
 	
 
 	@RequestMapping("/viewproduct-{productId}-product")
-	public ModelAndView productData(@ModelAttribute("product") @PathVariable("productId")  int productId, Product product, Model newModel) {
+	public ModelAndView productData(@ModelAttribute("product") @PathVariable("productId")  int productId, ProductView productView) {
 		Gson pGson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		product=productService.getById(productId);
-		String pJson=pGson.toJson(product);
-		//newModel.addAttribute("listProductSpecifications",this.productSpecificationService.listProductSpecifications());
+		productView=productService.getProductViewById(productId);
+		String pJson=pGson.toJson(productView);
+		
 		ModelAndView model = new ModelAndView("viewproduct");
-		model.addObject("product", pJson);
-		model.addObject("listProductSpecifications",this.productSpecificationService.listProductSpecifications());
+		model.addObject("productView", pJson);
+		
 		return model;
 		
 	}

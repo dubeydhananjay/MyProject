@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="resources/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  
 <style type="text/css">body{background-image:url('image/tile.jpg');}</style>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -33,51 +33,55 @@
         <li class="active"><a href="products">Products</a></li>
         <li><a href="registration">Registration</a></li>
         <li><a href="home">Home</a></li>
-        <li><a href="productSpecification">Product Specification</a></li>
+        
       </ul>
       </div>
     </div>
   </nav>
 <br>
-          <form:form method="POST" action="product" commandName="products" modelAttribute="products" enctype="multipart/form-data" >
+          <form:form method="POST" class="form-inline" action="product" commandName="products" modelAttribute="products" enctype="multipart/form-data" >
    			<form:input path="productId" hidden="true" />
-   <table>
-   <tr>
-  <td><label>select supplier</label></td>
-   <td><form:select path="userDetail.username" items="${listSupplier}" itemValue="username" itemName="username" itemLabel="username"></form:select></td>
-      
-   </tr>
-   <tr>
-  <td><label>select subcategory</label></td>
-   <td><form:select path="subCategory.subCategoryName" items="${subCategoryList}" itemValue="subCategoryName" itemName="subCategoryName" itemLabel="subCategoryName"></form:select></td>
+  
+  <div class="form-group">
+  <label>select supplier</label>
+   <form:select path="userDetail.username" items="${listSupplier}" class="form-control" itemValue="username" itemName="username" itemLabel="username"></form:select><br><br>
    
-   </tr>
-   
+     
+  <label>select subcategory</label>
+   <form:select path="subCategory.subCategoryName" items="${subCategoryList}" class="form-control" itemValue="subCategoryName" itemName="subCategoryName" itemLabel="subCategoryName"></form:select><br><br>
  
-    <tr>
-        <td><form:label path="productName">Product Name</form:label></td>
-        <td><form:input path="productName" /></td>
-        <td><form:errors path="productName"></form:errors>
-    </tr>
-   <tr>
-   <td><label>select file</label></td>
-   <td><form:input type="file" name="file" path="uploadFiles"></form:input></td>
-   </tr> 
-   <tr>
-   <td><label>name</label></td>
-   <td><input type="text" name="name"></td>
-   </tr> 
-   <tr>
    
-   <td colspan="2"><input type="submit" value="Submit"/></td>
-   </tr>
+ <form:label path="productName">Product Name</form:label>
+        <form:input path="productName" class="form-control"/>
+        <form:errors path="productName"></form:errors><br><br>
    
-    <%-- <tr>
-        <td colspan="2">
-            <input type="submit" value="Submit"/>
-        </td>
-    </tr>--%>
-</table>  
+  
+  <label>Product Weight</label>
+   <input type="text" name="productWeight" class="form-control"><br><br>
+ 
+    
+  <label>Product size</label>
+   <input type="text" name="productSize" class="form-control"><br><br>
+   
+   
+   <label>Skin Type</label>
+   <input type="text" name="skintype" class="form-control"><br><br>
+   
+   
+   <label>Soap Type</label>
+   <input type="text" name="soapType" class="form-control"><br><br>
+   
+   
+   <label>Organic</label>
+  <input type="text" name="organic" class="form-control"><br><br>
+  
+   
+   <label>select file</label>
+   <form:input type="file" name="file" path="uploadFiles" class="form-control"></form:input></div><br><br>
+   
+  
+   <button type="submit" class="btn btn-default">Submit</button>
+  
 </form:form>
           
         <br><br>
@@ -92,6 +96,11 @@
                   <th ng-click="orderByMe('productName')">ProductName</th>
                   <th ng-click="orderByMe('subCategoryId')">subCategoryId</th>
                   <th ng-click="orderByMe('supplierId')">supplierId</th>
+                  <th ng-click="orderByMe('productWeight')">Product Weight</th>
+                  <th ng-click="orderByMe('productSize')">Product Size</th>
+                  <th ng-click="orderByMe('soapType')">Soap Type</th>
+                  <th ng-click="orderByMe('skintype')">Skin Type</th>
+                  <th ng-click="orderByMe('organic')">Organic</th>
                   <th>Edit</th>
                   <th>Delete</th>
 				</tr>
@@ -102,6 +111,11 @@
 				  <td>{{list.productName}}</td>
 				  <td>{{list.subCategoryId}}</td>
 				  <td>{{list.userId}}</td>
+				  <td>{{list.productWeight}}</td>
+				  <td>{{list.productSize}}</td>
+				  <td>{{list.soapType}}</td>
+				  <td>{{list.skintype}}</td>
+				  <td>{{list.organic}}</td>
 				  
 				  <td><a href="editProduct-{{list.productId}}">edit</a></td>
 				  <td><a href="deleteProduct-{{list.productId}}">delete</a></td>
@@ -113,8 +127,8 @@
 				  angular.module('getProducts',[]).controller('productController',function($scope)
 						  {
 					  $scope.productList=${productsList};
-					  $scope.orderByMe = function(productList) {
-					        $scope.myOrderBy =productList;}
+					  $scope.orderByMe = function(productsList) {
+					        $scope.myOrderBy =productsList;}
 						  });
 				  </script>
 				   

@@ -165,13 +165,14 @@ public class DemoHandler {
 		public String saveOrUpdateUser(UserDetail userDetail, ShippingAddress shippingAddress,BillingAddress billingAddress )
 		{
 			userService.saveOrUpdateUser(userDetail);
+			
 			shippingAddress.setUserDetail(userDetail);
-			this.userDetail.setShippingAddress(shippingAddress);
+			userDetail.setShippingAddress(shippingAddress);
 			this.shippingAddress.setUserDetail(userDetail);
 			//this.userService.savOrUpdateUser(userDetail);
 			
 			billingAddress.setUserDetail(userDetail);
-			this.userDetail.setBillingAddress(billingAddress);
+			userDetail.setBillingAddress(billingAddress);
 			this.billingAddress.setUserDetail(userDetail);
 			
 			userService.addBillingAddress(billingAddress);
@@ -188,7 +189,7 @@ public class DemoHandler {
 		
 		newSupplierService.saveOrUpdateSupplier(userDetail);
 		supplier.setUserDetail(userDetail);
-		this.userDetail.setSupplier(supplier);
+		userDetail.setSupplier(supplier);
 		this.supplier.setUserDetail(userDetail);
 		newSupplierService.addSupplierAddress(supplier);
 		//newSupplierService.savOrUpdateSupplier(userDetail);

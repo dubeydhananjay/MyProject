@@ -3,6 +3,11 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+                          
+     <var name="userDetail"      class="com.webdesign.model.UserDetail"/>
+     <var name="billingAddress"  class="com.webdesign.model.BillingAddress"/>
+     <var name="shippingAddress" class="com.webdesign.model.ShippingAddress"/>
+     <var name="supplier"        class="com.webdesign.model.Supplier"/>
  
 	<!-- Executed when webFlow is triggered -->
 	<on-start>
@@ -32,7 +37,7 @@
 	   <transition on="edit" to="start"/>
 	</view-state>
 	
-	<view-state id="decide" view="decide" model="userDetail">
+	<view-state id="decide" view="decide" model="flowScope.userDetail">
 	   <transition on="submit" to="supplieraddress"/>
 	   <transition on="edit" to="shippingaddress"/>
 	</view-state>

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.webdesign.daoimpl.ProductDAOImpl;
 import com.webdesign.model.Product;
+import com.webdesign.model.ProductView;
 
 
 @Service
@@ -45,6 +46,24 @@ public Product getByName(String productName)
 public List<Product> listProducts()
 {
 	return this.productDAO.listProducts();
+}
+
+@Transactional
+public List<ProductView> listProductView()
+{
+	return this.productDAO.listProductView();
+}
+
+@Transactional
+public String productViewList()
+{
+	return this.productDAO.productViewList();
+}
+
+@Transactional
+public ProductView getProductViewById(int productId)
+{
+	return this.productDAO.getProductViewById(productId);
 }
 }
 

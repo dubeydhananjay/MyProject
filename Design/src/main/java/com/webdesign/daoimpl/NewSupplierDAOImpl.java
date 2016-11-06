@@ -79,7 +79,7 @@ public class NewSupplierDAOImpl {
 		}
 		public void addSupplierAddress(Supplier supplier)
 		{
-			this.sessionFactory.getCurrentSession().saveOrUpdate(supplier);
+			sessionFactory.getCurrentSession().saveOrUpdate(supplier);
 
 		}
 }

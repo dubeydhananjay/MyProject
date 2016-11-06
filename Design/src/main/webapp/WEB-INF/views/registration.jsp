@@ -28,18 +28,18 @@
       <ul class="nav navbar-nav">
         <li ><a href="categories">Categories</a></li>
         <li><a href="subCategories">SubCategories</a></li>
-        <li><a href="suppliers">Suppliers</a></li>
+        
         <li><a href="products">Products</a></li>
-        <li class="active"><a href="registration">Registration</a></li>
-        <li><a href="${flowExecutionUrl}&_eventId_home">Home</a></li>
-        <li><a href="productSpecification">Product Specification</a></li>
+        
+        <li><a href="home">Home</a></li>
+        
       </ul>
       </div>
     </div>
   </nav>
   <br>
   
-<form:form method="POST" action="addRegistration" commandName="registration" modelAttribute="registration" >
+<form:form method="POST" class="form-inline" action="addRegistration" commandName="registration" modelAttribute="registration" >
                
    <table>
    <tr>

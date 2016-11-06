@@ -13,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.webdesign.dao.ProductDAO;
 
 import com.webdesign.model.Product;
+import com.webdesign.model.ProductView;
 
 
 @Repository
@@ -66,6 +67,33 @@ public class ProductDAOImpl implements ProductDAO {
 		List<Product> productsList=this.sessionFactory.getCurrentSession().createQuery(editQuery).getResultList();
 	    if(productsList!=null && !productsList.isEmpty())
 	    	return productsList.get(0);
+	    else return null;
+	}
+	
+	public List<ProductView> listProductView()
+	{
+		@SuppressWarnings({  "unchecked" })
+		List<ProductView> productViewList=this.sessionFactory.getCurrentSession().createQuery("from ProductView").getResultList();
+		return productViewList;
+	}
+	
+	public String productViewList() {
+		@SuppressWarnings({  "unchecked" })
+		List<ProductView> productViewList=this.sessionFactory.getCurrentSession().createQuery("from ProductView").getResultList();
+		//return categoryList;
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String json = gson.toJson( productViewList);
+		return json;
+		
+	}
+	
+	public ProductView getProductViewById(int productId)
+	{
+		String editQuery="from ProductView where productId= "+productId;
+		@SuppressWarnings({  "unchecked" })
+		List<ProductView> productViewList=this.sessionFactory.getCurrentSession().createQuery(editQuery).getResultList();
+	    if(productViewList!=null && !productViewList.isEmpty())
+	    	return productViewList.get(0);
 	    else return null;
 	}
 }

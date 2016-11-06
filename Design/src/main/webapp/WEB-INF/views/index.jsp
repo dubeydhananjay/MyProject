@@ -119,10 +119,10 @@ input[type=text]:focus {
                   </ul></li></c:forEach><!-- End of first c:forEach -->
                  
                   <c:if test="${pageContext.request.userPrincipal.name!=null}">
-       			  <li><h6>Welcome
+       			  <li><a href="#">Welcome
        			  <sec:authorize access="isAuthenticated()">  
         		  <strong><sec:authentication property="principal.username"/></strong>
-        		  </sec:authorize></h6>
+        		  </sec:authorize></a>
        			  </li>
        			  </c:if>
                 
@@ -134,6 +134,7 @@ input[type=text]:focus {
         		<sec:authorize access="isAuthenticated()"> 
         		<li><a href="perform_logout">Logout</a></li>
         		</sec:authorize></c:if>
+        		<li><a href="registration"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
                  </ul>
                   
 	</div><!-- /.nav-collapse -->
@@ -155,83 +156,10 @@ input[type=text]:focus {
         
         <li><a href="products">Products</a></li>
         <li><a href="registration">Registration</a></li>
-        <li><a href="productSpecification">Product Specification</a></li>
-        
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#mySignUpModal"> Sign Up</button></a></li>
       </ul>
       </div>
     </div>
   </nav>
-<!-- --------------------------------------Modal------------------------------------- -->
-<!-- ------------------------------------Sign up---------------------------------------- -->
-<div class="container">
-  <div class="modal fade" id="mySignUpModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Sign up</h4>
-        </div>
-        <div class="modal-body">
-          <h2>Sign up</h2>
-  <form>
-  <div class="form-group">
-      <label for="usr">Name:</label>
-      <input type="text" class="form-control" id="usr" placeholder="Enter Name">
-    </div>
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email">
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-    </div>
-    
-    <button type="submit" class="btn btn-default">Submit</button>
-  </form>
-</div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      </div> </div> 
-      <%--  ------------------Login Modal--------------------------------------------- 
-<div class="modal fade" id="myLoginModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Sign In</h4>
-        </div>
-        <div class="modal-body">
-          <h2>Login</h2>
-  <form>
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email">
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox"> Remember me</label>
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-  </form>
-</div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div></div>--%>
-
   <%-- ----------------------------------CAROUSEL------------------------------------- --%>
   
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -246,19 +174,19 @@ input[type=text]:focus {
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img class="img-responsive" src="resources/image/bath-powder.jpg"  alt="Beach" >
+        <img class="img-responsive" src="resources/image/bath-powder.jpg"  alt="bath-powder" >
       </div>
 
       <div class="item">
-        <img class="img-responsive" src="resources/image/Essential-Oil-Diffuser.jpg" alt="Elephant">
+        <img class="img-responsive" src="resources/image/Essential-Oil-Diffuser.jpg" alt="Essential-Oil-Diffuser">
       </div>
     
       <div class="item">
-        <img class="img-responsive" src="resources/image/herbaloils.jpg" alt="mountain">
+        <img class="img-responsive" src="resources/image/herbaloils.jpg" alt="herbaloils">
       </div>
 
       <div class="item">
-        <img class="img-responsive" src="resources/image/Home-Fragrance.jpg">
+        <img class="img-responsive" src="resources/image/Home-Fragrance.jpg" alt="Home-Fragrance">
       </div>
     </div>
 

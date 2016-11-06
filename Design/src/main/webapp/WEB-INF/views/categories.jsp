@@ -30,36 +30,32 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="categories">Categories</a></li>
         <li><a href="subCategories">SubCategories</a></li>
-        <li><a href="suppliers">Suppliers</a></li>
+        
         <li><a href="products">Products</a></li>
         <li><a href="registration">Registration</a></li>
         <li><a href="home">Home</a></li>
-        <li><a href="productSpecification">Product Specification</a></li>
+        
       </ul>
       </div>
     </div>
   </nav>
 <br>
-      <form:form method="POST" action="category" commandName="categories" modelAttribute="categories" >
+      <form:form method="POST" action="category" commandName="categories" modelAttribute="categories" class="form-inline" >
             <form:input path="categoryId" hidden="true" />    
-   <table>
-    <tr>
-        <td><form:label path="categoryName">CategoryName</form:label></td>
-        <td><form:input path="categoryName" /></td>
-        <td><form:errors path="categoryName" /></td>
-    </tr>
-    <tr>
-        <td><form:label path="categoryDescription">Description</form:label></td>
-        <td><form:input path="categoryDescription" /></td>
-        <td><form:errors path="categoryDescription" /></td>
-    </tr>
+   <div class="form-group">
+        <form:label path="categoryName">CategoryName</form:label>
+        <form:input path="categoryName" class="form-control"/>
+        <form:errors path="categoryName" /></div>
     
-    <tr>
-        <td colspan="2">
-            <input type="submit" value="Submit"/>
-        </td>
-    </tr>
-</table>  
+    <div class="form-group">
+        <form:label path="categoryDescription">Description</form:label>
+        <form:input path="categoryDescription" class="form-control"/>
+        <form:errors path="categoryDescription" /></div>
+    
+            <button type="submit" class="btn btn-default">Submit</button>
+       
+    
+ 
 </form:form><br><br>
 <!-- --------------------------------------------------------------------------------------------------- -->
         <div ng-app="getCategories" ng-controller="categoriesController">

@@ -15,33 +15,33 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
 <body>
-<form:form method="POST"  modelAttribute="billingAddress"  commandName="billingAddress">
+<form:form method="POST"  class="form-inline" modelAttribute="billingAddress"  commandName="billingAddress">
       <h2>Billing Address</h2>         
    <div class="form-group">
     <label>Street Address 1:</label>
-        <form:input path="streetAddress1" class="form-control" /></div>
+        <form:input path="streetAddress1" class="form-control" />
         
-        <div class="form-group">
+        
     <label>Street Address 2:</label>
-        <form:input path="streetAddress2" class="form-control" /></div>
+        <form:input path="streetAddress2" class="form-control" />
         
-        <div class="form-group">
+        
     <label>Landmark:</label>
-        <form:input path="landmark" class="form-control" /></div>
+        <form:input path="landmark" class="form-control" />
 
- <div class="form-group">
+ 
     <label>City:</label>
-        <form:input path="city" class="form-control" /></div>
+        <form:input path="city" class="form-control" />
 
- <div class="form-group">
+ 
     <label>District:</label>
-        <form:input path="district" class="form-control" /></div>
+        <form:input path="district" class="form-control" />
 
- <div class="form-group">
+ 
     <label>Pincode:</label>
-        <form:input path="pinCode" class="form-control" /></div>
+        <form:input path="pinCode" class="form-control" />
 
- <div class="form-group">
+ 
     <label>State:</label>
         <form:input path="state" class="form-control" /></div>
         <br>

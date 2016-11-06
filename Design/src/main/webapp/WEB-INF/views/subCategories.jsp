@@ -40,31 +40,26 @@
     </div>
   </nav>
   <br>
-  <form:form method="POST" action="subCategory" commandName="subCategories" modelAttribute="subCategories" >
+  <form:form method="POST" class="form-inline" action="subCategory" commandName="subCategories" modelAttribute="subCategories" >
    				<form:input path="subCategoryId" hidden="true" />
-   <table>
-   <tr>
-  <td><label>select category</label></td>
-   <td><form:select path="category.categoryName" items="${categoryList}" itemValue="categoryName" itemName="categoryName" itemLabel="categoryName"></form:select></td>
+   
+   <div class="form-group">
+  <label>select category</label>
+   <form:select path="category.categoryName" items="${categoryList}" class="form-control" itemValue="categoryName" itemName="categoryName" itemLabel="categoryName"></form:select></div>
    		
-   </tr>
-    <tr>
-        <td><form:label path="subCategoryName">SubCategoryName</form:label></td>
-        <td><form:input path="subCategoryName" /></td>
-        <td><form:errors path="subCategoryName"></form:errors>
-    </tr>
-    <tr>
-        <td><form:label path="subCategoryPrice">Price</form:label></td>
-        <td><form:input path="subCategoryPrice" /></td>
-        <td><form:errors path="subCategoryPrice"></form:errors>
-    </tr>
+   
+    <div class="form-group">
+        <form:label path="subCategoryName">SubCategoryName</form:label>
+        <form:input path="subCategoryName" class="form-control"/>
+        <form:errors path="subCategoryName"></form:errors></div>
+   <div class="form-group">
+   
+        <form:label path="subCategoryPrice">Price</form:label>
+        <form:input path="subCategoryPrice" class="form-control"/>
+        <form:errors path="subCategoryPrice"></form:errors></div>
     
-    <tr>
-        <td colspan="2">
-            <input type="submit" value="Submit"/>
-        </td>
-    </tr>
-</table>  
+    <button type="submit" class="btn btn-default">Submit</button>   
+    
 </form:form><br><br>
 
 <div ng-app="getSubCategories" ng-controller="subCategoriesController">

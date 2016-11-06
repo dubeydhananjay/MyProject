@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
 		Session session =this.sessionFactory.getCurrentSession();
 		
 		User user  = new User();
-		//user.setUserId(userDetails.getUserId());
+		
 		user.setUsername(userDetail.getUsername());
 		user.setPassword(userDetail.getPassword());
 		user.setEnabled(true);
@@ -69,12 +69,12 @@ public class UserDAOImpl implements UserDAO {
 	
 	public void addShippingAddress(ShippingAddress shippingAddress)
 	{	
-		this.sessionFactory.getCurrentSession().saveOrUpdate(shippingAddress);
+		sessionFactory.getCurrentSession().saveOrUpdate(shippingAddress);
 	}
 
 	public void addBillingAddress(BillingAddress billingAddress)
 	{
-		this.sessionFactory.getCurrentSession().saveOrUpdate(billingAddress);
+		sessionFactory.getCurrentSession().saveOrUpdate(billingAddress);
 	}
 	
 }

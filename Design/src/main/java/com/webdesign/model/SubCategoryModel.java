@@ -37,6 +37,7 @@ public class SubCategoryModel  implements Serializable
 	@Expose
 	private int categoryId;
 	
+	
 	@ManyToOne
     @JoinColumn(name ="categoryId" ,nullable=false,insertable=false, updatable=false)
 	private Category category;
