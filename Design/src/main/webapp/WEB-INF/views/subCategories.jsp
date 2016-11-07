@@ -19,27 +19,24 @@
 <body>
 
   <h2>SubCategory Page</h2>
-  <nav class="navbar navbar-inverse">
-<div class="navbar-header">
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNewNavbar">
+ <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNewNavbar">
  <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
       <div class="collapse navbar-collapse" id="myNewNavbar">
       <ul class="nav navbar-nav">
+        <li><a href="home">Home</a>
         <li ><a href="categories">Categories</a></li>
-        <li class="active"><a href="subCategories">SubCategories</a></li>
-        <li><a href="suppliers">Suppliers</a></li>
+        <li><a href="subCategories">SubCategories</a></li>
         <li><a href="products">Products</a></li>
         <li><a href="registration">Registration</a></li>
-        <li><a href="home">Home</a></li>
-        <li><a href="productSpecification">Product Specification</a></li>
       </ul>
       </div>
-    </div>
-  </nav>
-  <br>
+    </div></div></div> <br>
   <form:form method="POST" class="form-inline" action="subCategory" commandName="subCategories" modelAttribute="subCategories" >
    				<form:input path="subCategoryId" hidden="true" />
    

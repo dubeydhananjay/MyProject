@@ -31,7 +31,8 @@ public class Category implements Serializable{
 	private String categoryDescription;
 	
 	@OneToMany(fetch = FetchType.EAGER,mappedBy="category", cascade=CascadeType.ALL)
-	private Set<SubCategoryModel> subCategory; 
+	private Set<SubCategoryModel> subCategory;
+	 
 	public Set<SubCategoryModel> getSubCategory() {
 		return subCategory;
 	}

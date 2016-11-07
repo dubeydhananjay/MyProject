@@ -18,66 +18,63 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <body>
 <h2>Products Page</h2>
-<nav class="navbar navbar-inverse">
-<div class="navbar-header">
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNewNavbar">
+<div class="navbar navbar-default yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNewNavbar">
  <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
       <div class="collapse navbar-collapse" id="myNewNavbar">
       <ul class="nav navbar-nav">
+        <li><a href="home">Home</a>
         <li ><a href="categories">Categories</a></li>
         <li><a href="subCategories">SubCategories</a></li>
-        
-        <li class="active"><a href="products">Products</a></li>
+        <li><a href="products">Products</a></li>
         <li><a href="registration">Registration</a></li>
-        <li><a href="home">Home</a></li>
-        
       </ul>
       </div>
-    </div>
-  </nav>
-<br>
+    </div></div></div><br>
           <form:form method="POST" class="form-inline" action="product" commandName="products" modelAttribute="products" enctype="multipart/form-data" >
    			<form:input path="productId" hidden="true" />
   
   <div class="form-group">
-  <label>select supplier</label>
-   <form:select path="userDetail.username" items="${listSupplier}" class="form-control" itemValue="username" itemName="username" itemLabel="username"></form:select><br><br>
+  <label class="col-md-4 control-label">select supplier</label>
+   <form:select path="userDetail.username" items="${listSupplier}" class="form-control input-md" itemValue="username" itemName="username" itemLabel="username"></form:select><br><br>
    
      
-  <label>select subcategory</label>
-   <form:select path="subCategory.subCategoryName" items="${subCategoryList}" class="form-control" itemValue="subCategoryName" itemName="subCategoryName" itemLabel="subCategoryName"></form:select><br><br>
+  <label class="col-md-4 control-label">select subcategory</label>
+   <form:select path="subCategory.subCategoryName" items="${subCategoryList}" class="form-control input-md" itemValue="subCategoryName" itemName="subCategoryName" itemLabel="subCategoryName"></form:select><br><br>
  
    
- <form:label path="productName">Product Name</form:label>
-        <form:input path="productName" class="form-control"/>
+ <form:label path="productName" class="col-md-4 control-label">Product Name</form:label>
+        <form:input path="productName" class="form-control input-md"/>
         <form:errors path="productName"></form:errors><br><br>
    
   
-  <label>Product Weight</label>
-   <input type="text" name="productWeight" class="form-control"><br><br>
+  <label class="col-md-4 control-label">Product Weight</label>
+   <input type="text" name="productWeight" class="form-control input-md"><br><br>
  
     
-  <label>Product size</label>
-   <input type="text" name="productSize" class="form-control"><br><br>
+  <label class="col-md-4 control-label">Product size</label>
+   <input type="text" name="productSize" class="form-control input-md"><br><br>
    
    
-   <label>Skin Type</label>
-   <input type="text" name="skintype" class="form-control"><br><br>
+   <label class="col-md-4 control-label">Skin Type</label>
+   <input type="text" name="skintype" class="form-control input-md"><br><br>
    
    
-   <label>Soap Type</label>
-   <input type="text" name="soapType" class="form-control"><br><br>
+   <label class="col-md-4 control-label">Soap Type</label>
+   <input type="text" name="soapType" class="form-control input-md"><br><br>
    
    
-   <label>Organic</label>
-  <input type="text" name="organic" class="form-control"><br><br>
+   <label class="col-md-4 control-label">Organic</label>
+  <input type="text" name="organic" class="form-control input-md"><br><br>
   
    
-   <label>select file</label>
-   <form:input type="file" name="file" path="uploadFiles" class="form-control"></form:input></div><br><br>
+   <label class="col-md-4 control-label">select file</label>
+   <form:input type="file" name="file" path="uploadFiles" class="form-control input-md"></form:input></div><br><br>
    
   
    <button type="submit" class="btn btn-default">Submit</button>

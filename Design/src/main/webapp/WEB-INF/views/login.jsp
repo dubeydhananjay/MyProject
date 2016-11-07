@@ -12,6 +12,24 @@
 </head>
 <body>
 <h2>Login</h2>
+<div class="navbar navbar-default yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNewNavbar">
+ <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="myNewNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="home">Home</a>
+        <li ><a href="categories">Categories</a></li>
+        <li><a href="subCategories">SubCategories</a></li>
+        <li><a href="products">Products</a></li>
+        <li><a href="registration">Registration</a></li>
+      </ul>
+      </div>
+    </div></div></div><br><br>
   <form method="post" action="perform_login" class="form-inline">
     
      

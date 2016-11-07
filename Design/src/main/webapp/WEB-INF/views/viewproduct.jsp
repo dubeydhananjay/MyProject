@@ -31,11 +31,25 @@
 </style>
 </head>
 <body ng-app="getProducts" ng-controller="productController">
-<table>
-<tr>
-<td><a href="home">Home</a></td>
-<td>|</td>
-<td><a href="products">Products</a></td></tr></table>
+<div class="navbar navbar-default yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNewNavbar">
+ <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="myNewNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="home">Home</a>
+        <li ><a href="categories">Categories</a></li>
+        <li><a href="subCategories">SubCategories</a></li>
+        <li><a href="products">Products</a></li>
+        <li><a href="registration">Registration</a></li>
+      </ul>
+      </div>
+    </div></div></div>
+    <br>
 <h1>{{productList.productName}}</h1>
  <div class="col-sm-5">
 <img id="div2" src="resources/image/{{productList.productId}}.jpg">
