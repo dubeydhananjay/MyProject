@@ -17,7 +17,7 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <body>
-<h2>Products Page</h2>
+
 <div class="navbar navbar-default yamm" role="navigation" id="navbar">
         <div class="container">
             <div class="navbar-header">
@@ -35,46 +35,60 @@
         <li><a href="registration">Registration</a></li>
       </ul>
       </div>
-    </div></div></div><br>
+    </div></div></div><br><br>
+    <h2>Products Page</h2><br><br>
           <form:form method="POST" class="form-inline" action="product" commandName="products" modelAttribute="products" enctype="multipart/form-data" >
    			<form:input path="productId" hidden="true" />
   
   <div class="form-group">
-  <label class="col-md-4 control-label">select supplier</label>
-   <form:select path="userDetail.username" items="${listSupplier}" class="form-control input-md" itemValue="username" itemName="username" itemLabel="username"></form:select><br><br>
-   
-     
-  <label class="col-md-4 control-label">select subcategory</label>
-   <form:select path="subCategory.subCategoryName" items="${subCategoryList}" class="form-control input-md" itemValue="subCategoryName" itemName="subCategoryName" itemLabel="subCategoryName"></form:select><br><br>
- 
-   
- <form:label path="productName" class="col-md-4 control-label">Product Name</form:label>
-        <form:input path="productName" class="form-control input-md"/>
-        <form:errors path="productName"></form:errors><br><br>
-   
+  <label class="col-md-6 control-label">select supplier</label>
+  <div class="col-md-6">
+  <form:select path="userDetail.username" items="${listSupplier}" class="form-control input-md" itemValue="username" itemName="username" itemLabel="username"></form:select>
+   </div></div>
   
+  <div class="form-group">   
+  <label class="col-md-6 control-label">select subcategory</label>
+  <div class="col-md-6">
+  <form:select path="subCategory.subCategoryName" items="${subCategoryList}" class="form-control input-md" itemValue="subCategoryName" itemName="subCategoryName" itemLabel="subCategoryName"></form:select>
+ </div></div><br><br>
+ 
+ <div class="form-group">  
+ <label class="col-md-4 control-label">Product Name</label>
+ <div class="col-md-4">
+  <form:input path="productName" class="form-control input-md"/>
+         <form:errors path="productName"></form:errors></div></div><br><br>
+       
+   
+  <div class="form-group">
   <label class="col-md-4 control-label">Product Weight</label>
-   <input type="text" name="productWeight" class="form-control input-md"><br><br>
+  <div class="col-md-4">
+   <input type="text" name="productWeight" class="form-control input-md"></div></div><br><br>
  
-    
+   <div class="form-group"> 
   <label class="col-md-4 control-label">Product size</label>
-   <input type="text" name="productSize" class="form-control input-md"><br><br>
+  <div class="col-md-4">
+   <input type="text" name="productSize" class="form-control input-md"></div></div><br><br>
    
-   
+  <div class="form-group"> 
    <label class="col-md-4 control-label">Skin Type</label>
-   <input type="text" name="skintype" class="form-control input-md"><br><br>
+   <div class="col-md-4">
+   <input type="text" name="skintype" class="form-control input-md"></div></div><br><br>
    
-   
+   <div class="form-group">
    <label class="col-md-4 control-label">Soap Type</label>
-   <input type="text" name="soapType" class="form-control input-md"><br><br>
+   <div class="col-md-4">
+   <input type="text" name="soapType" class="form-control input-md"></div></div><br><br>
    
-   
+  <div class="form-group"> 
    <label class="col-md-4 control-label">Organic</label>
-  <input type="text" name="organic" class="form-control input-md"><br><br>
+   <div class="col-md-4">
+  <input type="text" name="organic" class="form-control input-md"></div></div><br><br>
   
    
-   <label class="col-md-4 control-label">select file</label>
-   <form:input type="file" name="file" path="uploadFiles" class="form-control input-md"></form:input></div><br><br>
+   <div class="form-group">
+   <label class="col-md-4 control-label">select Image file</label>
+   <div class="col-md-4">
+   <form:input type="file" name="file" path="uploadFiles" class="form-control input-md"></form:input></div></div><br><br>
    
   
    <button type="submit" class="btn btn-default">Submit</button>
@@ -86,7 +100,7 @@
           <div ng-app="getProducts" ng-controller="productController">
           <table><tr><td>Search</td>
         <td><input type="text" ng-model="test"></td></tr></table><br>
-				  <table class="table">
+				  <table class="table" border="1" width="100%">
                   <thead>
                   <tr>
                   <th ng-click="orderByMe('productId')">productId</th>
@@ -100,7 +114,9 @@
                   <th ng-click="orderByMe('organic')">Organic</th>
                   <th>Edit</th>
                   <th>Delete</th>
-				</tr>
+                  <th>Image</th>
+                  <th>View</th>
+                  </tr>
 			</thead>
 			<tbody>
 				  <tr ng-repeat="list in productList | orderBy:myOrderBy | filter:test">

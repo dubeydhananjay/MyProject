@@ -77,4 +77,35 @@ public class UserDAOImpl implements UserDAO {
 		sessionFactory.getCurrentSession().saveOrUpdate(billingAddress);
 	}
 	
+	public void saveOrUpdateAdmin(UserDetail userDetail)
+	{
+		Session session =this.sessionFactory.getCurrentSession();
+		
+		User user  = new User();
+		
+		user.setUsername(userDetail.getUsername());
+		user.setPassword(userDetail.getPassword());
+		user.setEnabled(true);
+		user.setUserId(userDetail.getUserId());
+		session.saveOrUpdate(user);
+		
+		UserRole userRole  = new  UserRole();
+		userRole.setUserId(user.getUserId());
+		userRole.setRoleId(3);
+		session.saveOrUpdate(userRole);
+		
+		Cart cart  =new Cart();
+		cart.setCartId(user.getUserId());
+		cart.setUserId(user.getUserId());
+		session.saveOrUpdate(cart);
+		
+		userDetail.setRoleId(3);
+		userDetail.setUserId(user.getUserId());
+		userDetail.setCartId(cart.getCartId());
+		
+		session.saveOrUpdate(userDetail);
+		
+		session.flush();
+	}
+	
 }

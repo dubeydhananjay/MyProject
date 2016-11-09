@@ -18,7 +18,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <body >
 
-<h2>Category Page</h2>
  <div class="navbar navbar-default yamm" role="navigation" id="navbar">
         <div class="container">
             <div class="navbar-header">
@@ -37,7 +36,8 @@
       </ul>
       </div>
     </div></div></div>
-<br>
+<br><br>
+<h2>Category Page</h2><br><br>
       <form:form method="POST" action="category" commandName="categories" modelAttribute="categories" class="form-inline" >
             <form:input path="categoryId" hidden="true" />    
    <div class="form-group">

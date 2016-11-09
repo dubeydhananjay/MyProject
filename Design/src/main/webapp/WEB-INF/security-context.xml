@@ -6,7 +6,7 @@
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
    <!-- We will be adding all security related configurations -->
    
-   <authentication-manager>
+    <authentication-manager>
    <authentication-provider>
    <jdbc-user-service data-source-ref="dataSource"
    users-by-username-query="select username, password, enabled from user where username=?;"
@@ -16,7 +16,11 @@
    
    <http auto-config="true">
    <csrf disabled="true"/>
+   <access-denied-handler error-page="/exception"/>
    <intercept-url pattern="/" access="permitAll"/>
+   <intercept-url pattern="/categories" access="hasRole('ROLE_ADMIN')"/>
+   <intercept-url pattern="/subCategories" access="hasRole('ROLE_ADMIN')"/>
+   <intercept-url pattern="/products" access="hasRole('ROLE_ADMIN')"/>
    <form-login login-page="/login" default-target-url="/" login-processing-url="/perform_login"
    authentication-failure-url="/login?error" username-parameter="username"
    password-parameter="password"/>

@@ -61,4 +61,20 @@ public class UserController {
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/adminRegister")
+	public String adminRegister(Model model)
+	{
+		
+		model.addAttribute("adminRegister", new UserDetail());
+		return "adminRegister";
+		
+	}
+	
+	@RequestMapping("/addAdmin")
+	public String addAdmin(@ModelAttribute("adminRegister") UserDetail userDetail)
+	{
+		this.userService.saveOrUpdateAdmin(userDetail);
+		return "redirect:/adminRegister";
+	}
 }

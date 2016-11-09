@@ -11,15 +11,6 @@
 <title>Error</title>
 </head>
 <body>
-<div class="content" style="width:60%">
-			<!-- here the href's value will be used to decide the 
-				 controller to be executed on click of this link.
-				 here "home" is mapped in spring mvc controller-->
-			<a href="home">Home</a>
-			<fieldset>
-				<legend>Error occurred</legend>
-				${exception}
-			</fieldset>
-		</div>
+Access denied
 </body>
 </html>

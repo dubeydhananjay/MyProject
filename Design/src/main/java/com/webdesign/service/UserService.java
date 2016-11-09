@@ -38,4 +38,11 @@ public void addBillingAddress(BillingAddress billingAddress)
 {
 	this.userDAOImpl.addBillingAddress(billingAddress);
 }
+
+@Transactional
+public void saveOrUpdateAdmin(UserDetail userDetail)
+{
+	this.userDAOImpl.saveOrUpdateAdmin(userDetail);
+	
+}
 }

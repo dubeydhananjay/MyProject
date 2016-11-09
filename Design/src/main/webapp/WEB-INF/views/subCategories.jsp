@@ -18,7 +18,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <body>
 
-  <h2>SubCategory Page</h2>
  <div class="navbar navbar-default yamm" role="navigation" id="navbar">
         <div class="container">
             <div class="navbar-header">
@@ -36,7 +35,8 @@
         <li><a href="registration">Registration</a></li>
       </ul>
       </div>
-    </div></div></div> <br>
+    </div></div></div> <br><br>
+    <h2>SubCategory Page</h2><br><br>
   <form:form method="POST" class="form-inline" action="subCategory" commandName="subCategories" modelAttribute="subCategories" >
    				<form:input path="subCategoryId" hidden="true" />
    
@@ -62,7 +62,7 @@
 <div ng-app="getSubCategories" ng-controller="subCategoriesController">
            <table><tr><td>Search</td>
         <td><input type="text" ng-model="test"></td></tr></table><br>
-				  <table class="table">
+				  <table class="table" border="1" width="100%">
                   <thead>
                   <tr>
                   <th ng-click="orderByMe('subCategoryId')">#</th>
