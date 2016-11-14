@@ -1,5 +1,5 @@
 <%@include file="header.jsp" %>
-<!-- -------------------------------Carousel----------------------------------------------------------- -->
+ <!-- -------------------------------Carousel----------------------------------------------------------- -->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -43,7 +43,8 @@
             <div id="advantages">
 
                 <div class="container">
-                    <div class="same-height-row">
+                    <div class="row">
+  					
                         <div class="col-sm-4">
                             <div class="box same-height clickable">
                                 <div class="icon"><i class="fa fa-heart"></i>
@@ -96,56 +97,16 @@
                     </div>
                 </div></div>
                 
-                <div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Home-Fragrance</div>
-        <div class="panel-body"><img src="resources/image/Home-Fragrance.jpg" class="img-responsive" width="100px" height="100px" alt="Image"></div>
-        <div class="panel-footer">Home-Fragrance</div>
+ <div class="container">
+  <div class="row" ng-app="getProductViewList" ng-controller="productListViewController">
+    <div class="col-sm-4 col-md-4" ng-repeat="list in productsViewList">
+      <div class="panel panel-primary" >
+        <div class="panel-heading">{{list.productName}}</div>
+        <div class="panel-body"><a href="viewproduct-{{list.productId}}-product"><img src="resources/image/{{list.productId}}.jpg" class="img-responsive" style="width:300px;min-height:200px" alt="Image"></a></div>
+        <div class="panel-footer">{{list.productId}}</div>
       </div>
     </div>
-    <div class="col-sm-4">
-      <div class="panel panel-danger">
-        <div class="panel-heading">Essential Oil</div>
-        <div class="panel-body"><img src="resources/image/essentialoils.jpg" class="img-responsive" width="100px" height="100px" alt="Image"></div>
-        <div class="panel-footer">Essential Oil</div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="panel panel-success">
-        <div class="panel-heading">Essential-Oil-Diffuser</div>
-        <div class="panel-body"><img src="resources/image/Essential-Oil-Diffuser.jpg" class="img-responsive" width="100px" height="100px" alt="Image"></div>
-        <div class="panel-footer">Essential-Oil-Diffuser</div>
-      </div>
-    </div>
-  </div>
-</div><br>
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Herbal oils </div>
-        <div class="panel-body"><img src="resources/image/herbaloils.jpg" class="img-responsive" width="100px" height="100px" alt="Image"></div>
-        <div class="panel-footer">Herbal Oils</div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Diffuser</div>
-        <div class="panel-body"><img src="resources/image/essential-oil-diffuser1.jpg" class="img-responsive" width="100px" height="100px" alt="Image"></div>
-        <div class="panel-footer">Diffuser</div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Bath Powder</div>
-        <div class="panel-body"><img src="resources/image/bath-powder.jpg" class="img-responsive" width="100px" height="100px"alt="Image"></div>
-        <div class="panel-footer">Bath Powder</div>
-      </div>
-    </div>
-  </div>
+</div>
 </div><br><br>
 
 
@@ -239,6 +200,15 @@
         <!-- /#content -->
 
             <!-- /#all -->
+
+<script type="text/javascript">
+				  angular.module('getProductViewList',[]).controller('productListViewController',function($scope)
+						  {
+					  $scope.productsViewList=${productList};
+					 
+						  });
+				  </script>
+
 
 <%@include file="footer.jsp" %> 
     

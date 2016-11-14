@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
+    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page isELIgnored="false" %>
@@ -41,7 +42,7 @@
 
 <title>Insert title here</title>
 </head>
-<body>
+<body ng-app="getAllProducts" ng-controller="allProductController">
 
     <!-- *** TOPBAR ***
  _________________________________________________________ -->
@@ -74,12 +75,12 @@
 
     <div class="navbar navbar-default yamm" role="navigation" id="navbar">
         <div class="container">
-            <div class="navbar-header">
+           <!--  <div class="navbar-header">
 
-                <!-- <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
+                <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
                     <img src="resources/image/BoldMedia-flat-logo.png" alt="logo" class="hidden-xs" hidden="true">
                     <img src="resources/image/BoldMedia-flat-logo.png" alt="logo" class="visible-xs" hidden="true"><span class="sr-only">go to homepage</span>
-                </a> -->
+                </a>
                 <div class="navbar-buttons">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                         <span class="sr-only">Toggle navigation</span>
@@ -94,7 +95,7 @@
                     </a>
                 </div>
             </div>
-            <!--/.navbar-header -->
+ -->            <!--/.navbar-header -->
 
             <div class="navbar-collapse collapse" id="navigation">
 
@@ -112,11 +113,13 @@
                                 <div class="yamm-content">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <h5>${subCategory.subCategoryName}</h5>
+                                         <h5><a href="allproducts?search=${subCategory.subCategoryName}">${subCategory.subCategoryName}</a></h5>
                                             <ul>
                                                 
 							<c:forEach items="${subCategory.product}" var="product">
-							<li><a href="#">${product.productName}</a></li>
+							<li>
+						
+							<a href="viewproduct-${product.productId}-product">${product.productName}</a></li>
 							
 							</c:forEach><!-- End of third c:forEach -->
                             
@@ -166,10 +169,9 @@
 
                 <form class="navbar-form" role="search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="Search" ng-model="searchkeyword">
                         <span class="input-group-btn">
-
-			<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+							<a href="allproducts?search={{searchkeyword}}">	<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button></a>
 
 		    </span>
                     </div>
@@ -189,7 +191,7 @@
    
       
         <c:if test="${pageContext.request.userPrincipal.name!=null}">		  
-       		  
+       		<sec:authorize access="hasRole('ROLE_ADMIN')">  
      <div class="navbar navbar-default yamm" role="navigation" id="navbar">
         <div class="container">
             <div class="navbar-header">
@@ -199,7 +201,7 @@
         <span class="icon-bar"></span>
       </button>
       <div class="collapse navbar-collapse" id="myNewNavbar">
-     <sec:authorize access="hasRole('ROLE_ADMIN')">
+     
       <ul class="nav navbar-nav">
        
         <li ><a href="categories">Categories</a></li>
@@ -208,12 +210,13 @@
         <li><a href="products">Products</a></li>
       
         <li><a href="registration">Registration</a></li>
-      </ul></sec:authorize>
+      </ul>
       
       </div>
-    </div></div></div></c:if>
+    </div></div></div></sec:authorize></c:if>
     
-     <script src="resources/js/jquery-1.11.0.min.js"></script>
+         
+    <script src="resources/js/jquery-1.11.0.min.js"></script>
     <script src="resources/js/bootstrap.min.js"></script>
     <script src="resources/js/jquery.cookie.js"></script>
     <script src="resources/js/waypoints.min.js"></script>
@@ -221,4 +224,6 @@
     <script src="resources/js/bootstrap-hover-dropdown.js"></script>
     <script src="resources/js/owl.carousel.min.js"></script>
     <script src="resources/js/front.js"></script>
+  <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     

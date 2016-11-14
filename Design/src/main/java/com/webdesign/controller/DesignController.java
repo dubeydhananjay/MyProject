@@ -9,14 +9,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.webdesign.service.CategoryService;
+import com.webdesign.service.ProductService;
 
 @Controller
 public class DesignController {
 @Autowired
 	private CategoryService categoryService;
-	@RequestMapping(value={"/","home"})
+
+@Autowired
+private ProductService productService;
+
+
+@RequestMapping(value={"/","home"})
 	public String getHome(Model model) {
 		model.addAttribute("categoriesList" ,this.categoryService.listCategory());
+		model.addAttribute("productList",this.productService.listProduct());
 		return "index";
 	}
 	

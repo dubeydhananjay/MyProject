@@ -26,6 +26,7 @@ import com.google.gson.GsonBuilder;
 import com.webdesign.model.Product;
 import com.webdesign.model.ProductView;
 import com.webdesign.model.SubCategoryModel;
+import com.webdesign.service.CategoryService;
 import com.webdesign.service.NewSupplierService;
 import com.webdesign.service.ProductService;
 
@@ -40,7 +41,9 @@ public class ProductController {
 	@Autowired
 	private SubCategoryService subCategoryService;
 	@Autowired
-	private NewSupplierService newSupplierService; 
+	private NewSupplierService newSupplierService;
+	@Autowired
+	private CategoryService categoryService;
 	
 	@RequestMapping( "/products")
 	public String listProducts(Model model) {
@@ -136,6 +139,18 @@ public class ProductController {
 		return model;
 		
 	}
+	
+	@RequestMapping("/allproducts")
+	public ModelAndView allProductData(@ModelAttribute("product") ProductView productView) {
+		
+		ModelAndView model = new ModelAndView("allproducts");
+		model.addObject("productViewList", this.productService.productViewList());
+		model.addObject("listCategories", this.categoryService.listCategory());
+		model.addObject("listSubCategories", this.subCategoryService.listSubCategory());
+		
+		return model;
+		
+	} 
 
 
 }

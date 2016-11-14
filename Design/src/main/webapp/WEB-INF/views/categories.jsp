@@ -4,19 +4,19 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page isELIgnored="false" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Category Page</title>
+<title>SubCategories Page</title>
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="resources/js/bootstrap.min.js"></script>
-  <style type="text/css">body{background-image:url('image/tile.jpg');}</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<body >
+<body>
 
  <div class="navbar navbar-default yamm" role="navigation" id="navbar">
         <div class="container">
@@ -35,8 +35,9 @@
         <li><a href="registration">Registration</a></li>
       </ul>
       </div>
-    </div></div></div>
-<br><br>
+    </div></div></div> <br><br>
+
+
 <h2>Category Page</h2><br><br>
       <form:form method="POST" action="category" commandName="categories" modelAttribute="categories" class="form-inline" >
             <form:input path="categoryId" hidden="true" />    
@@ -105,5 +106,4 @@
 				  </c:forEach></table>--%>
 				  
 				    
-</body>
-</html>
+</body></html>
