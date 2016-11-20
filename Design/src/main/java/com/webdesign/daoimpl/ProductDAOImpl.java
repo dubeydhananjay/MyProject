@@ -96,4 +96,17 @@ public class ProductDAOImpl implements ProductDAO {
 	    	return productViewList.get(0);
 	    else return null;
 	}
+	
+	public void productSubtract(int productId)
+	{
+		String query = "update Product set productQuantity=productQuantity-1 where productId= "+productId;
+		sessionFactory.getCurrentSession().createQuery(query).executeUpdate();
+	}
+	
+	public void productAdd(int productId)
+	{
+		String query = "update Product set productQuantity=productQuantity+1 where productId= "+productId;
+		sessionFactory.getCurrentSession().createQuery(query).executeUpdate();
+	}
 }
+

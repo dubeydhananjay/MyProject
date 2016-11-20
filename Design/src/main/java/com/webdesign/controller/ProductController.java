@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,6 +81,8 @@ public class ProductController {
 		product.setUserDetail(userDetail);
 		product.setUserId(userDetail.getUserId());
 		
+		Date date = new Date();
+		product.setProductDate(date);
 		productService.createProduct(product);
 		
 		String path="C://Users//Dhananjay//Documents//Eclipse_Proj//Design//src//main//webapp//resources//image";

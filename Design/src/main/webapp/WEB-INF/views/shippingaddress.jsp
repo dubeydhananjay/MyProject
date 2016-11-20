@@ -32,7 +32,8 @@
         	
         <br>
         <input name="_eventId_submit" type="submit" value="Submit" /><br>
-        <input name="_eventId_edit" type="submit" value="Edit" />	
+        <input name="_eventId_edit" type="submit" value="Edit" />
+        <input name="_eventId_cancel" type="submit" value="Cancel" />	
         
         
         </form:form>

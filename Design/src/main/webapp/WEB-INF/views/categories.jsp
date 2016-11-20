@@ -57,7 +57,7 @@
  
 </form:form><br><br>
 <!-- --------------------------------------------------------------------------------------------------- -->
-        <div ng-app="getCategories" ng-controller="categoriesController">
+     <div ng-app="myNewApp" ng-controller="myNewController">
         <table><tr><td>Search</td>
         <td><input type="text" ng-model="test"></td></tr></table><br>
 				  <table class="table" border="1" width="100%">
@@ -81,7 +81,7 @@
 				  <td><a href="deleteCategory-{{list.categoryId}}">delete</a></td></tr></tbody></table>
 				  </div>
 				  <script type="text/javascript">
-				  angular.module('getCategories',[]).controller('categoriesController',function($scope)
+				  angular.module('myNewApp',[]).controller('myNewController',function($scope)
 						  {
 					  $scope.categoryList=${categoriesList};
 						  $scope.orderByMe = function(categoryList) {

@@ -58,6 +58,12 @@
   <form:input path="productName" class="form-control input-md"/>
          <form:errors path="productName"></form:errors></div></div><br><br>
        
+  
+  <div class="form-group">
+  <label class="col-md-4 control-label">Product Quantity</label>
+  <div class="col-md-4">
+   <input type="text" name="productQuantity" class="form-control input-md"></div></div><br><br>
+ 
    
   <div class="form-group">
   <label class="col-md-4 control-label">Product Weight</label>
@@ -79,6 +85,12 @@
    <div class="col-md-4">
    <input type="text" name="soapType" class="form-control input-md"></div></div><br><br>
    
+     <div class="form-group">
+   <label class="col-md-4 control-label">Price</label>
+   <div class="col-md-4">
+   <input type="text" name="productPrice" class="form-control input-md"></div></div><br><br>
+   
+   
   <div class="form-group"> 
    <label class="col-md-4 control-label">Organic</label>
    <div class="col-md-4">
@@ -97,7 +109,7 @@
           
         <br><br>
        <!-- ------------------------------------------------------------------------------------------ -->
-          <div ng-app="getProducts" ng-controller="productController">
+           <div ng-app="myNewApp" ng-controller="myNewController">
           <table><tr><td>Search</td>
         <td><input type="text" ng-model="test"></td></tr></table><br>
 				  <table class="table" border="1" width="100%">
@@ -135,9 +147,9 @@
 				  <td><img src="resources/image/{{list.productId}}.jpg" width="100px" height="100px"></td>
 				  <td><a href="viewproduct-{{list.productId}}-product">View</a>
 				  </tr></tbody></table>
-				  </div>
+				  </div> 
 				  <script type="text/javascript">
-				  angular.module('getProducts',[]).controller('productController',function($scope)
+				  angular.module('myNewApp',[]).controller('myNewController',function($scope)
 						  {
 					  $scope.productList=${productsList};
 					  $scope.orderByMe = function(productsList) {

@@ -13,7 +13,7 @@
 	      http://www.springframework.org/schema/tx 
 	       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<context:component-scan base-package="com.webdesign" />
+<context:component-scan base-package="com.webdesign" />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -22,7 +22,7 @@
 		<property name="username" value="demo" />
 		<property name="password" value="" />
 	</bean>
-	<!-- Hibernate 4 SessionFactory Bean definition -->
+	<!-- Hibernate 5 SessionFactory Bean definition -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -42,13 +42,24 @@
 			</props>
 		</property>
 	</bean>
+	
+<bean id="shippingAddress" class="com.webdesign.model.ShippingAddress" />
+<bean id="billingAddress" class="com.webdesign.model.BillingAddress" />
+<bean id="supplier" class="com.webdesign.model.Supplier" />
+<bean id="userDetail" class="com.webdesign.model.UserDetail"></bean>
 
-
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <!-- set the maximum file size in bytes -->
+    <property name="maxUploadSize" value="2000000"/>
+    
+</bean>
 	<tx:annotation-driven />
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	
 	<mvc:annotation-driven />
 </beans>

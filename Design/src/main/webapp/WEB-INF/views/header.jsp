@@ -16,6 +16,24 @@
       width: 100%;
       margin: auto; height:500px;
   }
+  #div2 {
+    width: 100px;
+    height: 100px;
+    background: red;
+    -webkit-transition: width 2s, height 4s; /* For Safari 3.1 to 6.0 */
+    transition: width 2s, height 4s;
+}
+
+#div2:hover {
+    width: 300px;
+    height: 300px;
+}
+
+body { margin-top:20px; }
+.panel-title {display: inline;font-weight: bold;}
+.checkbox.pull-right { margin: 0; }
+.pl-ziro { padding-left: 0px; }
+  
 
     </style>
 
@@ -42,7 +60,7 @@
 
 <title>Insert title here</title>
 </head>
-<body ng-app="getAllProducts" ng-controller="allProductController">
+<body ng-app="myNewApp" ng-controller="myNewController">
 
     <!-- *** TOPBAR ***
  _________________________________________________________ -->
@@ -75,12 +93,12 @@
 
     <div class="navbar navbar-default yamm" role="navigation" id="navbar">
         <div class="container">
-           <!--  <div class="navbar-header">
+             <div class="navbar-header">
 
-                <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
+               <!--  <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
                     <img src="resources/image/BoldMedia-flat-logo.png" alt="logo" class="hidden-xs" hidden="true">
                     <img src="resources/image/BoldMedia-flat-logo.png" alt="logo" class="visible-xs" hidden="true"><span class="sr-only">go to homepage</span>
-                </a>
+                </a> -->
                 <div class="navbar-buttons">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                         <span class="sr-only">Toggle navigation</span>
@@ -95,7 +113,7 @@
                     </a>
                 </div>
             </div>
- -->            <!--/.navbar-header -->
+             <!--/.navbar-header -->
 
             <div class="navbar-collapse collapse" id="navigation">
 
@@ -165,13 +183,13 @@
 
             </div>
 
-            <div class="collapse clearfix" id="search">
+            <div class="collapse clearfix" id="search" >
 
-                <form class="navbar-form" role="search">
+                <form class="navbar-form" role="search" >
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" ng-model="searchkeyword">
-                        <span class="input-group-btn">
-							<a href="allproducts?search={{searchkeyword}}">	<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button></a>
+                        <input type="text" id="searchItem" class="form-control" placeholder="Search" ng-model="searchkeyword">
+                      <span class="input-group-btn btn btn-primary"><a href="allproducts?search={{searchkeyword}}">  
+								<i class="glyphicon glyphicon-search white "></i></a>
 
 		    </span>
                     </div>
@@ -215,15 +233,44 @@
       </div>
     </div></div></div></sec:authorize></c:if>
     
-         
-    <script src="resources/js/jquery-1.11.0.min.js"></script>
+                
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>   
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    
     <script src="resources/js/bootstrap.min.js"></script>
+ 
     <script src="resources/js/jquery.cookie.js"></script>
     <script src="resources/js/waypoints.min.js"></script>
     <script src="resources/js/modernizr.js"></script>
     <script src="resources/js/bootstrap-hover-dropdown.js"></script>
     <script src="resources/js/owl.carousel.min.js"></script>
     <script src="resources/js/front.js"></script>
-  <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+   
     
+  <script>
+  $(document).ready(function() {
+
+	$('#searchItem').autocomplete({
+		serviceUrl: '${pageContext.request.contextPath}/getTags',
+		paramName: "subCategoryName",
+		delimiter: ",",
+	   transformResult: function(response) {
+
+		return {
+		  //must convert json to javascript object before process
+		  suggestions: $.map($.parseJSON(response), function(item) {
+
+		      return { value: item.subCategoryName, data: item.subCategoryId };
+		   })
+
+		 };
+
+            }
+
+	 });
+
+  });
+
+</script>

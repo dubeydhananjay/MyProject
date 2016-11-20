@@ -25,7 +25,7 @@
           
         <!-- here the id is mapped to invoke this flow -->
 		<webflow:flow-location id="reg" path="registerFlow.xml" />
-		<webflow:flow-location id="sup" path="supplierWebFlow.xml" />
+		<webflow:flow-location id="cart" path="cart-flow.xml" />
     </webflow:flow-registry>
 
     <!-- Plugs in a custom creator for Web Flow views -->

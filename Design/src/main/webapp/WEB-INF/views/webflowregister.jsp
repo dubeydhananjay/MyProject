@@ -61,6 +61,7 @@
         </c:forEach></div></div>
      <br><br>
            <input name="_eventId_submit" type="submit" value="Submit" />
+           <input name="_eventId_cancel" type="submit" value="Cancel" />
         
      
 </form:form><br><br>

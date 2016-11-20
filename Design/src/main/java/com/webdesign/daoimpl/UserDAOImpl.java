@@ -3,16 +3,20 @@ package com.webdesign.daoimpl;
 import java.util.List;
 
 
+
 import org.hibernate.Session;
 
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import com.webdesign.dao.UserDAO;
 import com.webdesign.model.BillingAddress;
 import com.webdesign.model.Cart;
+
 import com.webdesign.model.ShippingAddress;
 import com.webdesign.model.User;
 import com.webdesign.model.UserDetail;
@@ -106,6 +110,40 @@ public class UserDAOImpl implements UserDAO {
 		session.saveOrUpdate(userDetail);
 		
 		session.flush();
+	}
+	
+	public UserDetail getByName(String username)
+	{
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		username=authentication.getName();
+		String query = "from UserDetail where username= '"+username+"'";
+		@SuppressWarnings({  "unchecked" })
+		List<UserDetail> userList=this.sessionFactory.getCurrentSession().createQuery(query).getResultList();
+	    if(userList!=null && !userList.isEmpty())
+	    	return userList.get(0);
+	    else return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ShippingAddress getShippingAddressById(int userId)
+	{
+		String query ="from ShippingAddress where userdetail_userId= "+userId;
+		List<ShippingAddress> shippingList=this.sessionFactory.getCurrentSession().createQuery(query).getResultList();
+		 if(shippingList!=null && !shippingList.isEmpty())
+		    	return shippingList.get(0);
+		    else return null;
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public BillingAddress getBillingAddressById(int userId)
+	{
+		String query ="from BillingAddress where userdetail_userId= "+userId;
+		List<BillingAddress> billingList=this.sessionFactory.getCurrentSession().createQuery(query).getResultList();
+		 if(billingList!=null && !billingList.isEmpty())
+		    	return billingList.get(0);
+		    else return null;
+		
 	}
 	
 }

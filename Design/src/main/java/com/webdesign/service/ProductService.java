@@ -65,5 +65,18 @@ public ProductView getProductViewById(int productId)
 {
 	return this.productDAO.getProductViewById(productId);
 }
+
+@Transactional
+public void productSubtract(int productId)
+{
+	this.productDAO.productSubtract(productId);
+}
+
+@Transactional
+public void productAdd(int productId)
+{
+	this.productDAO.productAdd(productId);
+}
+
 }
 

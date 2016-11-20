@@ -45,4 +45,22 @@ public void saveOrUpdateAdmin(UserDetail userDetail)
 	this.userDAOImpl.saveOrUpdateAdmin(userDetail);
 	
 }
+
+@Transactional
+public UserDetail getByName(String username)
+{
+	return this.userDAOImpl.getByName(username);
+}
+
+@Transactional
+public ShippingAddress getShippingAddressById(int userId)
+{
+	return this.userDAOImpl.getShippingAddressById(userId);
+}
+
+@Transactional
+public BillingAddress getBillingAddressById(int userId)
+{
+	return this.userDAOImpl.getBillingAddressById(userId);
+}
 }

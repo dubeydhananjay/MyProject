@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+<var name="buyNow" class="com.webdesign.model.BuyNow"/>
+<var name="shippingAddress" class="com.webdesign.model.ShippingAddress"/>
+<var name="billingAddress" class="com.webdesign.model.BillingAddress"/>
+<var name="userDetail" class="com.webdesign.model.UserDetail"/>
+<var name="cartItem" class="com.webdesign.model.CartItem"/>
+<var name="product" class="com.webdesign.model.Product"/>
+
+<on-start>
+<evaluate expression="cartHandler.initFlow()" result="flowScope.buyNow"></evaluate>
+</on-start>
+
+<action-state id="start">
+		<evaluate expression="userService.getShippingAddressById(externalContext.sessionMap.userId)" result="shippingAddress"></evaluate>
+		<transition on="success" to="confirmshippingaddress" />
+		</action-state>
+	
+<view-state id="confirmshippingaddress" view="confirmshippingaddress" model="shippingAddress">
+		<transition on="submit" to="successshippingaddress"/> 
+		<transition on="edit" to="shippingaddress"/>
+		<transition on="cancel" to="toHome"/>
+	</view-state>
+	
+	<view-state id="shippingaddress" view="shippingaddress" model="shippingAddress">
+		<transition on="submit" to="addshippingaddress"/> 
+		<transition on="cancel" to="cancelorder"/>
+	</view-state>
+	
+	<action-state id="addshippingaddress">
+		<evaluate expression="userService.addShippingAddress(shippingAddress)" result="shippingAddress"></evaluate>
+		<transition on="success" to="start" />
+		</action-state>
+	
+	<action-state id="successshippingaddress">
+		<evaluate expression="userService.getBillingAddressById(externalContext.sessionMap.userId)" result="billingAddress"></evaluate>
+		<transition on="success" to="confirmbillingaddress" />
+		</action-state>
+	
+	<view-state id="confirmbillingaddress" view="confirmbillingaddress" model="billingAddress">
+		<transition on="submit" to="successsbillingaddress"/> 
+		<transition on="edit" to="billingaddress"/>
+		<transition on="cancel" to="cancelorder"/>
+	</view-state>
+	
+	<view-state id="billingaddress" view="billingaddress" model="billingAddress">
+		<transition on="submit" to="addbillingaddress"/> 
+		<transition on="cancel" to="cancelorder"/>
+	</view-state>
+	
+	<action-state id="addbillingaddress">
+		<evaluate expression="userService.addBillingAddress(billingAddress)" result="billingAddress"></evaluate>
+		<transition on="success" to="successshippingaddress" />
+		</action-state>
+		
+		<view-state id="successsbillingaddress" view="payment" model="buyNow">
+		<transition on="submit" to="successPayment"/> 
+		<transition on="cancel" to="cancelorder"/>
+	</view-state>
+	
+	<action-state id="cancelorder">
+		<evaluate expression="productService.productAdd(externalContext.sessionMap.productId)" result="product"></evaluate>
+		<transition on="success" to="delete" />
+		</action-state>
+	
+	<action-state id="delete">
+		<evaluate expression="cartItemService.delete(externalContext.sessionMap.cartItemId)" result="cartItem"></evaluate>
+		<transition on="success" to="toHome" />
+		</action-state>
+	
+	<action-state id="successPayment">
+		<evaluate expression="cartItemService.setFlag(externalContext.sessionMap.cartItemId)" result="cartItem"></evaluate>
+		<transition on="success" to="toHome" />
+		</action-state>
+	
+<end-state id="toHome" view="externalRedirect:contextRelative:/"/>	
+</flow>

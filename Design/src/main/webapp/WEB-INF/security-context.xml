@@ -18,6 +18,7 @@
    <csrf disabled="true"/>
    <access-denied-handler error-page="/exception"/>
    <intercept-url pattern="/" access="permitAll"/>
+   <intercept-url pattern="/buynow-{productId}" access="hasRole('ROLE_BUYER')"/>
    <intercept-url pattern="/categories" access="hasRole('ROLE_ADMIN')"/>
    <intercept-url pattern="/subCategories" access="hasRole('ROLE_ADMIN')"/>
    <intercept-url pattern="/products" access="hasRole('ROLE_ADMIN')"/>

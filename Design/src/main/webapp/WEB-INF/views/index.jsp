@@ -98,12 +98,12 @@
                 </div></div>
                 
  <div class="container">
-  <div class="row" ng-app="getProductViewList" ng-controller="productListViewController">
+  <div class="row">
     <div class="col-sm-4 col-md-4" ng-repeat="list in productsViewList">
       <div class="panel panel-primary" >
         <div class="panel-heading">{{list.productName}}</div>
         <div class="panel-body"><a href="viewproduct-{{list.productId}}-product"><img src="resources/image/{{list.productId}}.jpg" class="img-responsive" style="width:300px;min-height:200px" alt="Image"></a></div>
-        <div class="panel-footer">{{list.productId}}</div>
+        <div class="panel-footer"><a href="buynow-{{list.productId}}?userId=1">Buy</a></div>
       </div>
     </div>
 </div>
@@ -202,15 +202,15 @@
             <!-- /#all -->
 
 <script type="text/javascript">
-				  angular.module('getProductViewList',[]).controller('productListViewController',function($scope)
+				  angular.module('myNewApp',[]).controller('myNewController',function($scope)
 						  {
 					  $scope.productsViewList=${productList};
-					 
+					  
+					   
 						  });
 				  </script>
-
-
-<%@include file="footer.jsp" %> 
+				  
+				 <%@include file="footer.jsp" %> 
     
 
    

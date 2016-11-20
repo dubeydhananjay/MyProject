@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.annotations.Expose;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,7 +49,39 @@ private String soapType;
 private String skintype;
 @Expose
 private String organic;
+@Expose
+private int productPrice;
+@Expose
+private String productQuantity;
+@Expose
+private Date productDate;
 
+
+
+
+public String getProductQuantity() {
+	return productQuantity;
+}
+
+public void setProductQuantity(String productQuantity) {
+	this.productQuantity = productQuantity;
+}
+
+public Date getProductDate() {
+	return productDate;
+}
+
+public void setProductDate(Date productDate) {
+	this.productDate = productDate;
+}
+
+public int getProductPrice() {
+	return productPrice;
+}
+
+public void setProductPrice(int productPrice) {
+	this.productPrice = productPrice;
+}
 
 public String getProductWeight() {
 	return productWeight;

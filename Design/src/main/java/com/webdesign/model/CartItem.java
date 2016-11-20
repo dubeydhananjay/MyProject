@@ -1,17 +1,40 @@
 package com.webdesign.model;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.google.gson.annotations.Expose;
+
+@SuppressWarnings("serial")
 @Entity
-public class CartItem {
+public class CartItem implements Serializable{
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Expose
+	private int cartItemId;
+	@Expose
 	private int cartId;
+	@Expose
 	private int productId;
+	@Expose
 	private int userId;
+	@Expose
+	private String quantity;
+	@Expose
+	private int amount;
+	@Expose
+	private String productName;
+	@Expose
 	private boolean flag;
+	@Expose
+	private Date orderDate;
 	
 	@ManyToOne
 	@JoinColumn(name="cartId",nullable=false,insertable=false, updatable=false)
@@ -30,6 +53,40 @@ public class CartItem {
 
 	public void setCartId(int cartId) {
 		this.cartId = cartId;
+	}
+
+	public int getCartItemId() {
+		return cartItemId;
+	}
+
+	public void setCartItemId(int cartItemId) {
+		this.cartItemId = cartItemId;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	
+
+	public String getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
 	}
 
 	public int getProductId() {
@@ -78,6 +135,14 @@ public class CartItem {
 
 	public void setUserDetail(UserDetail userDetail) {
 		this.userDetail = userDetail;
+	}
+
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
 	}
 
 	
