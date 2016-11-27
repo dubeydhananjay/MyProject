@@ -48,6 +48,8 @@ body { margin-top:20px; }
     <link href="resources/css/owl.carousel.css" rel="stylesheet">
     <link href="resources/css/owl.theme.css" rel="stylesheet">
 	<link href="resources/css/owl.transitions.css" rel="stylesheet">
+	<link href="resources/css/userprofile.css" rel="stylesheet">
+	<link href="resources/css/login.css" rel="stylesheet">
     <!-- theme stylesheet -->
     <link href="resources/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
 
@@ -150,11 +152,14 @@ body { margin-top:20px; }
                                     </ul>
                                     </li></c:forEach><!-- End of First c:foreach  -->
                                     <c:if test="${pageContext.request.userPrincipal.name!=null}">
-       			  <li><a href="#">Welcome
+                                    
+       			  <li class="dropdown yamm-fw"><a href="userprofile" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Welcome
        			  <sec:authorize access="isAuthenticated()">  
         		  <strong><sec:authentication property="principal.username"/></strong>
-        		  </sec:authorize></a>
-       			  </li>
+        		  </sec:authorize><b class="caret"></b></a>
+        		  
+       			  <ul class="dropdown-menu">
+       			  <li><a href="mywishlist">My WishList</a></li></ul></li>
        			  </c:if>
        			  
        			   <c:if test="${pageContext.request.userPrincipal.name!=null}">
@@ -170,7 +175,7 @@ body { margin-top:20px; }
             <div class="navbar-buttons">
 
                 <div class="navbar-collapse collapse right" id="basket-overview">
-                    <a href="#" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm"> cart</span></a>
+                    <a href="cartList" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm"> cart</span></a>
                 </div>
                 <!--/.nav-collapse -->
 

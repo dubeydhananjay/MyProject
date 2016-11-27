@@ -30,7 +30,7 @@ public class ProductDAOImpl implements ProductDAO {
 		List<Product> productList=this.sessionFactory.getCurrentSession().createQuery("from Product").getResultList();
 		//return categoryList;
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		String json = gson.toJson( productList);
+		String json = gson.toJson(productList);
 		return json;
 		
 	}

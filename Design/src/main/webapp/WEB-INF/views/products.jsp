@@ -47,7 +47,7 @@
    </div></div>
   
   <div class="form-group">   
-  <label class="col-md-6 control-label">select subcategory</label>
+  <label class="col-md-6 control-label">Select Type of Product</label>
   <div class="col-md-6">
   <form:select path="subCategory.subCategoryName" items="${subCategoryList}" class="form-control input-md" itemValue="subCategoryName" itemName="subCategoryName" itemLabel="subCategoryName"></form:select>
  </div></div><br><br>
@@ -62,39 +62,39 @@
   <div class="form-group">
   <label class="col-md-4 control-label">Product Quantity</label>
   <div class="col-md-4">
-   <input type="text" name="productQuantity" class="form-control input-md"></div></div><br><br>
+   <form:input path="productQuantity" type="text" name="productQuantity" class="form-control input-md"/></div></div><br><br>
  
    
   <div class="form-group">
   <label class="col-md-4 control-label">Product Weight</label>
   <div class="col-md-4">
-   <input type="text" name="productWeight" class="form-control input-md"></div></div><br><br>
+   <form:input path="productWeight" type="text" name="productWeight" class="form-control input-md"/></div></div><br><br>
  
    <div class="form-group"> 
   <label class="col-md-4 control-label">Product size</label>
   <div class="col-md-4">
-   <input type="text" name="productSize" class="form-control input-md"></div></div><br><br>
+   <form:input path="productSize" type="text" name="productSize" class="form-control input-md"/></div></div><br><br>
    
   <div class="form-group"> 
    <label class="col-md-4 control-label">Skin Type</label>
    <div class="col-md-4">
-   <input type="text" name="skintype" class="form-control input-md"></div></div><br><br>
+   <form:input path="skintype" type="text" name="skintype" class="form-control input-md"/></div></div><br><br>
    
    <div class="form-group">
    <label class="col-md-4 control-label">Soap Type</label>
    <div class="col-md-4">
-   <input type="text" name="soapType" class="form-control input-md"></div></div><br><br>
+   <form:input path="soapType" type="text" name="soapType" class="form-control input-md"/></div></div><br><br>
    
      <div class="form-group">
    <label class="col-md-4 control-label">Price</label>
    <div class="col-md-4">
-   <input type="text" name="productPrice" class="form-control input-md"></div></div><br><br>
+   <form:input path="productPrice" type="text" name="productPrice" class="form-control input-md"/></div></div><br><br>
    
    
   <div class="form-group"> 
    <label class="col-md-4 control-label">Organic</label>
    <div class="col-md-4">
-  <input type="text" name="organic" class="form-control input-md"></div></div><br><br>
+  <form:input path="organic" type="text" name="organic" class="form-control input-md"/></div></div><br><br>
   
    
    <div class="form-group">
@@ -119,6 +119,7 @@
                   <th ng-click="orderByMe('productName')">ProductName</th>
                   <th ng-click="orderByMe('subCategoryId')">subCategoryId</th>
                   <th ng-click="orderByMe('supplierId')">supplierId</th>
+                 <th ng-click="orderByMe('productQuantity')"> Product Quantity</th>
                   <th ng-click="orderByMe('productWeight')">Product Weight</th>
                   <th ng-click="orderByMe('productSize')">Product Size</th>
                   <th ng-click="orderByMe('soapType')">Soap Type</th>
@@ -136,16 +137,17 @@
 				  <td>{{list.productName}}</td>
 				  <td>{{list.subCategoryId}}</td>
 				  <td>{{list.userId}}</td>
+				  <td>{{list.productQuantity}}</td>
 				  <td>{{list.productWeight}}</td>
 				  <td>{{list.productSize}}</td>
 				  <td>{{list.soapType}}</td>
 				  <td>{{list.skintype}}</td>
 				  <td>{{list.organic}}</td>
 				  
-				  <td><a href="editProduct-{{list.productId}}">edit</a></td>
-				  <td><a href="deleteProduct-{{list.productId}}">delete</a></td>
+				  <td><a href="editProduct-{{list.productId}}"><button type="button" class="btn btn-primary">Edit</button></a></td>
+				  <td><a href="deleteProduct-{{list.productId}}"><button type="button" class="btn btn-success">Delete</button></a></td>
 				  <td><img src="resources/image/{{list.productId}}.jpg" width="100px" height="100px"></td>
-				  <td><a href="viewproduct-{{list.productId}}-product">View</a>
+				  <td><a href="viewproduct-{{list.productId}}-product"><button type="button" class="btn btn-info">View</button></a>
 				  </tr></tbody></table>
 				  </div> 
 				  <script type="text/javascript">

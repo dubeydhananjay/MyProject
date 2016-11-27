@@ -52,18 +52,16 @@ private String organic;
 @Expose
 private int productPrice;
 @Expose
-private String productQuantity;
+private int productQuantity;
 @Expose
 private Date productDate;
 
 
-
-
-public String getProductQuantity() {
+public int getProductQuantity() {
 	return productQuantity;
 }
 
-public void setProductQuantity(String productQuantity) {
+public void setProductQuantity(int productQuantity) {
 	this.productQuantity = productQuantity;
 }
 

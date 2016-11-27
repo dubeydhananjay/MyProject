@@ -79,8 +79,8 @@
 				  <td>{{list.subCategoryName}}</td>
 				  <td>{{list.subCategoryPrice}}</td>
 				  <td>{{list.categoryId}}</td>
-				  <td><a href="editSubCategory-{{list.subCategoryId}}">edit</a></td>
-				  <td><a href="deleteSubCategory-{{list.subCategoryId}}">delete</a></td></tr></tbody></table>
+				  <td><a href="editSubCategory-{{list.subCategoryId}}"><button type="button" class="btn btn-primary">Edit</button></a></td>
+				  <td><a href="deleteSubCategory-{{list.subCategoryId}}"><button type="button" class="btn btn-success">Delete</button></a></td></tr></tbody></table>
 				  </div>
 				  <script type="text/javascript">
 				  angular.module('myNewApp',[]).controller('myNewController',function($scope)

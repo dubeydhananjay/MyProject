@@ -72,5 +72,7 @@ public class CategoryDAOImpl implements CategoryDao
 		removeCategory.setCategoryId(categoryId);
 		this.sessionFactory.getCurrentSession().delete(removeCategory);
 	}
+	
+	
  
 }

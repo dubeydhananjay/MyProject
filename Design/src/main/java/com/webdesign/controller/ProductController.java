@@ -93,7 +93,7 @@ public class ProductController {
         {
 			try
                 {
-                	//file.transferTo(imageFile);
+                	
                 	byte[] bytes = file.getBytes();
                 	FileOutputStream fileOutputStream = new FileOutputStream(imageFile);
     				BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
@@ -150,7 +150,7 @@ public class ProductController {
 		model.addObject("productViewList", this.productService.productViewList());
 		model.addObject("listCategories", this.categoryService.listCategory());
 		model.addObject("listSubCategories", this.subCategoryService.listSubCategory());
-		
+		model.addObject("subCategoriesList", this.subCategoryService.subCategoryList());
 		return model;
 		
 	} 

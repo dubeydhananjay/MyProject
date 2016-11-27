@@ -3,7 +3,9 @@
     <br>
 <h1>{{productList.productName}}</h1>
  <div class="col-sm-5">
-<img id="div2" src="resources/image/{{productList.productId}}.jpg">
+<img id="div2" src="resources/image/{{productList.productId}}.jpg"><br><br>
+<span><a href="addCart-{{list.productId}}"><button type="button" class="btn btn-danger">Add To Cart</button></a></span>
+<span><a href="buynow-{{list.productId}}?userId=1"><button type="button" class="btn btn-warning">Buy Now</button></a></span>
  </div>
 <div class="col-sm-7">
 <h6>Product ID: {{productList.productId}}</h6>

@@ -114,8 +114,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	public UserDetail getByName(String username)
 	{
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		username=authentication.getName();
+		
 		String query = "from UserDetail where username= '"+username+"'";
 		@SuppressWarnings({  "unchecked" })
 		List<UserDetail> userList=this.sessionFactory.getCurrentSession().createQuery(query).getResultList();

@@ -2,6 +2,7 @@ package com.webdesign.daoimpl;
 
 import java.util.List;
 
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,7 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.webdesign.dao.CartItemDAO;
 import com.webdesign.model.CartItem;
-import com.webdesign.model.Category;
+
 
 @Repository
 public class CartIemDAOImpl implements CartItemDAO
@@ -71,5 +72,24 @@ public class CartIemDAOImpl implements CartItemDAO
 		String query="update CartItem set flag=true where cartItemId= "+cartItemId;
 		this.sessionFactory.getCurrentSession().createQuery(query).executeUpdate();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<CartItem> cartList(int userId) 
+	{
+		String sql = "from CartItem where  flag = false and userId="+userId;
+		List<CartItem> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
+		return list;
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<CartItem> orderedList(int userId) 
+	{
+		String sql = "from CartItem where flag = false and userId="+userId;
+		List<CartItem> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
+		return list;
+	}
+
+
 		
 	}

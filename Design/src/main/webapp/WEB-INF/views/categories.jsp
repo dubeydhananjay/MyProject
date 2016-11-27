@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>SubCategories Page</title>
+<title>Categories Page</title>
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="resources/js/bootstrap.min.js"></script>
@@ -57,6 +57,7 @@
  
 </form:form><br><br>
 <!-- --------------------------------------------------------------------------------------------------- -->
+     <h2>List of Categories</h2><br><br>
      <div ng-app="myNewApp" ng-controller="myNewController">
         <table><tr><td>Search</td>
         <td><input type="text" ng-model="test"></td></tr></table><br>
@@ -77,8 +78,8 @@
 				  <td>{{list.categoryId}}</td>
 				  <td>{{list.categoryName}}</td>
 				  <td>{{list.categoryDescription}}</td>
-				  <td><a href="editCategory-{{list.categoryId}}" >edit</a></td>
-				  <td><a href="deleteCategory-{{list.categoryId}}">delete</a></td></tr></tbody></table>
+				  <td><a href="editCategory-{{list.categoryId}}"><button type="button" class="btn btn-primary">Edit</button></a></td>
+				  <td><a href="deleteCategory-{{list.categoryId}}"><button type="button" class="btn btn-success">Delete</button></a></td></tr></tbody></table>
 				  </div>
 				  <script type="text/javascript">
 				  angular.module('myNewApp',[]).controller('myNewController',function($scope)

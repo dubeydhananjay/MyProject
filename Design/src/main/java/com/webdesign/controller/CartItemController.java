@@ -1,6 +1,7 @@
 package com.webdesign.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -91,5 +92,71 @@ public class CartItemController
 		  
 		  return "redirect:/cart?userId="+userId;
 	  }
+	 
+	 @RequestMapping("/addCart-{productId}")
+	  public String addToCart(@ModelAttribute ("cartItem") CartItem cartItem,@PathVariable("productId") int productId,Model model,HttpSession session)
+	  {
+		 
+		  Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+		  String username=authentication.getName();
+		  int userId= userService.getByName(username).getUserId();
+		  cartItem.setUserId(userId);
+		  cartItem.setCartId(userId);
+		  cartItem.setFlag(false);
+		  cartItem.setProductId(productId);
+		
+		  cartItem.setProductName(productService.getById(productId).getProductName());
+		 // cartItem.setProductPrice(productService.getById(productId).getProductPrice());
+		  cartItem.setAmount(productService.getById(productId).getProductPrice());
+		  Date systemdate=new Date();
+		  cartItem.setOrderDate(systemdate);
+		 // cartItem.setProductDiscount(productService.getById(productId).getProductDiscount());
+		  cartItem.setQuantity("1");
+		  cartItemService.addToBuyNow(cartItem);
+	      
+	      productService.productSubtract(productId);
+	      
+	      session.setAttribute("cartItemId", cartItem.getCartItemId());
+	      session.setAttribute("productId"+cartItem.getCartItemId(), cartItem.getProductId());
+	  	
+	      return "redirect:/cartList";
+		  
+	  }
+	  
+	  @RequestMapping("/cartList")
+	  public String cartList(Model model,HttpSession session)
+	  {
+		  Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+		  String username=authentication.getName();
+		  int userId= userService.getByName(username).getUserId();
+	      List<CartItem> cartItem = cartItemService.cartList(userId);
+	      session.setAttribute("cartList", cartItem);
+	      for(CartItem k : cartItem)
+	      {
+	    	  session.setAttribute("productId"+k.getCartItemId(),k.getProductId());
+	      }
+	      Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+	      String json=gson.toJson(cartItem);
+	      model.addAttribute("cartList",json);
+	      return "cartList";
+	  }
+	  
+	  @RequestMapping("/orderList")
+	  public String orderList(Model model,HttpSession session)
+	  {
+		  Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+		  String username=authentication.getName();
+		  int userId= userService.getByName(username).getUserId();
+	      List<CartItem> p = cartItemService.orderedList(userId);
+	      for(CartItem k : p)
+	      {
+	    	  session.setAttribute("productId"+k.getCartItemId(),k.getProductId());
+	      }
+	      Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+	      String j=gson.toJson(p);
+	      model.addAttribute("orderedList",j);
+	      return "orderedList";
+	  }
+	 
 
 }

@@ -101,9 +101,9 @@
   <div class="row">
     <div class="col-sm-4 col-md-4" ng-repeat="list in productsViewList">
       <div class="panel panel-primary" >
-        <div class="panel-heading">{{list.productName}}</div>
-        <div class="panel-body"><a href="viewproduct-{{list.productId}}-product"><img src="resources/image/{{list.productId}}.jpg" class="img-responsive" style="width:300px;min-height:200px" alt="Image"></a></div>
-        <div class="panel-footer"><a href="buynow-{{list.productId}}?userId=1">Buy</a></div>
+        <div class="panel-heading"><span>{{list.productName}}</span></div>
+        <div class="panel-body"><a href="viewproduct-{{list.productId}}-product"><img src="resources/image/{{list.productId}}.jpg" class="img-responsive" style="width:300px;min-height:200px" alt="Image"></a><span><a href="wishlist-{{list.productId}}"><span class="glyphicon glyphicon-heart"></span></a></span></div>
+        <div class="panel-footer"><span><a href="buynow-{{list.productId}}?userId=1"><button type="button" class="btn btn-warning">Buy Now</button></a></span> <span><a href="addCart-{{list.productId}}"><button type="button" class="btn btn-danger">Add To Cart</button></a></span></div>
       </div>
     </div>
 </div>

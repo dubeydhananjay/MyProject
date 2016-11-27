@@ -23,7 +23,7 @@
 <view-state id="confirmshippingaddress" view="confirmshippingaddress" model="shippingAddress">
 		<transition on="submit" to="successshippingaddress"/> 
 		<transition on="edit" to="shippingaddress"/>
-		<transition on="cancel" to="toHome"/>
+		<transition on="cancel" to="cancelorder"/>
 	</view-state>
 	
 	<view-state id="shippingaddress" view="shippingaddress" model="shippingAddress">

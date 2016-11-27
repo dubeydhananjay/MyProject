@@ -8,22 +8,37 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.annotations.Expose;
 @SuppressWarnings("serial")
 @Entity
 public class UserDetail implements Serializable{
 
 	@Id
 	private int userId;
+	@Expose
 	private String username;
+	@Expose
 	private String firstname;
+	@Expose
 	private String lastname;
+	@Expose
 	private String password;
+	@Expose
 	private String contactNo;
+	@Expose
 	private String alternateContactNo;
+	@Expose
 	private String emailId;
+	@Expose
 	private int roleId;
-	
+	@Expose
 	private int cartId;
+	@Transient
+	private MultipartFile uploadFiles;
 	
 	
 	@OneToOne
@@ -53,6 +68,14 @@ public class UserDetail implements Serializable{
 	public Supplier supplier;
 
 	
+	public MultipartFile getUploadFiles() {
+		return uploadFiles;
+	}
+
+	public void setUploadFiles(MultipartFile uploadFiles) {
+		this.uploadFiles = uploadFiles;
+	}
+
 	public int getUserId() {
 		return userId;
 	}

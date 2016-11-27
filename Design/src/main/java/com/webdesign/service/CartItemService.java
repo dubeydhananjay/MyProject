@@ -1,5 +1,7 @@
 package com.webdesign.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,5 +39,17 @@ public void delete(int cartItemId)
 public void setFlag(int cartItemId)
 {
 	this.cartIemDAOImpl.setFlag(cartItemId);
+}
+
+@Transactional
+public List<CartItem> cartList(int userId) 
+{
+	return this.cartIemDAOImpl.cartList(userId);
+}
+
+@Transactional
+public List<CartItem> orderedList(int userId)
+{
+	return this.cartIemDAOImpl.orderedList(userId);
 }
 }
