@@ -5,6 +5,7 @@ package com.webdesign.controller;
 import javax.servlet.http.HttpSession;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,11 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.webdesign.model.CartItem;
+
 import com.webdesign.model.Wishlist;
 import com.webdesign.service.ProductService;
 import com.webdesign.service.UserService;
@@ -82,4 +83,11 @@ public class WishlistController
 		return "userwishlist";
 		
 	}
+	
+	@RequestMapping("/deleteWishlist-{wishListId}")
+	  public String deleteWishlist(@PathVariable("wishListId") int wishListId)
+	  {
+		  this.wishlistService.delete(wishListId);
+			return "redirect:/mywishlist";
+	  }
 }

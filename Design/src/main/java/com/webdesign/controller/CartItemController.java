@@ -67,9 +67,10 @@ public class CartItemController
 	@RequestMapping("/cartlist-{cartItemId}")
 	public String cartList(Model model, @ModelAttribute("cartItem") CartItem cartItem, @PathVariable("cartItemId") int cartItemId, HttpSession session )
 	{
+		 
 		cartItemId = (Integer)session.getAttribute("cartItemId");
 		session.setAttribute("cartItemId", cartItem.getCartItemId());
-		
+		session.setAttribute("checkout", "buynow");
 		Gson pGson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		CartItem newcartItem = cartItemService.getByCartItemId(cartItemId);
 		 String cartJson=pGson.toJson(newcartItem);
@@ -80,7 +81,7 @@ public class CartItemController
 		
 	}
 	
-	 @RequestMapping("/checkout-{productId}")
+	/* @RequestMapping("/checkout-{productId}")
 	  public String getCartCheckOut(@ModelAttribute("cartItem") CartItem cartItem, @PathVariable("productId") int productId,HttpSession session)
 	  {
 		  Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
@@ -91,7 +92,7 @@ public class CartItemController
 		  productId = (Integer) session.getAttribute("productId");
 		  
 		  return "redirect:/cart?userId="+userId;
-	  }
+	  }*/
 	 
 	 @RequestMapping("/addCart-{productId}")
 	  public String addToCart(@ModelAttribute ("cartItem") CartItem cartItem,@PathVariable("productId") int productId,Model model,HttpSession session)
@@ -126,11 +127,12 @@ public class CartItemController
 	  @RequestMapping("/cartList")
 	  public String cartList(Model model,HttpSession session)
 	  {
+		  session.setAttribute("checkout", "cartList");
 		  Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
 		  String username=authentication.getName();
 		  int userId= userService.getByName(username).getUserId();
 	      List<CartItem> cartItem = cartItemService.cartList(userId);
-	      session.setAttribute("cartList", cartItem);
+	      session.setAttribute("mycartList", cartItem);
 	      for(CartItem k : cartItem)
 	      {
 	    	  session.setAttribute("productId"+k.getCartItemId(),k.getProductId());
@@ -157,6 +159,47 @@ public class CartItemController
 	      model.addAttribute("orderedList",j);
 	      return "orderedList";
 	  }
-	 
+	  
+	  @RequestMapping("/delete-{cartItemId}")
+	  public String deleteCart(@PathVariable("cartItemId") int cartItemId)
+	  {
+		  this.cartItemService.delete(cartItemId);
+			return "redirect:/cartList";
+	  }
+	  
+	  
+	  @RequestMapping("/checkoutCart")
+	  public String checkOut(@ModelAttribute("cartItem") CartItem cartItem, HttpSession session)
+	  {
+		  Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+		  String username=authentication.getName();
+		  int userId=userService.getByName(username).getUserId();
+		  session.setAttribute("userId", userId);
+		  		  return "redirect:/cart?userId="+userId;
+	  }
+	  
+	  @SuppressWarnings({ "unchecked" })
+	@RequestMapping("/updateflag")
+	  public String updateFlag(HttpSession session)
+	  {
+		  List<CartItem> cart = (List<CartItem>) session.getAttribute("mycartList");
+		  if(cart==null || session.getAttribute("checkout")=="buynow")
+		  {
+			  
+			  cartItemService.setFlag((Integer) session.getAttribute("cartItemId"));
+		     // cartItemService.delete((Integer) session.getAttribute("cartItemId"));
+		  }
+		  else if(session.getAttribute("checkout")=="cartList")
+		  {
+			  for(CartItem c:cart)
+			  {
+				  cartItemService.setFlag(c.getCartItemId());
+				//  cartItemService.delete(c.getCartItemId());
+			  }
+		  }
+		  
+		return "redirect:/";
+
+	  }
 
 }

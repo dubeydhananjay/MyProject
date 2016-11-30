@@ -89,7 +89,8 @@ public class CartIemDAOImpl implements CartItemDAO
 		List<CartItem> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
 		return list;
 	}
-
+	
+	
 
 		
 	}

@@ -50,6 +50,7 @@ body { margin-top:20px; }
 	<link href="resources/css/owl.transitions.css" rel="stylesheet">
 	<link href="resources/css/userprofile.css" rel="stylesheet">
 	<link href="resources/css/login.css" rel="stylesheet">
+	<link href="resources/css/productstyle.css" rel="stylesheet">
     <!-- theme stylesheet -->
     <link href="resources/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
 

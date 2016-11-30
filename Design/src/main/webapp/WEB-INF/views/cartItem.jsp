@@ -28,7 +28,7 @@
 				  <td>{{cartItemLists.amount}}</td>
 				  
 				  <td><img src="resources/image/{{cartItemLists.productId}}.jpg" width="100px" height="100px"></td>
-				  <td><a href="checkout-{{cartItemLists.productId}}">Checkout</a></td>				 
+				  <td><a href="checkoutCart">Checkout</a></td>				 
 				  </tr>
 				  </tbody></table>
 				  </div>

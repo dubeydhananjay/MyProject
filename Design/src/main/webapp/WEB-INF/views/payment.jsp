@@ -1,6 +1,7 @@
 <%@include file="header.jsp" %><br>
-<form:form method="post" modelAttribute="buyNow">
 <div class="container">
+<form:form method="post" modelAttribute="buyNow">
+
     <div class="row">
         <div class="col-xs-12 col-md-4">
             <div class="panel panel-default">
@@ -8,12 +9,7 @@
                     <h3 class="panel-title">
                         Payment Details
                     </h3>
-                    <div class="checkbox pull-right">
-                        <label>
-                            <input type="checkbox" />
-                            Remember
-                        </label>
-                    </div>
+                    
                 </div>
                 <div class="panel-body">
                     <form role="form">
@@ -29,12 +25,11 @@
                     <div class="row">
                         <div class="col-xs-7 col-md-7">
                             <div class="form-group">
-                                <label for="expityMonth">
-                                    EXPIRY DATE</label>
-                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                <label for="expityMonth"> EXPIRY DATE</label><br>
+                                <div class="col-xs-6 col-md-6">
                                     <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
                                 </div>
-                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                <div class="col-xs-6 col-md-6">
                                     <input type="text" class="form-control" id="expityYear" placeholder="YY" required /></div>
                             </div>
                         </div>
@@ -49,15 +44,12 @@
                     </form>
                 </div>
             </div>
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd"></span>4200</span> Final Payment</a>
-                </li>
-            </ul>
+            
             <br/>
-            <div class="btn btn-success btn-lg btn-block" role="button" >
-            <button class="form-control btn btn-primary submit-button" name="_eventId_submit" type="submit">Pay</button></div>
-        </div>
+            
+            <button class="form-control btn btn-primary submit-button" name="_eventId_submit">Pay</button></div>
+        
     </div>
-</div>
-</form:form>
+
+</form:form></div>
 <%@include file="footer.jsp" %>

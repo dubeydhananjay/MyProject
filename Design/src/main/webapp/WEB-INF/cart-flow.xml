@@ -58,7 +58,7 @@
 		</action-state>
 		
 		<view-state id="successsbillingaddress" view="payment" model="buyNow">
-		<transition on="submit" to="successPayment"/> 
+		<transition on="submit" to="toHome"/> 
 		<transition on="cancel" to="cancelorder"/>
 	</view-state>
 	
@@ -77,5 +77,5 @@
 		<transition on="success" to="toHome" />
 		</action-state>
 	
-<end-state id="toHome" view="externalRedirect:contextRelative:/"/>	
+<end-state id="toHome" view="externalRedirect:contextRelative:/updateflag"/>	
 </flow>

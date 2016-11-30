@@ -15,6 +15,7 @@
                   <th>Image</th>
                   <th>Buy </th>
                   <th>Add to Cart</th>
+                  <th>Remove</th>
                   
 				</tr>
 			</thead>
@@ -32,6 +33,7 @@
 				  <td><a href="viewproduct-{{list.productId}}-product"><img src="resources/image/{{list.productId}}.jpg" width="100px" height="100px"></a></td>
 				  <td ><a href="buynow-{{list.productId}}?userId=1"><button type="button" class="btn btn-warning">Buy Now</button></a></td>
 				  <td><a href="addCart-{{list.productId}}"><button type="button" class="btn btn-danger">Add To Cart</button></a></td>				 
+				  <td><a href="deleteWishlist-{{list.wishListId}}"><button type="button" class="btn btn-success">Remove</button></a></td>
 				  </tr>
 				  </tbody></table>
 				  </div>
