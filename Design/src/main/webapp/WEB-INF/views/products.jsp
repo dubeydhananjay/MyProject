@@ -84,6 +84,12 @@
    <label class="col-md-4 control-label">Soap Type</label>
    <div class="col-md-4">
    <form:input path="soapType" type="text" name="soapType" class="form-control input-md"/></div></div><br><br>
+
+ <div class="form-group">
+   <label class="col-md-4 control-label">Aroma Type </label>
+   <div class="col-md-4">
+   <form:input path="aromaType" type="text" name="aromaType" class="form-control input-md"/></div></div><br><br>
+
    
      <div class="form-group">
    <label class="col-md-4 control-label">Price</label>

@@ -18,11 +18,27 @@
 
   <div ng-model="searchkeyword">
     <div class="col-xs-18 col-sm-6 col-md-3"  ng-repeat="list in productViewLists | filter:searchkeyword | orderBy:sortkey:reverse | filter:nextFilter">
-      <div class="panel panel-primary">
-        <div class="panel-heading">{{list.productName}}</div>
-        <div class="panel-body"><a href="viewproduct-{{list.productId}}-product"><img src="resources/image/{{list.productId}}.jpg" class="img-responsive" style="width:300px;min-height:200px" alt="Image"></a></div>
-        <div class="panel-footer">{{list.productId}}</div>
-      </div>
+      <article class="col-item">
+        		<div class="photo">
+        			<div class="options">
+        				<a href="wishlist-{{list.productId}}"><button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+        					<i class="fa fa-heart"></i>
+        				</button></a>
+        				<a href="buynow-{{list.productId}}?userId=1"><button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Buy Now">
+        					<i class="fa fa-credit-card"></i>
+        				</button></a>
+        			
+        			<!-- <div class="options-cart"> -->
+        				<a href="addCart-{{list.productId}}"><button class="btn btn-default" title="Add to cart">
+        					<span class="fa fa-shopping-cart"></span>
+        				</button></a>
+        			 </div> 
+        			<a href="viewproduct-{{list.productId}}-product"> <img src="resources/image/{{list.productId}}.jpg" class="img-responsive" alt="Product Image" style="width:300px;min-height:200px" /> </a>
+        			        
+        		</div>
+        		
+        	</article>
+            <p class="text-center">{{list.productName}}</p>
     
     </div>
 </div>

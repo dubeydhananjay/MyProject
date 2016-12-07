@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.webdesign.model.CartItem;
+import com.webdesign.model.Product;
 import com.webdesign.service.CartItemService;
 import com.webdesign.service.ProductService;
 import com.webdesign.service.UserService;
@@ -52,13 +53,15 @@ public class CartItemController
 		String productName=productService.getById(productId).getProductName();
 		cartItem.setProductName(productName);
 		cartItem.setAmount(productService.getById(productId).getProductPrice());
-		cartItem.setQuantity("1");
+		cartItem.setQuantity(1);
 		Date date = new Date();
 		cartItem.setOrderDate(date);
 		this.cartItemService.addToBuyNow(cartItem);
-		this.productService.productSubtract(productId);
+		//this.productService.productSubtract(productId);
 		session.setAttribute("cartItemId", cartItem.getCartItemId());
 		int cartItemId = (Integer)session.getAttribute("cartItemId");
+		List<CartItem> buynowList = cartItemService.cartList(userId);
+	      session.setAttribute("buynowList", buynowList);
 		return "redirect:/cartlist-"+cartItemId;
 		
 	}
@@ -112,13 +115,14 @@ public class CartItemController
 		  Date systemdate=new Date();
 		  cartItem.setOrderDate(systemdate);
 		 // cartItem.setProductDiscount(productService.getById(productId).getProductDiscount());
-		  cartItem.setQuantity("1");
+		  cartItem.setQuantity(1);
 		  cartItemService.addToBuyNow(cartItem);
 	      
-	      productService.productSubtract(productId);
+	     // productService.productSubtract(productId);
 	      
 	      session.setAttribute("cartItemId", cartItem.getCartItemId());
 	      session.setAttribute("productId"+cartItem.getCartItemId(), cartItem.getProductId());
+	      
 	  	
 	      return "redirect:/cartList";
 		  
@@ -156,14 +160,16 @@ public class CartItemController
 	      }
 	      Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 	      String j=gson.toJson(p);
-	      model.addAttribute("orderedList",j);
-	      return "orderedList";
+	      model.addAttribute("orderedlist",j);
+	      return "orderlist";
 	  }
 	  
 	  @RequestMapping("/delete-{cartItemId}")
-	  public String deleteCart(@PathVariable("cartItemId") int cartItemId)
+	  public String deleteCart(@PathVariable("cartItemId") int cartItemId, CartItem cartItem, HttpSession session)
 	  {
+		  
 		  this.cartItemService.delete(cartItemId);
+		  
 			return "redirect:/cartList";
 	  }
 	  
@@ -180,13 +186,15 @@ public class CartItemController
 	  
 	  @SuppressWarnings({ "unchecked" })
 	@RequestMapping("/updateflag")
-	  public String updateFlag(HttpSession session)
+	  public String updateFlag(HttpSession session, CartItem cartItem )
 	  {
+		  
 		  List<CartItem> cart = (List<CartItem>) session.getAttribute("mycartList");
 		  if(cart==null || session.getAttribute("checkout")=="buynow")
 		  {
 			  
 			  cartItemService.setFlag((Integer) session.getAttribute("cartItemId"));
+			  productService.productSubtract((Integer) session.getAttribute("productId"));
 		     // cartItemService.delete((Integer) session.getAttribute("cartItemId"));
 		  }
 		  else if(session.getAttribute("checkout")=="cartList")
@@ -194,12 +202,39 @@ public class CartItemController
 			  for(CartItem c:cart)
 			  {
 				  cartItemService.setFlag(c.getCartItemId());
+				  productService.productSubtract(c.getProductId());
 				//  cartItemService.delete(c.getCartItemId());
 			  }
 		  }
 		  
-		return "redirect:/";
+		return "receipt";
 
 	  }
+	  
+	  @SuppressWarnings("unchecked")
+	  @RequestMapping("/receipt")
+	  public String receipt(Model model, HttpSession session)
+	  {
+		  List<CartItem> order = (List<CartItem>) session.getAttribute("mycartList");
+		  if(order==null || session.getAttribute("checkout")=="buynow")
+		  {
+			  List<CartItem> k = (List<CartItem>) session.getAttribute("buynowList");
+			  Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			  String rjson=gson.toJson(k);
+			  model.addAttribute("placedOrder",rjson);
+			  
+		  }
+		  else if(session.getAttribute("checkout")=="cartList")
+		  {
+		  List<CartItem> k = (List<CartItem>) session.getAttribute("mycartList");
+		  Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		  String rjson=gson.toJson(k);
+		  model.addAttribute("placedOrder",rjson);
+		 
+		  }
+		  return "redirect:/";
+		  
+	  }
+
 
 }

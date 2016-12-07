@@ -31,9 +31,7 @@ public class SubCategoryModel  implements Serializable
 	@NotEmpty(message="SubCategory Name cannot be empty")
 	@Expose
 	private String subCategoryName;
-	@NotEmpty(message="SubCategory Name cannot be empty")
-	@Expose
-	private String subCategoryPrice;
+	
 	@Expose
 	private int categoryId;
 	
@@ -62,14 +60,7 @@ public class SubCategoryModel  implements Serializable
 	public void setSubCategoryName(String subCategoryName) {
 		this.subCategoryName = subCategoryName;
 	}
-	public String getSubCategoryPrice() {
-		return subCategoryPrice;
-	}
 	
-	
-	public void setSubCategoryPrice(String subCategoryPrice) {
-		this.subCategoryPrice = subCategoryPrice;
-	}
 	
 	public Category getCategory() {
 		return category;

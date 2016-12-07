@@ -24,6 +24,7 @@ public class Category implements Serializable{
 	@Expose
 	private int categoryId;
 	@NotEmpty(message="Category Name is Required")
+	
 	@Expose
 	private String categoryName;
 	@NotEmpty(message="Category Description is Required")

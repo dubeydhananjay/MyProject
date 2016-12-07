@@ -1,7 +1,7 @@
 <%@include file="header.jsp" %>
 
-<form:form method="POST"  class="form-inline" modelAttribute="billingAddress"  commandName="billingAddress">
-      <h2>Billing Address</h2>         
+<form:form method="POST"  modelAttribute="billingAddress"  commandName="billingAddress">
+      <h2>Billing Address(Optional)</h2>         
    <div class="form-group">
     <label>Street Address 1:</label>
         <form:input path="streetAddress1" class="form-control" />
@@ -30,8 +30,8 @@
     <label>State:</label>
         <form:input path="state" class="form-control" /></div>
         <br>
-        <input name="_eventId_submit" type="submit" value="Submit" /><br>
-        <input name="_eventId_edit" type="submit" value="Edit" />	
+        <input name="_eventId_submit" type="submit" value="Submit" />
+        <input name="_eventId_cancel" type="submit" value="cancel" />	
         
         
         </form:form>

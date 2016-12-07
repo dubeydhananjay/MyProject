@@ -1,9 +1,9 @@
 <%@include file="header.jsp" %>
 
 <form:form method="POST"  modelAttribute="supplier"  commandName="supplier">
-      <h2>Supplier Address</h2>         
+      <h2>Supplier Address (<sup> *</sup> denotes necessary fields)</h2>         
    <div class="form-group">
-    <label> Company Name:</label>
+    <label> Company Name<sup>*</sup>:</label>
         <form:input path="supplierCompanyName" class="form-control" /></div>
         
         <div class="form-group">
@@ -11,7 +11,7 @@
         <form:input path="supplierCompanyURL" class="form-control" /></div>
         
         <div class="form-group">
-    <label> Company Address 1:</label>
+    <label> Company Address 1<sup>*</sup>:</label>
         <form:input path="supplierCompanyAddress1" class="form-control" /></div>
 
  <div class="form-group">
@@ -19,15 +19,15 @@
         <form:input path="supplierCompanyAddress2" class="form-control" /></div>
 
  <div class="form-group">
-    <label>City:</label>
+    <label>City<sup>*</sup>:</label>
         <form:input path="supplierCity" class="form-control" /></div>
 
  <div class="form-group">
-    <label>District:</label>
+    <label>District<sup>*</sup>:</label>
         <form:input path="supplierDistrict" class="form-control" /></div>
         
         <div class="form-group">
-    <label>Pincode:</label>
+    <label>Pincode<sup>*</sup>:</label>
         <form:input path="supplierPinCode" class="form-control" /></div>
 
  <div class="form-group">
@@ -39,4 +39,4 @@
         
         
         </form:form>
-<%@include file="header.jsp" %>
+<%@include file="footer.jsp" %>

@@ -37,8 +37,8 @@
       </div>
     </div></div></div> <br><br>
     <h2>SubCategory Page</h2><br><br>
-  <form:form method="POST" class="form-inline" action="subCategory" commandName="subCategories" modelAttribute="subCategories" >
-   				<form:input path="subCategoryId" hidden="true" />
+  <form:form method="POST" class="form-inline" action="addsubCategory" commandName="subCategory" modelAttribute="subCategory" >
+   				  <form:input path="subCategoryId" hidden="true" /> 
    
    <div class="form-group">
   <label>select category</label>
@@ -46,14 +46,10 @@
    		
    
     <div class="form-group">
-        <form:label path="subCategoryName">SubCategoryName</form:label>
+        <label>SubCategoryName</label>
         <form:input path="subCategoryName" class="form-control"/>
         <form:errors path="subCategoryName"></form:errors></div>
-   <div class="form-group">
-   
-        <form:label path="subCategoryPrice">Price</form:label>
-        <form:input path="subCategoryPrice" class="form-control"/>
-        <form:errors path="subCategoryPrice"></form:errors></div>
+  
     
     <button type="submit" class="btn btn-default">Submit</button>   
     
@@ -67,7 +63,7 @@
                   <tr>
                   <th ng-click="orderByMe('subCategoryId')">#</th>
                   <th ng-click="orderByMe('subCategoryName')">subCategoryName</th>
-                  <th ng-click="orderByMe('subCategoryPrice')">subCategoryPrice</th>
+                  
                   <th ng-click="orderByMe('categoryId')">categoryId</th>
                   <th>Edit</th>
                   <th>Delete</th>
@@ -77,7 +73,7 @@
 				  <tr ng-repeat="list in subCategoryList | orderBy:myOrderBy | filter:test">
 				  <td>{{list.subCategoryId}}</td>
 				  <td>{{list.subCategoryName}}</td>
-				  <td>{{list.subCategoryPrice}}</td>
+				  
 				  <td>{{list.categoryId}}</td>
 				  <td><a href="editSubCategory-{{list.subCategoryId}}"><button type="button" class="btn btn-primary">Edit</button></a></td>
 				  <td><a href="deleteSubCategory-{{list.subCategoryId}}"><button type="button" class="btn btn-success">Delete</button></a></td></tr></tbody></table>

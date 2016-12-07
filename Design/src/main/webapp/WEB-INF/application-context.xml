@@ -15,6 +15,7 @@
 
 <context:component-scan base-package="com.webdesign" />
 
+
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.h2.Driver" />
@@ -49,6 +50,9 @@
 <bean id="userDetail" class="com.webdesign.model.UserDetail"></bean>
 <bean id="buyNow" class="com.webdesign.model.BuyNow"></bean>
 <bean id="product" class="com.webdesign.model.Product"></bean>
+<bean id="categoryDAOImpl" class="com.webdesign.daoimpl.CategoryDAOImpl"></bean>
+<bean id="category" class="com.webdesign.model.Category"></bean>
+
 
 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     <!-- set the maximum file size in bytes -->

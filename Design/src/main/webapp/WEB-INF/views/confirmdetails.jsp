@@ -1,25 +1,38 @@
 <%@include file="header.jsp" %><br>
-
-<form:form method="post" modelAttribute="userDetail">
-					<form:label path="username">UserName:</form:label>${userDetail.username}
+<div class="container">
+    
+  
+<form:form method="POST" class="form-inline" commandName="userDetail" >
+      <div class="row">
+    	<div class="col-md-8 col-md-offset-2">
+ <div class="panel panel-default">
+			  	<div class="panel-heading">
+			    	<h3 class="panel-title">Confirm Details</h3>
+			 	</div>
+			  	<div class="panel-body">
+   <div class="col-md-4">
+					UserName:</div><div class="col-md-8">${userDetail.username}</div>
 					<br /><br />
-					<form:label path="emailId">Email Id:</form:label>${userDetail.emailId}
+					<div class="col-md-4">
+					Email Id:</div><div class="col-md-8">${userDetail.emailId}</div>
+					<br /><br />
+					<div class="col-md-4">
+					First Name :</div><div class="col-md-8">${userDetail.firstname}</div>
+					<br /><br />
+					<div class="col-md-4">Last Name :</div><div class="col-md-8">${userDetail.lastname}</div>
+					<br /><br />
+					<div class="col-md-4">contact No :</div><div class="col-md-8">${userDetail.contactNo}</div>
+					<br /><br />
+					<div class="col-md-4">Alternate contact No :</div><div class="col-md-8">${userDetail.alternateContactNo}</div>
 					<br /><br />
 					
-					<form:label path="firstname">First Name :</form:label>${userDetail.firstname}
-					<br /><br />
-					<form:label path="lastname">Last Name :</form:label>${userDetail.lastname}
-					<br /><br />
-					<form:label path="contactNo">contact No :</form:label>${userDetail.contactNo}
-					<br /><br />
-					<form:label path="alternateContactNo">Alternate contact No :</form:label>${userDetail.alternateContactNo}
-					<br /><br />
-					<!-- for triggering webflow events using form submission,
-					 the eventId to be triggered is given in "name" attribute as:
-					-->
 					<input name="_eventId_edit" type="submit" value="Edit" /> 
 					<input name="_eventId_submit" type="submit" value="confirmdetails" /><br>
+					</div>
+					</div>
+					</div>
+					</div>
 				</form:form>
-		
+		</div>
 
 <%@include file="footer.jsp" %>

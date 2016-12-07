@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.webdesign.model.UserDetail;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.webdesign.model.Category;
 import com.webdesign.model.Product;
 import com.webdesign.model.ProductView;
 import com.webdesign.model.SubCategoryModel;
@@ -132,13 +134,26 @@ public class ProductController {
 
 	@RequestMapping("/viewproduct-{productId}-product")
 	public ModelAndView productData(@ModelAttribute("product") @PathVariable("productId")  int productId, ProductView productView) {
+		List<Category> newcategory;
+		List<SubCategoryModel> newsubcategory;
+		List<Product> newproduct;
 		Gson pGson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		
 		productView=productService.getProductViewById(productId);
+		newcategory=categoryService.listCategory();
+		newsubcategory=subCategoryService.listSubCategory();
+		newproduct=productService.listProducts();
+		
 		String pJson=pGson.toJson(productView);
+		String cJson=pGson.toJson(newcategory);
+		String scJson=pGson.toJson(newsubcategory);
+		String npJson=pGson.toJson(newproduct);
 		
 		ModelAndView model = new ModelAndView("viewproduct");
 		model.addObject("productView", pJson);
-		
+		model.addObject("categoriesLists", cJson);
+		model.addObject("subcategoriesLists", scJson);
+		model.addObject("productsLists", npJson);
 		return model;
 		
 	}

@@ -85,7 +85,7 @@ public class CartIemDAOImpl implements CartItemDAO
 	@SuppressWarnings("unchecked")
 	public List<CartItem> orderedList(int userId) 
 	{
-		String sql = "from CartItem where flag = false and userId="+userId;
+		String sql = "from CartItem where flag = true and userId="+userId;
 		List<CartItem> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
 		return list;
 	}

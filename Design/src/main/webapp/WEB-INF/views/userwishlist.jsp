@@ -1,14 +1,51 @@
 <%@include file="header.jsp" %>
-<h2>My WishLists</h2>
+
 <div class="container">
+
+<div class="row">
+	 <div class="col-md-3">	
+       <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Customer section</h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="active">
+                                    <a href="orderList"><i class="fa fa-list"></i> My orders</a>
+                                </li>
+                                <li>
+                                    <a href="mywishlist"><i class="fa fa-heart"></i> My wishlist</a>
+                                </li>
+                                <li>
+                                    <a href="userprofile"><i class="fa fa-user"></i> My account</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- /.col-md-3 -->
+        </div>
+<div class="col-md-9 ">
+
+ <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">My WishLists</h3>
+                        </div>
+
+                        <div class="panel-body">
+
  <table class="table" border="1" width="100%">
                   <thead>
                   <tr>
                   
-                  <th>#</th>
+                  
                   <th>Cart Id</th>
-                  <th>Product Id</th>
-                  <th>User Id</th>
+                 
                   <th>Product Name</th>
                   <th>Quantity</th>
                   <th>Amount</th>
@@ -22,10 +59,9 @@
 			<tbody>
 				  <tr ng-repeat="list in mywishlist">
 				  
-				  <td>{{list.wishlistId}}</td>
+				  
 				  <td>{{list.cartId}}</td>
-				  <td>{{list.productId}}</td>
-				  <td>{{list.userId}}</td>
+				  
 				  <td>{{list.productName}}</td>
 				  <td>{{list.quantity}}</td>
 				  <td>{{list.amount}}</td>
@@ -36,7 +72,8 @@
 				  <td><a href="deleteWishlist-{{list.wishListId}}"><button type="button" class="btn btn-success">Remove</button></a></td>
 				  </tr>
 				  </tbody></table>
-				  </div>
+				  </div></div>
+				  </div></div></div>
 				  <script type="text/javascript">
 				  angular.module('myNewApp',[]).controller('myNewController',function($scope)
 						  {

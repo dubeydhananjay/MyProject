@@ -21,10 +21,16 @@
 		</action-state>
 	
 <view-state id="confirmshippingaddress" view="confirmshippingaddress" model="shippingAddress">
-		<transition on="submit" to="successshippingaddress"/> 
+		<transition on="submit" to="validateAddress"/> 
 		<transition on="edit" to="shippingaddress"/>
 		<transition on="cancel" to="cancelorder"/>
 	</view-state>
+	
+	<action-state id="validateAddress">
+		<evaluate expression="cartHandler.validateShippingDetails(shippingAddress,messageContext)"></evaluate>
+		<transition on="success" to="successshippingaddress" />
+		<transition on="failure" to="shippingaddress" />
+	</action-state>
 	
 	<view-state id="shippingaddress" view="shippingaddress" model="shippingAddress">
 		<transition on="submit" to="addshippingaddress"/> 
@@ -62,7 +68,8 @@
 		<transition on="cancel" to="cancelorder"/>
 	</view-state>
 	
-	<action-state id="cancelorder">
+	
+	<action-state id="cancelorder1">
 		<evaluate expression="productService.productAdd(externalContext.sessionMap.productId)" result="product"></evaluate>
 		<transition on="success" to="delete" />
 		</action-state>
@@ -77,5 +84,8 @@
 		<transition on="success" to="toHome" />
 		</action-state>
 	
-<end-state id="toHome" view="externalRedirect:contextRelative:/updateflag"/>	
+<end-state id="toHome" view="externalRedirect:contextRelative:/updateflag"/>
+<end-state id="cancelorder" view="externalRedirect:contextRelative:/"/>
+
+
 </flow>

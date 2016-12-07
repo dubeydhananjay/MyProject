@@ -5,10 +5,10 @@
                   <thead>
                   <tr>
                   
-                  <th>#</th>
+                  
                   <th>Cart Id</th>
                   <th>Product Id</th>
-                  <th>User Id</th>
+                  
                   <th>Product Name</th>
                   <th>Quantity</th>
                   <th>Amount</th>
@@ -19,16 +19,16 @@
 			<tbody>
 				  <tr>
 				  
-				  <td>{{cartItemLists.cartItemId}}</td>
+				  
 				  <td>{{cartItemLists.cartId}}</td>
 				  <td>{{cartItemLists.productId}}</td>
-				  <td>{{cartItemLists.userId}}</td>
+				  
 				  <td>{{cartItemLists.productName}}</td>
 				  <td>{{cartItemLists.quantity}}</td>
 				  <td>{{cartItemLists.amount}}</td>
 				  
 				  <td><img src="resources/image/{{cartItemLists.productId}}.jpg" width="100px" height="100px"></td>
-				  <td><a href="checkoutCart">Checkout</a></td>				 
+				  <td><a href="checkoutCart"><button type="button" class="btn btn-primary">Checkout</button></a></td>				 
 				  </tr>
 				  </tbody></table>
 				  </div>

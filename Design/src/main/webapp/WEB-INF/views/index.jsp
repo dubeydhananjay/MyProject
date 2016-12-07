@@ -117,7 +117,7 @@
         					<span class="fa fa-shopping-cart"></span>
         				</button></a>
         			 </div> 
-        			<a href="#"> <img src="resources/image/{{list.productId}}.jpg" class="img-responsive" alt="Product Image" style="width:300px;min-height:200px" /> </a>
+        			<a href="viewproduct-{{list.productId}}-product"> <img src="resources/image/{{list.productId}}.jpg" class="img-responsive" alt="Product Image" style="width:300px;min-height:200px" /> </a>
         			        
         		</div>
         		

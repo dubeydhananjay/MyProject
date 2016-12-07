@@ -31,20 +31,20 @@ public class SubCategoryController
 	@RequestMapping( "/subCategories")
 	public String listSubCategories(Model model) {
 		
-		model.addAttribute("subCategories", new SubCategoryModel());
+		model.addAttribute("subCategory", new SubCategoryModel());
 		model.addAttribute("categoryList", this.categoryService.listCategory());
 		model.addAttribute("subCategoriesList", this.subCategoryService.subCategoryList());
 		return "subCategories";
 	}
-@RequestMapping("/subCategory")
+@RequestMapping("/addsubCategory")
 	
-	public String addSubCategory(@Validated @ModelAttribute("subCategories") SubCategoryModel subCategory, BindingResult result, Model model)
+	public String addSubCategory(@Validated @ModelAttribute("subCategory") SubCategoryModel subCategory, BindingResult result, Model model)
 	{
 	if(result.hasErrors())
 	{
 		model.addAttribute("categoryList", this.categoryService.listCategory());
 		model.addAttribute("subCategoriesList", this.subCategoryService.subCategoryList());
-		return "subCategories";
+		return "/subCategories";
 	}
 	else
 	{

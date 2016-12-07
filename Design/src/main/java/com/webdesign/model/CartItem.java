@@ -26,7 +26,7 @@ public class CartItem implements Serializable{
 	@Expose
 	private int userId;
 	@Expose
-	private String quantity;
+	private int quantity;
 	@Expose
 	private int amount;
 	@Expose
@@ -81,11 +81,11 @@ public class CartItem implements Serializable{
 
 	
 
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 

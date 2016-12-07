@@ -5,7 +5,9 @@
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page isELIgnored="false" %>
-
+<fmt:setBundle basename="mymessage" />
+<fmt:message key="message.password" var="noPass" />
+<fmt:message key="message.username" var="noUser" />
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> <meta name="keywords" content="">
@@ -68,25 +70,36 @@ body { margin-top:20px; }
     <!-- *** TOPBAR ***
  _________________________________________________________ -->
     <div id="top">
-        <div class="container">
+                 <div class="container">
+           
             <div class="col-md-6 offer" data-animate="fadeInDown">
                 <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">Get flat 35% off on orders over $50!</a>
             </div>
             <div class="col-md-6" data-animate="fadeInDown">
                 <ul class="menu">
                        			 <c:if test="${pageContext.request.userPrincipal.name==null}">
-                    <li><a href="login">Login</a>
+                    <li><a href="login" class="btn btn-success btn-sm">Login</a>
                     </li>
-                    <li><a href="registration">Register</a>
+                    <li><a href="registration" class="btn btn-success btn-sm">Register</a>
                     </li></c:if>
-                    <li><a href="#">Contact</a>
-                    </li>
-                    <li><a href="#">Recently viewed</a>
-                    </li>
+                   <c:if test="${pageContext.request.userPrincipal.name!=null}">
+        		<sec:authorize access="isAuthenticated()"> 
+        		<li><a href="perform_logout" class="btn btn-success btn-sm">Logout</a></li>
+        		</sec:authorize></c:if>
+                    
+					 <c:if test="${pageContext.request.userPrincipal.name!=null}">
+                                    
+       			  <li><a href="userprofile" class="btn btn-success btn-sm">Welcome
+       			  <sec:authorize access="isAuthenticated()">  
+        		  <strong><sec:authentication property="principal.username"/></strong>
+        		  </sec:authorize></a>
+                    </li></c:if>
+                   
+
                 </ul>
             </div>
         </div>
-       
+     
     </div>
 
     <!-- *** TOP BAR END *** -->
@@ -111,8 +124,8 @@ body { margin-top:20px; }
                         <span class="sr-only">Toggle search</span>
                         <i class="fa fa-search"></i>
                     </button>
-                    <a class="btn btn-default navbar-toggle" href="#">
-                        <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">cart</span>
+                     <a class="btn btn-default navbar-toggle" href="#">
+                        <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">My cart</span>
                     </a>
                 </div>
             </div>
@@ -152,21 +165,9 @@ body { margin-top:20px; }
                                     </c:forEach><!-- End of second c:foreach  -->
                                     </ul>
                                     </li></c:forEach><!-- End of First c:foreach  -->
-                                    <c:if test="${pageContext.request.userPrincipal.name!=null}">
-                                    
-       			  <li class="dropdown yamm-fw"><a href="userprofile" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Welcome
-       			  <sec:authorize access="isAuthenticated()">  
-        		  <strong><sec:authentication property="principal.username"/></strong>
-        		  </sec:authorize><b class="caret"></b></a>
-        		  
-       			  <ul class="dropdown-menu">
-       			  <li><a href="mywishlist">My WishList</a></li></ul></li>
-       			  </c:if>
-       			  
-       			   <c:if test="${pageContext.request.userPrincipal.name!=null}">
-        		<sec:authorize access="isAuthenticated()"> 
-        		<li><a href="perform_logout">Logout</a></li>
-        		</sec:authorize></c:if>
+                                    <li><a href="#">About Us</a></li>
+        							<li><a href="#">Contact Us</a></li>
+        		
                                     </ul>
                                 </div>
                                 <!-- /.yamm-content -->
@@ -175,13 +176,13 @@ body { margin-top:20px; }
 
             <div class="navbar-buttons">
 
-                <div class="navbar-collapse collapse right" id="basket-overview">
-                    <a href="cartList" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm"> cart</span></a>
-                </div>
+                 <div class="navbar-collapse collapse right" id="basket-overview">
+                    <a href="cartList" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">My cart</span></a>
+                </div> 
                 <!--/.nav-collapse -->
 
                 <div class="navbar-collapse collapse right" id="search-not-mobile">
-                    <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
+                    <button type="button" id="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
                         <span class="sr-only">Toggle search</span>
                         <i class="fa fa-search"></i>
                     </button>
@@ -193,7 +194,7 @@ body { margin-top:20px; }
 
                 <form class="navbar-form" role="search" >
                     <div class="input-group">
-                        <input type="text" id="searchItem" class="form-control" placeholder="Search" ng-model="searchkeyword">
+                        <input type="text" id="searchItem" class="form-control" placeholder="Search" ng-model="searchkeyword" onkeypress="enterfunction(event)">
                       <span class="input-group-btn btn btn-primary"><a href="allproducts?search={{searchkeyword}}">  
 								<i class="glyphicon glyphicon-search white "></i></a>
 
@@ -256,6 +257,19 @@ body { margin-top:20px; }
    
     
   <script>
+  function filterredirect()
+  {
+  	window.location.href = "allproducts?search="+document.getElementById('searchItem').value;
+  };
+  
+  function enterfunction(e)
+  {
+	  if(e.keyCode==13)
+		  {
+		      window.location.href = "allproducts?search="+document.getElementById('searchItem').value;
+		  }
+  };
+  
   $(document).ready(function() {
 
 	$('#searchItem').autocomplete({
@@ -275,8 +289,10 @@ body { margin-top:20px; }
 
             }
 
+		
 	 });
-
+	
   });
-
+  
+  
 </script>

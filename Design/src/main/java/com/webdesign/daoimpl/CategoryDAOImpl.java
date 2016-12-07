@@ -3,32 +3,40 @@ package com.webdesign.daoimpl;
 import java.util.List;
 
 
-/*import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.hibernate.Session;*/
-//import org.h2.engine.Session;
+import org.hibernate.HibernateException;
+
 import org.hibernate.SessionFactory;
-//import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.webdesign.dao.CategoryDao;
+import com.webdesign.dao.CategoryDAO;
+
 import com.webdesign.model.Category;
 @Repository
-public class CategoryDAOImpl implements CategoryDao
+public class CategoryDAOImpl implements CategoryDAO
 {
+	private static final Logger logger =  LoggerFactory.getLogger(CategoryDAOImpl.class);
 	
 @Autowired
 	private SessionFactory sessionFactory;
-//private static final Logger logger = LoggerFactory.getLogger(CategoryDAOImpl.class);
 
- 
-	public void createCategory(Category category) 
+	public boolean createCategory(Category category) 
 	{
 		
-	sessionFactory.getCurrentSession().saveOrUpdate(category);
+		try
+		{
+			this.sessionFactory.getCurrentSession().saveOrUpdate(category);
+			return true;
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 		
 	}
 
@@ -66,12 +74,24 @@ public class CategoryDAOImpl implements CategoryDao
 	    else return null;
 	
 	}
-	public void delete(int categoryId)
+	public boolean delete(int categoryId)
 	{
+		try
+		{
+			
+			
 		Category removeCategory = new Category();
 		removeCategory.setCategoryId(categoryId);
 		this.sessionFactory.getCurrentSession().delete(removeCategory);
-	}
+		
+		return true;
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		}
 	
 	
  

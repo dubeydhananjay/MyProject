@@ -48,6 +48,7 @@
 	   <transition on="edit" to="start"/>
 	</view-state>
 	
+	
 	<action-state id="addShippingAddress">
 		<evaluate expression="demoHandler.addShippingAddress(shippingAddress)"></evaluate>
 		<transition on="success" to="billingaddress" />

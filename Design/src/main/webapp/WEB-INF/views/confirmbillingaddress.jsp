@@ -1,22 +1,44 @@
 <%@include file="header.jsp" %><br>
-<h2>Confirm Billing Address</h2>
-<form:form method="post" modelAttribute="billingAddress">
-					<form:label path="streetAddress1">Street Address1:</form:label>${billingAddress.streetAddress1}
+<div class="container">
+    
+  
+<form:form method="POST" class="form-inline" commandName="billingAddress" >
+      <div class="row">
+    	<div class="col-md-8 col-md-offset-2">
+ <div class="panel panel-default">
+			  	<div class="panel-heading">
+			    	<h3 class="panel-title">Confirm Billing Address</h3>
+			 	</div>
+			  	<div class="panel-body">
+   <div class="col-md-4">
+					Street Address1:</div><div class="col-md-8">${billingAddress.streetAddress1}</div>
 					<br /><br />
-					<form:label path="streetAddress2">Street Address2:</form:label>${billingAddress.streetAddress2}
+					<div class="col-md-4">
+					Street Address2:</div><div class="col-md-8">${billingAddress.streetAddress2}</div>
 					<br /><br />
-					<form:label path="landmark">Landmark:</form:label>${billingAddress.landmark}
+					<div class="col-md-4">
+					Landmark:</div><div class="col-md-8">${billingAddress.landmark}</div>
 					<br /><br />
-					<form:label path="city">City:</form:label>${billingAddress.city}
+					<div class="col-md-4">
+					City:</div><div class="col-md-8">${billingAddress.city}</div>
 					<br /><br />
-					<form:label path="district">District:</form:label>${billingAddress.district}
+					<div class="col-md-4">
+					District:</div><div class="col-md-8">${billingAddress.district}</div>
 					<br /><br />
-					<form:label path="pinCode">PinCode:</form:label>${billingAddress.pinCode}
+					<div class="col-md-4">
+					PinCode:</div><div class="col-md-8">${billingAddress.pinCode}</div>
 					<br /><br />
-					<form:label path="state">State:</form:label>${billingAddress.state}
+					<div class="col-md-4">
+					State:</div><div class="col-md-8">${billingAddress.state}</div>
 					<br /><br />
 					<input name="_eventId_edit" type="submit" value="Edit" /> 
 					<input name="_eventId_submit" type="submit" value="confirm" />
 					<input name="_eventId_cancel" type="submit" value="Cancel" /><br>
+					</div>
+					</div>
+					</div>
+					</div>
 					</form:form>
-<%@include file="header.jsp" %>
+					</div>
+					
+<%@include file="footer.jsp" %>

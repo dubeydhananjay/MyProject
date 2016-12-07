@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -22,6 +23,9 @@ import com.webdesign.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	MessageSource resources;
 	@RequestMapping("/registration")
 	public String listUser(Model model)
 	{
@@ -49,6 +53,16 @@ public class UserController {
 		
 		return "login";
 	}
+	
+	@RequestMapping("/loginfailed")
+	public String loginerror(Model model) {
+ 
+		//String errormessage = resources.getMessage("login.error", null, null);
+		model.addAttribute("error", "true");
+		return "login";
+ 
+	}
+
 	
 	@RequestMapping("/perform_logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response)
