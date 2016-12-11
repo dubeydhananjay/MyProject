@@ -1,7 +1,14 @@
 <%@include file="header.jsp" %>
 
 <form:form method="POST"  modelAttribute="billingAddress"  commandName="billingAddress">
-      <h2>Billing Address(Optional)</h2>         
+ <div class="row">
+    	<div class="col-md-6 col-md-offset-2">
+ <div class="panel panel-default">
+			  	<div class="panel-heading">
+			    	<h3 class="panel-title">Billing Address(Optional)</h3>
+			 	</div>
+			  	<div class="panel-body">
+              
    <div class="form-group">
     <label>Street Address 1:</label>
         <form:input path="streetAddress1" class="form-control" />
@@ -32,7 +39,9 @@
         <br>
         <input name="_eventId_submit" type="submit" value="Submit" />
         <input name="_eventId_cancel" type="submit" value="cancel" />	
-        
-        
+        </div>
+        </div>
+        </div>
+        </div>
         </form:form>
 <%@include file="footer.jsp" %>

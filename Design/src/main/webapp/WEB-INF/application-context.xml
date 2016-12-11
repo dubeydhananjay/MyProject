@@ -50,9 +50,23 @@
 <bean id="userDetail" class="com.webdesign.model.UserDetail"></bean>
 <bean id="buyNow" class="com.webdesign.model.BuyNow"></bean>
 <bean id="product" class="com.webdesign.model.Product"></bean>
-<bean id="categoryDAOImpl" class="com.webdesign.daoimpl.CategoryDAOImpl"></bean>
-<bean id="category" class="com.webdesign.model.Category"></bean>
+<bean id="categoryDAOImpl" class="com.webdesign.daoimpl.CategoryDAOImpl" autowire="byName"></bean>
+<bean id="category" class="com.webdesign.model.Category" autowire="byName"></bean>
 
+<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="organicsoul11@gmail.com"/>
+        <property name="password" value="organicsoul"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                
+            </props>
+        </property>
+    </bean>
 
 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     <!-- set the maximum file size in bytes -->

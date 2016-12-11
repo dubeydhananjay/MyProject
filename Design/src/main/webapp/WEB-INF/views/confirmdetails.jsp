@@ -26,8 +26,8 @@
 					<div class="col-md-4">Alternate contact No :</div><div class="col-md-8">${userDetail.alternateContactNo}</div>
 					<br /><br />
 					
-					<input name="_eventId_edit" type="submit" value="Edit" /> 
-					<input name="_eventId_submit" type="submit" value="confirmdetails" /><br>
+			<button type="submit" name="_eventId_submit" class="btn btn-default">Confirm</button>
+           <button type="submit" name="_eventId_edit" class="btn btn-default">Edit</button><br>
 					</div>
 					</div>
 					</div>

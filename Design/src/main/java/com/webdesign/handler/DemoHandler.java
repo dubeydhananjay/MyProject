@@ -4,10 +4,12 @@ import java.util.List;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
-
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,8 @@ public class DemoHandler {
 	public NewSupplierService newSupplierService;
 	@Autowired
 	public UserDetail userDetail;
+	@Autowired
+	private MailSender mailSender;
 	
 	
 	public UserDetail initFlow()
@@ -75,14 +79,30 @@ public class DemoHandler {
 					"lastname").defaultText("Last name cannot be Empty").build());
 			status = "failure";
 		}
-		if(userDetail.getContactNo().isEmpty()){
-			messageContext.addMessage(new MessageBuilder().error().source(
-					"contactNo").defaultText("Contact no cannot be Empty").build());
+		
+		
+		
+		if(userDetail.getPassword().isEmpty()|| (userDetail.getPassword().length()<6 && !userDetail.getPassword().isEmpty())){
+			if(userDetail.getPassword().length()<6 && !userDetail.getPassword().isEmpty())
+			{
+				messageContext.addMessage(new MessageBuilder().error().source("password").defaultText(" It Should Be Minimum 6 Characters").build());
+			}
+			else
+			{
+				messageContext.addMessage(new MessageBuilder().error().source("password").defaultText("	Password cannot be empty").build());
+			}
+			
 			status = "failure";
 		}
-		if(userDetail.getPassword().isEmpty()){
-			messageContext.addMessage(new MessageBuilder().error().source(
-					"password").defaultText("Password cannot be Empty").build());
+		if(userDetail.getContactNo().isEmpty() || (userDetail.getContactNo().length()!=10 && !userDetail.getContactNo().isEmpty()) ){
+			if(userDetail.getContactNo().length()!=10 && !userDetail.getContactNo().isEmpty() )
+			{
+				messageContext.addMessage(new MessageBuilder().error().source("contactNo").defaultText(" It Should be 10 digits").build());
+			}
+			else
+			{
+				messageContext.addMessage(new MessageBuilder().error().source("contactNo").defaultText("Contact No cannot be empty").build());
+			}
 			status = "failure";
 		}
 		
@@ -148,6 +168,54 @@ public class DemoHandler {
 		}
 	
 
+		 public String validateShippingDetails(ShippingAddress shippingAddress,MessageContext messageContext){
+				String status = "success";
+				
+				if(shippingAddress.getStreetAddress1().isEmpty()){
+					messageContext.addMessage(new MessageBuilder().error().source(
+							"streetAddress1").defaultText("please fill your address").build());
+					status = "failure";
+				}
+				if(shippingAddress.getStreetAddress2().isEmpty()){
+					messageContext.addMessage(new MessageBuilder().error().source(
+							"streetAddress2").defaultText("please fill your address").build());
+					status = "failure";
+				}
+				if(shippingAddress.getCity().isEmpty()){
+					messageContext.addMessage(new MessageBuilder().error().source(
+							"city").defaultText("please fill your city").build());
+					status = "failure";
+				}
+				if(shippingAddress.getDistrict().isEmpty()){
+					messageContext.addMessage(new MessageBuilder().error().source(
+							"District").defaultText("please fill your district").build());
+					status = "failure";
+				}
+				if(shippingAddress.getPinCode().isEmpty()){
+					messageContext.addMessage(new MessageBuilder().error().source(
+							"pinCode").defaultText("please fill your pin code").build());
+					status = "failure";
+				}
+				
+				if(shippingAddress.getLandmark().isEmpty()){
+					messageContext.addMessage(new MessageBuilder().error().source(
+							"landmark").defaultText("please fill your landmark").build());
+					status = "failure";
+				}
+				if(shippingAddress.getPinCode().isEmpty()){
+					messageContext.addMessage(new MessageBuilder().error().source(
+							"pinCode").defaultText("please fill your pincode").build());
+					status = "failure";
+				}
+				if(shippingAddress.getState().isEmpty()){
+					messageContext.addMessage(new MessageBuilder().error().source(
+							"state").defaultText("please fill your state").build());
+					status = "failure";
+				}
+				return status;
+			}
+
+		
 	public String addSupplierAddress(Supplier supplier)
 	{
 		this.supplier.setSupplierCity(supplier.getSupplierCity());
@@ -162,8 +230,54 @@ public class DemoHandler {
 				return "success";
 	}
 	
-		public String saveOrUpdateUser(UserDetail userDetail, ShippingAddress shippingAddress,BillingAddress billingAddress )
+	public String validateSupplierDetails(Supplier supplier,MessageContext messageContext){
+		String status = "success";
+		
+		if(supplier.getSupplierCompanyName().isEmpty()){
+			messageContext.addMessage(new MessageBuilder().error().source(
+					"supplierCompanyName").defaultText("please provide your company name").build());
+			status = "failure";
+		}
+		if(supplier.getSupplierCompanyAddress1().isEmpty()){
+			messageContext.addMessage(new MessageBuilder().error().source(
+					"supplierCompanyAddress1").defaultText("please provide your address").build());
+			status = "failure";
+		}
+		if(supplier.getSupplierCompanyAddress2().isEmpty()){
+			messageContext.addMessage(new MessageBuilder().error().source(
+					"supplierCompanyAddress2").defaultText("please provide your address").build());
+			status = "failure";
+		}
+		
+		if(supplier.getSupplierCity().isEmpty()){
+			messageContext.addMessage(new MessageBuilder().error().source(
+					"supplierCity").defaultText("please provide your city").build());
+			status = "failure";
+		}
+		if(supplier.getSupplierDistrict().isEmpty()){
+			messageContext.addMessage(new MessageBuilder().error().source(
+					"supplierDistrict").defaultText("please provide your district").build());
+			status = "failure";
+		}
+		if(supplier.getSupplierPinCode().isEmpty()){
+			messageContext.addMessage(new MessageBuilder().error().source(
+					"supplierPinCode").defaultText("please provide your pin code").build());
+			status = "failure";
+		}
+		if(supplier.getSupplierState().isEmpty()){
+			messageContext.addMessage(new MessageBuilder().error().source(
+					"supplierState").defaultText("please provide your state").build());
+			status = "failure";
+		}
+		
+		return status;
+	}
+	
+	
+		public String saveOrUpdateUser(UserDetail userDetail, ShippingAddress shippingAddress,BillingAddress billingAddress,MessageContext messageContext )
 		{
+			try
+			{
 			userService.saveOrUpdateUser(userDetail);
 			
 			shippingAddress.setUserDetail(userDetail);
@@ -178,6 +292,18 @@ public class DemoHandler {
 			userService.addBillingAddress(billingAddress);
 			userService.addShippingAddress(shippingAddress);
 			
+			SimpleMailMessage email = new SimpleMailMessage();
+			email.setTo(userDetail.getEmailId());
+			email.setSubject("Welocme to ORGANIC SOUL");
+			email.setText("Thank you for creating account at our website. Enjoy your shopping!!!");
+			
+			mailSender.send(email);
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+				messageContext.addMessage(new MessageBuilder().error().build());
+				return "failure";
+			}
 			
 			return "success";
 		}

@@ -1,13 +1,13 @@
 <%@include file="header.jsp" %>
 <div class="container-fluid">
 <div class="row">
-<div class="col-xs-18 col-sm-6 col-md-3">
+<div class="col-sm-3">
 <div  ng-repeat="list in productViewLists | filter:searchkeyword ">
 <input type="checkbox" ng-click="myNewFilter(list.subCategoryName)"/> {{list.subCategoryName}}<br>
 </div></div>
 
 
-<div >
+<div class="col-sm-9">
 <div><span ng-click="sort('productName')"><button type="submit" class="btn btn-default">Product Name 
 <span class="glyphicon sort-icon" ng-show="sortkey=='productName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></button>
 </span>
@@ -20,7 +20,7 @@
     <div class="col-xs-18 col-sm-6 col-md-3"  ng-repeat="list in productViewLists | filter:searchkeyword | orderBy:sortkey:reverse | filter:nextFilter">
       <article class="col-item">
         		<div class="photo">
-        			<div class="options">
+        			<div class="options" ng-if="list.productQuantity!=0">
         				<a href="wishlist-{{list.productId}}"><button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
         					<i class="fa fa-heart"></i>
         				</button></a>
@@ -38,7 +38,7 @@
         		</div>
         		
         	</article>
-            <p class="text-center">{{list.productName}}</p>
+            <p class="text-center">{{list.productName}}<span ng-if="list.productQuantity==0"><strong><font color=red>(Out of stock)</font></strong></span></p>
     
     </div>
 </div>

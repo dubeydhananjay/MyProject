@@ -31,9 +31,9 @@
 					<div class="col-md-4">
 					State:</div><div class="col-md-8">${billingAddress.state}</div>
 					<br /><br />
-					<input name="_eventId_edit" type="submit" value="Edit" /> 
-					<input name="_eventId_submit" type="submit" value="confirm" />
-					<input name="_eventId_cancel" type="submit" value="Cancel" /><br>
+		   <button type="submit" name="_eventId_submit" class="btn btn-default">Confirm</button>
+           <button type="submit" name="_eventId_edit" class="btn btn-default">Edit</button>
+		   <button type="submit" name="_eventId_cancel" class="btn btn-default">Cancel</button><br>
 					</div>
 					</div>
 					</div>

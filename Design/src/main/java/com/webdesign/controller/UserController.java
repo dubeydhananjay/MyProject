@@ -76,6 +76,12 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping("/welcome")
+	public String welcome()
+	{
+		return "welcome";
+	}
+	
 	@RequestMapping("/adminRegister")
 	public String adminRegister(Model model)
 	{

@@ -32,7 +32,7 @@ public class CategoryController
 		
 		model.addAttribute("categories", new Category());
 		model.addAttribute("categoriesList", this.categoryService.listCategories());
-		
+		model.addAttribute("listCategories", this.categoryService.listCategory());
 		return "categories";
 	}
 	@RequestMapping("/category")

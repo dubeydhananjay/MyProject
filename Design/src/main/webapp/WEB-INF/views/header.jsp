@@ -61,7 +61,7 @@ body { margin-top:20px; }
 
     <script src="resources/js/respond.min.js"></script>
 
-    <link rel="shortcut icon" href="favicon.png">
+    
 
 <title>Insert title here</title>
 </head>
@@ -94,9 +94,8 @@ body { margin-top:20px; }
         		  <strong><sec:authentication property="principal.username"/></strong>
         		  </sec:authorize></a>
                     </li></c:if>
-                   
-
-                </ul>
+                    </ul>
+            
             </div>
         </div>
      
@@ -137,7 +136,7 @@ body { margin-top:20px; }
                     <li class="active"><a href="home">Home</a>
                     </li>
                     <!-- Start c:ForEach here -->
-			<c:forEach items="${categoriesList}" var="category">
+			<c:forEach items="${listCategories}" var="category">
                     
                     <li class="dropdown yamm-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">${category.categoryName} <b class="caret"></b></a>
@@ -169,6 +168,7 @@ body { margin-top:20px; }
         							<li><a href="#">Contact Us</a></li>
         		
                                     </ul>
+                                     
                                 </div>
                                 <!-- /.yamm-content -->
                             
@@ -207,10 +207,16 @@ body { margin-top:20px; }
 
         </div>
         <!-- /.container -->
+        
     </div>
     <!-- /#navbar -->
 
     <!-- *** NAVBAR END *** -->
+    <div class="scroll-top-wrapper ">
+  <span class="scroll-top-inner">
+    <i class="fa fa-2x fa-arrow-circle-up"></i>
+  </span>
+</div>
     
     <!-- ----------------------second navbar------------------------------------------------ -->
    
@@ -294,5 +300,30 @@ body { margin-top:20px; }
 	
   });
   
-  
+  $(document).ready(function(){
+
+	  $(function(){
+	   
+	      $(document).on( 'scroll', function(){
+	   
+	      	if ($(window).scrollTop() > 100) {
+	  			$('.scroll-top-wrapper').addClass('show');
+	  		} else {
+	  			$('.scroll-top-wrapper').removeClass('show');
+	  		}
+	  	});
+	   
+	  	$('.scroll-top-wrapper').on('click', scrollToTop);
+	  });
+	   
+	  function scrollToTop() {
+	  	verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+	  	element = $('body');
+	  	offset = element.offset();
+	  	offsetTop = offset.top;
+	  	$('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
+	  }
+
+	  });
+
 </script>

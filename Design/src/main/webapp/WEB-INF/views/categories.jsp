@@ -16,7 +16,7 @@
 
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<body>
+<body ng-app="myNewApp" ng-controller="myNewController">
 
  <div class="navbar navbar-default yamm" role="navigation" id="navbar">
         <div class="container">
@@ -40,7 +40,8 @@
 
 <h2>Category Page</h2><br><br>
       <form:form method="POST" action="category" commandName="categories" modelAttribute="categories" class="form-inline" >
-            <form:input path="categoryId" hidden="true" />    
+            <form:input path="categoryId" hidden="true" />  
+             
    <div class="form-group">
         <form:label path="categoryName">CategoryName</form:label>
         <form:input path="categoryName" class="form-control"/>
@@ -58,7 +59,7 @@
 </form:form><br><br>
 <!-- --------------------------------------------------------------------------------------------------- -->
      <h2>List of Categories</h2><br><br>
-     <div ng-app="myNewApp" ng-controller="myNewController">
+     <div>
         <table><tr><td>Search</td>
         <td><input type="text" ng-model="test"></td></tr></table><br>
 				  <table class="table" border="1" width="100%">

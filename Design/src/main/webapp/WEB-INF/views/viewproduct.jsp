@@ -64,7 +64,7 @@
                                 <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details</a>
                                 </p>
                                <!--  <p class="price">Rs.{{productList.productPrice}}</p> -->
-                                <p class="text-center buttons">
+                                <p class="text-center buttons" ng-if="productList.productQuantity!=0">
                                     <a href="addCart-{{productList.productId}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
                                     <a href="wishlist-{{productList.productId}}" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
                                     

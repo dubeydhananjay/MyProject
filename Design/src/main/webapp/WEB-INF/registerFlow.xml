@@ -18,7 +18,7 @@
 	 <!-- if not specified the first view state is the starting state -->
 	<view-state id="start" view="webflowregister" model="flowScope.userDetail">
 	   <transition on="submit" to="validate"/>
-	   <transition on="cancel" to="toHome"/>
+	   <transition on="cancel" to="cancel"/>
 	</view-state>
 	
 	<action-state id="validate">
@@ -41,29 +41,38 @@
 	<view-state id="decide" view="decide" model="flowScope.userDetail">
 	   <transition on="submit" to="supplieraddress"/>
 	   <transition on="edit" to="shippingaddress"/>
+	   <transition on="cancel" to="cancel"/>
 	</view-state>
 	
 	<view-state id="shippingaddress" view="shippingaddress" model="shippingAddress">
-	   <transition on="submit" to="addShippingAddress"/>
+	   <transition on="submit" to="validateshippingaddress"/>
 	   <transition on="edit" to="start"/>
+	   <transition on="cancel" to="cancel"/>
 	</view-state>
+	
+	<action-state id="validateshippingaddress">
+		<evaluate expression="demoHandler.validateShippingDetails(shippingAddress,messageContext)" result="flowScope.userDetail"></evaluate>
+		<transition on="success" to="addShippingAddress" />
+		<transition on="failure" to="shippingaddress" />
+	</action-state>
 	
 	
 	<action-state id="addShippingAddress">
 		<evaluate expression="demoHandler.addShippingAddress(shippingAddress)"></evaluate>
-		<transition on="success" to="billingaddress" />
+		<transition on="success" to="confirmshippingaddress" />
 		
 	</action-state>
 
-   	<!-- <view-state id="confirmdetails"> 
-		<evaluate expression="demoHandler.validateDetails(userDetail,messageContext)"></evaluate>
-		<transition on="success" to="confirmdetails" />
-		<transition on="failure" to="start" /> 
- 	</view-state> -->
- 
-	<view-state id="billingaddress" view="billingaddress" model="billingAddress">
+	<view-state id="confirmshippingaddress" view="confirmshippingaddress" model="shippingAddress">
+		<transition on="edit" to="shippingaddress" />
+		<transition on="submit" to="billingaddress" />
+		<transition on="cancel" to="cancel"/>
+	</view-state>
+   	
+ 	<view-state id="billingaddress" view="billingaddress" model="billingAddress">
 		<transition on="edit" to="start" />
 		<transition on="submit" to="addBillingAddress" />
+		<transition on="cancel" to="cancel"/>
 	</view-state>
 	
 	<action-state id="addBillingAddress">
@@ -72,9 +81,17 @@
 		</action-state>
 		
 		<view-state id="supplieraddress" view="supplieraddress" model="supplier">
-	   <transition on="submit" to="addSupplierAddress"/>
+	   <transition on="submit" to="validateSupplierAddress"/>
 	   <transition on="edit" to="start"/>
+	   <transition on="cancel" to="cancel"/>
 	</view-state>
+	
+	<action-state id="validateSupplierAddress">
+		<evaluate expression="demoHandler.validateSupplierDetails(supplier,messageContext)" result="flowScope.userDetail"></evaluate>
+		<transition on="success" to="addSupplierAddress" />
+		<transition on="failure" to="supplieraddress" />
+	</action-state>
+	
 	
 	<action-state id="addSupplierAddress">
 		<evaluate expression="demoHandler.addSupplierAddress(supplier)"></evaluate>
@@ -82,7 +99,7 @@
 		</action-state>
 		
 		<action-state id="saveUser">
-		<evaluate expression="demoHandler.saveOrUpdateUser(flowScope.userDetail,shippingAddress,billingAddress)"></evaluate>
+		<evaluate expression="demoHandler.saveOrUpdateUser(flowScope.userDetail,shippingAddress,billingAddress,messageContext)"></evaluate>
 		<transition on="success" to="actionUser" />
 		</action-state>
 		
@@ -100,11 +117,13 @@
 		<evaluate expression="newSupplierService.saveOrUpdateSupplier(userDetail)" result="flowScope.userDetail"></evaluate>
 		<transition on="success" to="toHome" />
 		</action-state>
+		
  
 	<end-state id="index" view="index" />
-	<end-state id="toHome" view="externalRedirect:contextRelative:/" />
+	<end-state id="toHome" view="externalRedirect:contextRelative:/welcome" />
 	<end-state id="toException" view="externalRedirect:contextRelative:exception.jsp" />
- 
+ 	<end-state id="cancel" view="externalRedirect:contextRelative:/" />
+ 	
 	<!-- these events are available in every state-->
 	<global-transitions>
 		<transition on="home" to="toHome" />

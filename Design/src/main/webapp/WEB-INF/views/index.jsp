@@ -104,7 +104,7 @@
                             
       <article class="col-item">
         		<div class="photo">
-        			<div class="options">
+        			<div class="options" ng-if="list.productQuantity!=0">
         				<a href="wishlist-{{list.productId}}"><button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
         					<i class="fa fa-heart"></i>
         				</button></a>
@@ -122,7 +122,7 @@
         		</div>
         		
         	</article>
-            <p class="text-center">{{list.productName}}</p>
+            <p class="text-center">{{list.productName}}<span ng-if="list.productQuantity==0"><strong><font color=red>(Out of stock)</font></strong></span></p>
         
         
         	

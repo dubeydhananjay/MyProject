@@ -32,7 +32,16 @@ public class ProductView {
 	private String soapType;
 	@Expose
 	private String skintype;
+	@Expose
+	private int productQuantity;
 
+	
+	public int getProductQuantity() {
+		return productQuantity;
+	}
+	public void setProductQuantity(int productQuantity) {
+		this.productQuantity = productQuantity;
+	}
 	public String getAromaType() {
 		return aromaType;
 	}
