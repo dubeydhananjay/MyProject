@@ -14,7 +14,8 @@ import com.webdesign.model.ProductView;
 @Service
 @Transactional
 public class ProductService
-{@Autowired
+{
+	@Autowired
 	private ProductDAOImpl productDAO;
 
 	@Transactional
@@ -76,6 +77,13 @@ public void productSubtract(int productId)
 public void productAdd(int productId)
 {
 	this.productDAO.productAdd(productId);
+}
+
+@Transactional
+public String likeProducts()
+{
+	return productDAO.likeProducts();
+	
 }
 
 }

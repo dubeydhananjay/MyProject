@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -60,7 +61,7 @@ public class CartItemController
 		//this.productService.productSubtract(productId);
 		session.setAttribute("cartItemId", cartItem.getCartItemId());
 		int cartItemId = (Integer)session.getAttribute("cartItemId");
-		List<CartItem> buynowList = cartItemService.cartList(userId);
+		List<CartItem> buynowList = cartItemService.cartListByCartItemId(cartItemId);
 	      session.setAttribute("buynowList", buynowList);
 		return "redirect:/cartlist-"+cartItemId;
 		
@@ -84,18 +85,7 @@ public class CartItemController
 		
 	}
 	
-	/* @RequestMapping("/checkout-{productId}")
-	  public String getCartCheckOut(@ModelAttribute("cartItem") CartItem cartItem, @PathVariable("productId") int productId,HttpSession session)
-	  {
-		  Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-		  String username=authentication.getName();
-		  int userId=userService.getByName(username).getUserId();
-		  session.setAttribute("userId", userId);
-		  session.setAttribute("productId", productId);
-		  productId = (Integer) session.getAttribute("productId");
-		  
-		  return "redirect:/cart?userId="+userId;
-	  }*/
+	
 	 
 	 @RequestMapping("/addCart-{productId}")
 	  public String addToCart(@ModelAttribute ("cartItem") CartItem cartItem,@PathVariable("productId") int productId,Model model,HttpSession session)
@@ -207,21 +197,22 @@ public class CartItemController
 			  }
 		  }
 		  
-		return "receipt";
+		return "redirect:/receipt";
 
 	  }
 	  
 	  @SuppressWarnings("unchecked")
 	  @RequestMapping("/receipt")
-	  public String receipt(Model model, HttpSession session)
+	  public ModelAndView receipt(HttpSession session)
 	  {
+		  ModelAndView model = new ModelAndView("receipt");
 		  List<CartItem> order = (List<CartItem>) session.getAttribute("mycartList");
 		  if(order==null || session.getAttribute("checkout")=="buynow")
 		  {
 			  List<CartItem> k = (List<CartItem>) session.getAttribute("buynowList");
 			  Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			  String rjson=gson.toJson(k);
-			  model.addAttribute("placedOrder",rjson);
+			  model.addObject("placedOrder",rjson);
 			  
 		  }
 		  else if(session.getAttribute("checkout")=="cartList")
@@ -229,10 +220,10 @@ public class CartItemController
 		  List<CartItem> k = (List<CartItem>) session.getAttribute("mycartList");
 		  Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		  String rjson=gson.toJson(k);
-		  model.addAttribute("placedOrder",rjson);
+		  model.addObject("placedOrder",rjson);
 		 
 		  }
-		  return "redirect:/";
+		  return model;
 		  
 	  }
 

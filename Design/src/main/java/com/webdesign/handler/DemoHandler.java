@@ -50,7 +50,7 @@ public class DemoHandler {
 		if(userDetail.getUsername().isEmpty()){
 			messageContext.addMessage(new MessageBuilder().error().source(
 					"username").defaultText("UserName cannot be Empty").build());
-			status = "failure";
+			status="failure";
 		}
 		if(userDetail.getEmailId().isEmpty()){
 			messageContext.addMessage(new MessageBuilder().error().source(
@@ -60,24 +60,26 @@ public class DemoHandler {
 		}
 		else if(userDetail.getEmailId().matches(emailPattern))
 		{
-			return "success";
+			status="success";
 			
 		}
 		else{
 			messageContext.addMessage(new MessageBuilder().error().source(
 		
 				"emailId").defaultText("Invalid Email format").build());
-			return "failure";
+			status="failure";
 		}
-		if(userDetail.getFirstname().isEmpty()){
+		if(userDetail.getFirstname().isEmpty())
+		{
 			messageContext.addMessage(new MessageBuilder().error().source(
 					"firstname").defaultText("First name cannot be Empty").build());
-			status = "failure";
+			status="failure";
 		}
-		if(userDetail.getLastname().isEmpty()){
+		if(userDetail.getLastname().isEmpty())
+		{
 			messageContext.addMessage(new MessageBuilder().error().source(
 					"lastname").defaultText("Last name cannot be Empty").build());
-			status = "failure";
+			status="failure";
 		}
 		
 		
@@ -86,24 +88,28 @@ public class DemoHandler {
 			if(userDetail.getPassword().length()<6 && !userDetail.getPassword().isEmpty())
 			{
 				messageContext.addMessage(new MessageBuilder().error().source("password").defaultText(" It Should Be Minimum 6 Characters").build());
+				status="failure";
 			}
 			else
 			{
 				messageContext.addMessage(new MessageBuilder().error().source("password").defaultText("	Password cannot be empty").build());
+				status="failure";
 			}
 			
-			status = "failure";
+			
 		}
 		if(userDetail.getContactNo().isEmpty() || (userDetail.getContactNo().length()!=10 && !userDetail.getContactNo().isEmpty()) ){
 			if(userDetail.getContactNo().length()!=10 && !userDetail.getContactNo().isEmpty() )
 			{
 				messageContext.addMessage(new MessageBuilder().error().source("contactNo").defaultText(" It Should be 10 digits").build());
+				status="failure";
 			}
 			else
 			{
 				messageContext.addMessage(new MessageBuilder().error().source("contactNo").defaultText("Contact No cannot be empty").build());
+				status="failure";
 			}
-			status = "failure";
+			
 		}
 		
 		return status;
@@ -191,22 +197,27 @@ public class DemoHandler {
 							"District").defaultText("please fill your district").build());
 					status = "failure";
 				}
+				if(shippingAddress.getPinCode().isEmpty()|| (shippingAddress.getPinCode().length()<6 && !shippingAddress.getPinCode().isEmpty())){
 				if(shippingAddress.getPinCode().isEmpty()){
 					messageContext.addMessage(new MessageBuilder().error().source(
 							"pinCode").defaultText("please fill your pin code").build());
 					status = "failure";
 				}
+				else 
+				{
+					messageContext.addMessage(new MessageBuilder().error().source(
+							"pinCode").defaultText("It should be 6 digits").build());
+					status = "failure";
+					
+				}
+			}
 				
 				if(shippingAddress.getLandmark().isEmpty()){
 					messageContext.addMessage(new MessageBuilder().error().source(
 							"landmark").defaultText("please fill your landmark").build());
 					status = "failure";
 				}
-				if(shippingAddress.getPinCode().isEmpty()){
-					messageContext.addMessage(new MessageBuilder().error().source(
-							"pinCode").defaultText("please fill your pincode").build());
-					status = "failure";
-				}
+				
 				if(shippingAddress.getState().isEmpty()){
 					messageContext.addMessage(new MessageBuilder().error().source(
 							"state").defaultText("please fill your state").build());
@@ -259,10 +270,19 @@ public class DemoHandler {
 					"supplierDistrict").defaultText("please provide your district").build());
 			status = "failure";
 		}
-		if(supplier.getSupplierPinCode().isEmpty()){
+		if(supplier.getSupplierPinCode().isEmpty()|| (supplier.getSupplierPinCode().length()<6 && !supplier.getSupplierPinCode().isEmpty())){
+		if(supplier.getSupplierPinCode().isEmpty())
+		{
 			messageContext.addMessage(new MessageBuilder().error().source(
 					"supplierPinCode").defaultText("please provide your pin code").build());
 			status = "failure";
+		}
+		else
+		{
+			messageContext.addMessage(new MessageBuilder().error().source(
+					"supplierPinCode").defaultText("It should be 6 digits").build());
+			status = "failure";
+		}
 		}
 		if(supplier.getSupplierState().isEmpty()){
 			messageContext.addMessage(new MessageBuilder().error().source(
@@ -279,6 +299,7 @@ public class DemoHandler {
 			try
 			{
 			userService.saveOrUpdateUser(userDetail);
+			userDetail.setUsername(userDetail.getUsername().trim());
 			
 			shippingAddress.setUserDetail(userDetail);
 			userDetail.setShippingAddress(shippingAddress);
@@ -295,12 +316,12 @@ public class DemoHandler {
 			SimpleMailMessage email = new SimpleMailMessage();
 			email.setTo(userDetail.getEmailId());
 			email.setSubject("Welocme to ORGANIC SOUL");
-			email.setText("Thank you for creating account at our website. Enjoy your shopping!!!");
+			email.setText("Thank you for creating account at our website. Enjoy your shopping!!!\nUsername: "+userDetail.getUsername()+"\nPassword: "+userDetail.getPassword());
 			
 			mailSender.send(email);
 			}
 			catch (Exception e) {
-				// TODO: handle exception
+				
 				messageContext.addMessage(new MessageBuilder().error().build());
 				return "failure";
 			}
@@ -309,7 +330,7 @@ public class DemoHandler {
 		}
 	
 	
-	@Transactional
+	
 	public String saveOrUpdateSupplier(UserDetail userDetail, Supplier supplier)
 	{
 		

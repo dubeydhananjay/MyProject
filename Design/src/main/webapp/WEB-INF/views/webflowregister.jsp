@@ -23,7 +23,7 @@
    <div class="form-group">
         <label>First Name:<sup>*</sup></label>
         
-        <form:input path="firstname" class="form-control input-md"/><br>
+        <form:input path="firstname" class="form-control"/><br>
         <c:forEach items="${flowRequestContext.messageContext.getMessagesBySource('firstname')}" var="err">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
      <span><font color="red">${err.text}</font></span>
@@ -32,7 +32,7 @@
  <div class="form-group">
         <label>Last Name:<sup>*</sup></label>
         
-        <form:input path="lastname" class="form-control input-md" /><br>
+        <form:input path="lastname" class="form-control" /><br>
         <c:forEach items="${flowRequestContext.messageContext.getMessagesBySource('lastname')}" var="err">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
      <span><font color="red">${err.text}</font></span>
@@ -41,7 +41,7 @@
     <div class="form-group"> 
         <label>Password:<sup>*</sup></label>
         
-       <form:input path="password" type="password" class="form-control input-md" /><br>
+       <form:input path="password" type="password" class="form-control" /><br>
         <c:forEach items="${flowRequestContext.messageContext.getMessagesBySource('password')}" var="err">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
      <span><font color="red">${err.text}</font></span>
@@ -50,7 +50,7 @@
      <div class="form-group">   
         <label>Contact No.:<sup>*</sup></label>
         
-        <form:input path="contactNo" class="form-control input-md"/><br>
+        <form:input path="contactNo" class="form-control"/><br>
         <c:forEach items="${flowRequestContext.messageContext.getMessagesBySource('contactNo')}" var="err">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
      <span><font color="red">${err.text}</font></span>

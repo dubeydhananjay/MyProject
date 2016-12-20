@@ -1,11 +1,16 @@
 package com.webdesign.daoimpl;
 
+import java.util.Iterator;
 import java.util.List;
 
+import javax.transaction.SystemException;
+import javax.transaction.Transaction;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,14 +60,41 @@ public class CategoryDAOImpl implements CategoryDAO
 		List<Category> categoryList=this.sessionFactory.getCurrentSession().createQuery("from Category").getResultList();
 		return categoryList;
 	}
-	public Category getByName(String categoryName)
+	@SuppressWarnings({  "rawtypes", "unchecked", "deprecation" })
+	public Category getByName(String categoryName) throws IllegalStateException, SystemException
 	{
-		String query=" from Category where categoryName= '"+categoryName+"'";
+		Session session =this.sessionFactory.getCurrentSession();
+		Category category=null;
+		Transaction tx=null;
+		try
+		{
+			tx=(Transaction) session.beginTransaction();
+			Criteria c=session.createCriteria(Category.class).add(Restrictions.eq("categoryName", categoryName));
+			List cat = c.list();
+			for(Iterator<Category> iterator = cat.iterator();iterator.hasNext(); )
+			{
+				category = iterator.next();
+				
+			}
+			tx.commit();
+		}
+		catch(Exception he)
+		{
+			if(tx!=null) tx.rollback();
+			he.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+			
+		}
+		return category;
+		/*String query=" from Category where categoryName= '"+categoryName+"'";
 		@SuppressWarnings({  "unchecked" })
 		List<Category> categoryList=this.sessionFactory.getCurrentSession().createQuery(query).getResultList();
 	    if(categoryList!=null && !categoryList.isEmpty())
 	    	return categoryList.get(0);
-	    else return null;
+	    else return null;*/
 	}
 	public Category getById(int categoryId)
 	{

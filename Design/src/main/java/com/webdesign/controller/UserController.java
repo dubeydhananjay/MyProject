@@ -1,6 +1,14 @@
 package com.webdesign.controller;
 
 
+import java.io.BufferedOutputStream;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,8 +20,13 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.webdesign.model.BillingAddress;
 import com.webdesign.model.ShippingAddress;
 import com.webdesign.model.UserDetail;
@@ -97,4 +110,44 @@ public class UserController {
 		this.userService.saveOrUpdateAdmin(userDetail);
 		return "redirect:/adminRegister";
 	}
-}
+	
+	
+	@RequestMapping("/userprofile")
+	public ModelAndView getPages(String username,@ModelAttribute("userDetail")UserDetail userDetail)throws  IOException
+	{
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		username=authentication.getName();
+		ModelAndView model = new ModelAndView("userprofile");
+		UserDetail newuserDetail = this.userService.getByName(username);
+		Gson pGson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String pJson = pGson.toJson(newuserDetail);
+		model.addObject("listUser",pJson);
+		
+		String path="C://Users//Dhananjay//Documents//Eclipse_Proj//Design//src//main//webapp//resources//image";
+		MultipartFile file=userDetail.getUploadFiles();
+        path=path+String.valueOf("//"+username+".jpg");
+        File imageFile = new File(path);
+		if (null!=file) 
+        {
+			try
+                {
+                	
+                	byte[] bytes = file.getBytes();
+                	FileOutputStream fileOutputStream = new FileOutputStream(imageFile);
+    				BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+    				bufferedOutputStream.write(bytes);
+    				bufferedOutputStream.close();
+                    
+                     } catch (IOException e) 
+                {
+                    e.printStackTrace();
+                }
+         }
+		else System.out.println("no file");	
+		return model;
+
+	}
+	
+	}
+

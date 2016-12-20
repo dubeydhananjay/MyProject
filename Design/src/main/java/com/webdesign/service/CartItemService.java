@@ -52,4 +52,10 @@ public List<CartItem> orderedList(int userId)
 {
 	return this.cartIemDAOImpl.orderedList(userId);
 }
+
+@Transactional
+public List<CartItem> cartListByCartItemId(int cartItemId) 
+{
+	return cartIemDAOImpl.cartListByCartItemId(cartItemId);
+}
 }

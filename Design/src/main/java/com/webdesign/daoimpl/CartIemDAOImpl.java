@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.webdesign.dao.CartItemDAO;
 import com.webdesign.model.CartItem;
+import com.webdesign.model.ShippingAddress;
 
 
 @Repository
@@ -91,6 +92,21 @@ public class CartIemDAOImpl implements CartItemDAO
 	}
 	
 	
+	@SuppressWarnings("unchecked")
+	public List<CartItem> cartListByCartItemId(int cartItemId) 
+	{
+		String sql = "from CartItem where  flag = false and cartItemId="+cartItemId;
+		List<CartItem> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
+		return list;
+		
+	}
 
+	@SuppressWarnings("unchecked")
+	public List<ShippingAddress> getByUserId(int userId)
+	{
+		String sql = "from CartItem where  flag = false and cartItemId="+userId;
+		List<ShippingAddress> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
+		return list;
+	}
 		
 	}

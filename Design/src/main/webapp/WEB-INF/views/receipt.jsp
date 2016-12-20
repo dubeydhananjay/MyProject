@@ -1,7 +1,7 @@
 <%@include file="header.jsp" %>
 
 <div class="container">
-<form:form method="post" modelAttribute="buyNow">
+<form:form method="post" action="home">
     <div class="row">
         <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
             <div class="row">
@@ -61,7 +61,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-success btn-lg btn-block" name="_eventId_submit">
+                <button type="submit" class="btn btn-success btn-lg btn-block">
                     Pay Now   <span class="glyphicon glyphicon-chevron-right"></span>
                 </button>
             </div>

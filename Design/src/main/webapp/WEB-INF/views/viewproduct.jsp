@@ -98,7 +98,8 @@
 <h6>Size: {{productList.productSize}}</h6>
 <h6>Weight: {{productList.productWeight}}</h6>
 <h6>Aroma Type:{{productList.aromaType}}</h6>
-
+<h6 ng-if="'productList.skintype'=={{likeproducts.productName}}">Skin Type:{{productList.skintype}}</h6>
+<h6>Soap type:{{productList.soapType}}</h6>
 <div class="social">
                                 <h4>Show it to your friends</h4>
                                 <p>
@@ -116,6 +117,7 @@
 					  $scope.categorylist=${categoriesLists};
 					  $scope.subcategorylist=${subcategoriesLists};
 					  $scope.productLists=${productsLists};
+					  $scope.likeproducts=${likeProducts};
 				      
 						  });
 				  </script>

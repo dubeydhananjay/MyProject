@@ -18,6 +18,7 @@ import com.google.gson.annotations.Expose;
 public class UserDetail implements Serializable{
 
 	@Id
+	@Expose
 	private int userId;
 	@Expose
 	private String username;

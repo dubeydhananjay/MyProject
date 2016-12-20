@@ -2,6 +2,8 @@ package com.webdesign.service;
 
 import java.util.List;
 
+import javax.transaction.SystemException;
+
 //import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,7 @@ public List<Category> listCategory()
 	return this.categoryDAO.listCategory();
 }
 @Transactional
-public Category getByName(String categoryName)
+public Category getByName(String categoryName) throws IllegalStateException, SystemException
 {
 	return this.categoryDAO.getByName(categoryName);
 }

@@ -60,7 +60,7 @@ public class ProductController {
 	
 	@RequestMapping("/product")
 
-	public String addcategory(@Validated @ModelAttribute("products") Product product, BindingResult result, Model model, MultipartFile file) throws  IOException
+	public String addproducts(@Validated @ModelAttribute("products") Product product, BindingResult result, Model model, MultipartFile file) throws  IOException
 	{
 		if(result.hasErrors())
 		{
@@ -154,6 +154,7 @@ public class ProductController {
 		model.addObject("categoriesLists", cJson);
 		model.addObject("subcategoriesLists", scJson);
 		model.addObject("productsLists", npJson);
+		model.addObject("likeProducts", productService.likeProducts());
 		return model;
 		
 	}

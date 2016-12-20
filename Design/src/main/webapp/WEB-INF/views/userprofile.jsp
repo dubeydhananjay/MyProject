@@ -28,7 +28,7 @@
                     </div>
                     <!-- /.col-md-3 -->
         </div>
-        
+       
        <div class="col-md-9 ">
 
 <div class="panel panel-default">
@@ -40,12 +40,17 @@
             <div class="box-body">
                      <div class="col-sm-6">
                      <div  align="center">
-                     <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
+                     <form:form action="userprofile" modelAttribute="userDetail" method="POST" enctype="multipart/form-data">
+                    
+                    
+                     <div  align="center"> <img alt="User Pic" src="resources/image/{{listUsers.username}}.jpg" id="profile-image1" class="img-circle img-responsive"> 
                 
-                <input id="profile-image-upload" class="hidden" type="file">
-<div style="color:#999;" >click here to change profile image</div>
+                <form:input id="profile-image-upload"  type="file" name="file" path="uploadFiles"/>
+ <div style="color:#999;" >click here to change profile image</div> 
                 <!--Upload Image Js And Css-->
+                <span class="pull-left"><button type="submit" class="btn btn-default">Submit</button></span>
   </div>
+  </form:form>
                <br>
     
               <!-- /input-group -->
@@ -58,25 +63,25 @@
             <hr style="margin:5px 0 5px 0;">
     
               
-<div class="col-sm-5 col-xs-6 tital " >First Name:</div><div class="col-sm-7 col-xs-6 ">{{listUsers.firstname}}</div>
+<div class="col-sm-6 col-xs-6 tital " >First Name:</div><div class="col-sm-6 col-xs-6 ">{{listUsers.firstname}}</div>
      <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Last Name:</div><div class="col-sm-7"> {{listUsers.lastname}}</div>
+<div class="col-sm-6 col-xs-6 tital " >Last Name:</div><div class="col-sm-6"> {{listUsers.lastname}}</div>
   <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Contact Number:</div><div class="col-sm-7">{{listUsers.contactNo}}</div>
-
-  <div class="clearfix"></div>
-<div class="bot-border"></div>
-
-<div class="col-sm-5 col-xs-6 tital " >Alternate Contact Number:</div><div class="col-sm-7">{{listUsers.alternateContactNo}}</div>
+<div class="col-sm-6 col-xs-6 tital " >Contact Number:</div><div class="col-sm-6">{{listUsers.contactNo}}</div>
 
   <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Email Id:</div><div class="col-sm-7">{{listUsers.emailId}}</div>
+<div class="col-sm-6 col-xs-6 tital " >Alternate Contact Number:</div><div class="col-sm-6">{{listUsers.alternateContactNo}}</div>
+
+  <div class="clearfix"></div>
+<div class="bot-border"></div>
+
+<div class="col-sm-6 col-xs-6 tital " >Email Id:</div><div class="col-sm-6">{{listUsers.emailId}}</div>
 
  <div class="clearfix"></div>
 <div class="bot-border"></div>
@@ -94,20 +99,30 @@
     </div>
 </div> 
 
-    
-       
-              
-   </div>
+ </div>
 </div>
+
 <script>
-              $(function() {
+             /*  $(function() {
     $('#profile-image1').on('click', function() {
         $('#profile-image-upload').click();
     });
-});       
-              </script>  
-               
-<script type="text/javascript">
+});        */
+             
+ 
+ /* function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+
+	        reader.onload = function (e) {
+	            document.getElementById('profile-image-upload').src =  e.target.result;
+	        }
+
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	} */
+  </script>              
+ <script type="text/javascript">
 				  angular.module('myNewApp',[]).controller('myNewController',function($scope)
 						  {
 					  $scope.listUsers=${listUser};

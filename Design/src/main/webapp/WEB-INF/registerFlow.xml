@@ -51,7 +51,7 @@
 	</view-state>
 	
 	<action-state id="validateshippingaddress">
-		<evaluate expression="demoHandler.validateShippingDetails(shippingAddress,messageContext)" result="flowScope.userDetail"></evaluate>
+		<evaluate expression="demoHandler.validateShippingDetails(shippingAddress,messageContext)"></evaluate>
 		<transition on="success" to="addShippingAddress" />
 		<transition on="failure" to="shippingaddress" />
 	</action-state>
@@ -80,6 +80,16 @@
 		<transition on="success" to="saveUser" />
 		</action-state>
 		
+		<action-state id="saveUser">
+		<evaluate expression="demoHandler.saveOrUpdateUser(userDetail,shippingAddress,billingAddress,messageContext)"></evaluate>
+		<transition on="success" to="actionUser" />
+		</action-state>
+		
+		<action-state id="actionUser">
+		<evaluate expression="userService.saveOrUpdateUser(userDetail)" result="flowScope.userDetail"></evaluate>
+		<transition on="success" to="toHome" />
+		</action-state>
+		
 		<view-state id="supplieraddress" view="supplieraddress" model="supplier">
 	   <transition on="submit" to="validateSupplierAddress"/>
 	   <transition on="edit" to="start"/>
@@ -87,7 +97,7 @@
 	</view-state>
 	
 	<action-state id="validateSupplierAddress">
-		<evaluate expression="demoHandler.validateSupplierDetails(supplier,messageContext)" result="flowScope.userDetail"></evaluate>
+		<evaluate expression="demoHandler.validateSupplierDetails(supplier,messageContext)"></evaluate>
 		<transition on="success" to="addSupplierAddress" />
 		<transition on="failure" to="supplieraddress" />
 	</action-state>
@@ -98,15 +108,7 @@
 		<transition on="success" to="saveSupplier" />
 		</action-state>
 		
-		<action-state id="saveUser">
-		<evaluate expression="demoHandler.saveOrUpdateUser(flowScope.userDetail,shippingAddress,billingAddress,messageContext)"></evaluate>
-		<transition on="success" to="actionUser" />
-		</action-state>
 		
-		<action-state id="actionUser">
-		<evaluate expression="userService.saveOrUpdateUser(userDetail)" result="flowScope.userDetail"></evaluate>
-		<transition on="success" to="toHome" />
-		</action-state>
 		
 		<action-state id="saveSupplier">
 		<evaluate expression="demoHandler.saveOrUpdateSupplier(flowScope.userDetail, supplier)"></evaluate>

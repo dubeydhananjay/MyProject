@@ -1,5 +1,7 @@
 package com.webdesign.controller;
 
+import javax.transaction.SystemException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -38,7 +40,7 @@ public class SubCategoryController
 	}
 @RequestMapping("/addsubCategory")
 	
-	public String addSubCategory(@Validated @ModelAttribute("subCategory") SubCategoryModel subCategory, BindingResult result, Model model)
+	public String addSubCategory(@Validated @ModelAttribute("subCategory") SubCategoryModel subCategory, BindingResult result, Model model) throws IllegalStateException, SystemException
 	{
 	if(result.hasErrors())
 	{
