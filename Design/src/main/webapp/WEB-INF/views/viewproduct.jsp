@@ -65,9 +65,17 @@
                                 </p>
                                <!--  <p class="price">Rs.{{productList.productPrice}}</p> -->
                                 <p class="text-center buttons" ng-if="productList.productQuantity!=0">
-                                    <a href="addCart-{{productList.productId}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
+                                    <a id="quantityUrl" onclick="redirect()" dummyhref="addCart-{{productList.productId}}-" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add To Cart</a> 
                                     <a href="wishlist-{{productList.productId}}" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
-                                    
+                                 <div class="input-group">
+   <br>
+         <p>Quantity To Be Added in Cart</p>
+         
+        <div class="form-inline">
+         <input type="number" id="quantity" class="form-control input-number" value="1" min="1" max="3" maxlength="1">
+          <span style="color:red;">${sessionScope.Error} <c:set var="Error" value="" scope="session"/></span>
+        </div>
+      </div>   
                                 </p>
          </div>
     
@@ -98,8 +106,8 @@
 <h6>Size: {{productList.productSize}}</h6>
 <h6>Weight: {{productList.productWeight}}</h6>
 <h6>Aroma Type:{{productList.aromaType}}</h6>
-<h6 ng-if="'productList.skintype'=={{likeproducts.productName}}">Skin Type:{{productList.skintype}}</h6>
-<h6>Soap type:{{productList.soapType}}</h6>
+<h6 ng-show="productList.subCategoryName=='Soap'">Skin Type:{{productList.skintype}}</h6>
+<h6 ng-show="productList.subCategoryName=='Soap'">Soap type:{{productList.soapType}}</h6>
 <div class="social">
                                 <h4>Show it to your friends</h4>
                                 <p>
@@ -117,9 +125,21 @@
 					  $scope.categorylist=${categoriesLists};
 					  $scope.subcategorylist=${subcategoriesLists};
 					  $scope.productLists=${productsLists};
-					  $scope.likeproducts=${likeProducts};
+					  
 				      
 						  });
+				  function redirect()
+				  {
+				 	if(document.getElementById('quantity').value < 1 || document.getElementById('quantity').value > 3)
+				 		{
+				 		window.location.href = document.getElementById('quantityUrl').getAttribute("dummyhref")+"1";
+				 		}
+				 	else
+				 		{
+				 		window.location.href = document.getElementById('quantityUrl').getAttribute("dummyhref")+""+document.getElementById('quantity').value.substring(0, 1);
+				 		}
+				 	
+				  };
 				  </script>
 
 

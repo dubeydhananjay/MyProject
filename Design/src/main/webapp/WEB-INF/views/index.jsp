@@ -113,7 +113,7 @@
         				</button></a>
         			
         			<!-- <div class="options-cart"> -->
-        				<a href="addCart-{{list.productId}}"><button class="btn btn-default" title="Add to cart">
+        				<a href="addCart-{{list.productId}}-1"><button class="btn btn-default" title="Add to cart">
         					<span class="fa fa-shopping-cart"></span>
         				</button></a>
         			 </div> 

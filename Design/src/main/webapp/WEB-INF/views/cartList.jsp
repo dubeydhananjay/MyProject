@@ -43,8 +43,20 @@
 <label>Search</label>
 <input type="text" ng-model="test"/>
 </div>
-<br><br>
+<br>
+<div class="form-group col-sm-6 col-xs-12">
+          <label for="search">Items per page:</label>
+          <select class="form-control" ng-model="maxsize" ng-init="maxsize=5">
+            <option ng-selected="true">5</option>
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>
+          </select>
+          <!--               <input type="number" min="1" max="100" class="form-control" ng-model="maxsize" ng-init="maxsize=10" > -->
+        </div>
  <table class="table" border="1" width="100%">
+ 
+ 
                   <thead>
                   <tr>
                   
@@ -68,7 +80,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				  <tr ng-repeat="list in resultValue=(cartLists | filter: test) | orderBy:sortKey:reverse">
+				  <tr dir-paginate="list in resultValue=(cartLists | filter: test) | orderBy:sortKey:reverse | itemsPerPage: maxsize" pagination-id="Product">
 				  
 				  <td>{{list.cartItemId}}</td>
 				  <td>{{list.cartId}}</td>
@@ -96,13 +108,15 @@
 				  </tbody></table>
 				  
 				  <a href="checkoutCart"><button type="button" class="btn btn-primary">Checkout</button></a>
+				   <dir-pagination-controls  class="pull-right" maxsize="5" pagination-id="Product" direction-links="true" boundary-links="true">
+                </dir-pagination-controls>
 				  
 				  </div></div>
 				  </div></div></div>
 				  <br><br>
 				  <script type="text/javascript">
 
-				  var app = angular.module('myNewApp', []).filter('totalAmtQty', function () {
+				  var app = angular.module('myNewApp',['angularUtils.directives.dirPagination']).filter('totalAmtQty', function () {
     return function (data, key1, key2) {
         
         if (typeof (data) === 'undefined' && typeof (key1) === 'undefined' && typeof (key2) === 'undefined') {

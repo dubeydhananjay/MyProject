@@ -149,12 +149,25 @@ public class ProductController {
 		String scJson=pGson.toJson(newsubcategory);
 		String npJson=pGson.toJson(newproduct);
 		
+		ProductView p = productService.getProductViewById(productId);
+		try
+		{
+			p.getProductId();
+		}
+		catch(NullPointerException e)
+		{
+			
+			ModelAndView model=new ModelAndView("404");
+			
+			return model;
+		}
+		
 		ModelAndView model = new ModelAndView("viewproduct");
 		model.addObject("productView", pJson);
 		model.addObject("categoriesLists", cJson);
 		model.addObject("subcategoriesLists", scJson);
 		model.addObject("productsLists", npJson);
-		model.addObject("likeProducts", productService.likeProducts());
+		
 		return model;
 		
 	}

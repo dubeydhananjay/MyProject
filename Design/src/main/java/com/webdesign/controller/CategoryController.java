@@ -19,7 +19,11 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 @Controller
 public class CategoryController
@@ -58,10 +62,18 @@ public class CategoryController
 		return "categories";
 	}
 	@RequestMapping("/deleteCategory-{categoryId}")
-	public String deleteCategory(@PathVariable("categoryId") int categoryId, Model model)
+	public String deleteCategory(@PathVariable("categoryId") int categoryId, Model model,HttpServletRequest request)
 	{
-		
+		try
+		{
 		this.categoryService.delete(categoryId);
+		}
+		catch(DataIntegrityViolationException e)
+		{
+			HttpSession session= request.getSession();
+			session.setAttribute("Error", "<div class=\"alert\"><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Category Cannot Be Deleted!!Constraint Violation</div>");
+			 
+		}
 		return "redirect:/categories";
 	}
 

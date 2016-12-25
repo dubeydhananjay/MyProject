@@ -87,9 +87,22 @@ public class CartItemController
 	
 	
 	 
-	 @RequestMapping("/addCart-{productId}")
-	  public String addToCart(@ModelAttribute ("cartItem") CartItem cartItem,@PathVariable("productId") int productId,Model model,HttpSession session)
+	@RequestMapping("/addCart-{productId}-{productQuantity}")
+	  public String addToCart(@ModelAttribute ("cartItem") CartItem cartItem,@PathVariable("productId") int productId,@PathVariable("productQuantity") int productQuantity, Model model,HttpSession session)
 	  {
+		if(productQuantity > productService.getById(productId).getProductQuantity() || productService.getById(productId).getProductQuantity()<=0 || productQuantity>3)
+		{
+			if(productQuantity>3)
+			{
+				session.setAttribute("Error", "Max Amount Of products is 3.");
+				return "redirect:/viewproduct-"+productId+"-product";
+			}
+			else
+			{
+			session.setAttribute("Error", "Not Enough Stock To Supply.");
+			return "redirect:/viewproduct-"+productId+"-product";
+			}
+		}
 		 
 		  Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
 		  String username=authentication.getName();
@@ -105,7 +118,14 @@ public class CartItemController
 		  Date systemdate=new Date();
 		  cartItem.setOrderDate(systemdate);
 		 // cartItem.setProductDiscount(productService.getById(productId).getProductDiscount());
-		  cartItem.setQuantity(1);
+		  if(cartItem.getQuantity()== 0)
+			{
+			cartItem.setQuantity(1);
+			}
+			else
+			{
+				cartItem.setQuantity(productQuantity);
+			}
 		  cartItemService.addToBuyNow(cartItem);
 	      
 	     // productService.productSubtract(productId);

@@ -79,12 +79,6 @@ public void productAdd(int productId)
 	this.productDAO.productAdd(productId);
 }
 
-@Transactional
-public String likeProducts()
-{
-	return productDAO.likeProducts();
-	
-}
 
 }
 

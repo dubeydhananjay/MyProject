@@ -41,7 +41,8 @@
 <h2>Category Page</h2><br><br>
       <form:form method="POST" action="category" commandName="categories" modelAttribute="categories" class="form-inline" >
             <form:input path="categoryId" hidden="true" />  
-             
+        
+        <div>${sessionScope.Error} <c:set var="Error" value="" scope="session"/></div>     
    <div class="form-group">
         <form:label path="categoryName">CategoryName</form:label>
         <form:input path="categoryName" class="form-control"/>
