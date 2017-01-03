@@ -11,6 +11,8 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +31,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.webdesign.model.SubCategoryModel;
 import com.webdesign.model.UserDetail;
+import com.webdesign.service.CartItemService;
 import com.webdesign.service.CategoryService;
 import com.webdesign.service.ProductService;
 import com.webdesign.service.SubCategoryService;
@@ -45,7 +48,8 @@ private ProductService productService;
 private SubCategoryService subCategoryService;
 @Autowired
 private UserService userService;
-
+@Autowired
+private CartItemService cartItemService; 
 
 @RequestMapping(value={"/","home"})
 	public String getHome(Model model) {
@@ -90,6 +94,27 @@ private UserService userService;
 		pJson=pGson.toJson(result);
 		
 		return pJson;
+	}
+	
+	@ModelAttribute
+	public void global(Model model,HttpSession session)
+	{
+		
+		model.addAttribute("listCategory",categoryService.listCategory());
+		model.addAttribute("listsubCategory",subCategoryService.listSubCategory());
+		
+	    try
+	    {
+	     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		    String user = authentication.getName();
+		    int userId = userService.getByName(user).getUserId();
+		
+		    session.setAttribute("cartListNo",this.cartItemService.cartList(userId).size());
+		}
+		catch(Exception e)
+		{
+			session.setAttribute("cartListNo",0);
+		}
 	}
 
 

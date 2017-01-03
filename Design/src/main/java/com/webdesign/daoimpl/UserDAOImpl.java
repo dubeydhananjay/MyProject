@@ -23,12 +23,11 @@ import com.webdesign.model.UserDetail;
 import com.webdesign.model.UserRole;
 
 @Repository
-public class UserDAOImpl implements UserDAO {
-	@Autowired
-	private SessionFactory sessionFactory;
+public class UserDAOImpl extends AbstractDaoImpl implements UserDAO  {
+	
 
 	public void saveOrUpdateUser(UserDetail userDetail) {
-		Session session =this.sessionFactory.getCurrentSession();
+		Session session =getCurrentSession();
 		
 		User user  = new User();
 		
@@ -66,24 +65,24 @@ public class UserDAOImpl implements UserDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<UserDetail> userDetailList() {
-		List<UserDetail> userDetailList = this.sessionFactory.getCurrentSession().createQuery("from UserDetail").getResultList();
+		List<UserDetail> userDetailList = getCurrentSession().createQuery("from UserDetail").getResultList();
 		
 		return userDetailList;
 	}
 	
 	public void addShippingAddress(ShippingAddress shippingAddress)
 	{	
-		sessionFactory.getCurrentSession().saveOrUpdate(shippingAddress);
+		getCurrentSession().saveOrUpdate(shippingAddress);
 	}
 
 	public void addBillingAddress(BillingAddress billingAddress)
 	{
-		sessionFactory.getCurrentSession().saveOrUpdate(billingAddress);
+		getCurrentSession().saveOrUpdate(billingAddress);
 	}
 	
 	public void saveOrUpdateAdmin(UserDetail userDetail)
 	{
-		Session session =this.sessionFactory.getCurrentSession();
+		Session session =getCurrentSession();
 		
 		User user  = new User();
 		
@@ -117,7 +116,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		String query = "from UserDetail where username= '"+username+"'";
 		@SuppressWarnings({  "unchecked" })
-		List<UserDetail> userList=this.sessionFactory.getCurrentSession().createQuery(query).getResultList();
+		List<UserDetail> userList=getCurrentSession().createQuery(query).getResultList();
 	    if(userList!=null && !userList.isEmpty())
 	    	return userList.get(0);
 	    else return null;
@@ -127,7 +126,7 @@ public class UserDAOImpl implements UserDAO {
 	public ShippingAddress getShippingAddressById(int userId)
 	{
 		String query ="from ShippingAddress where userdetail_userId= "+userId;
-		List<ShippingAddress> shippingList=this.sessionFactory.getCurrentSession().createQuery(query).getResultList();
+		List<ShippingAddress> shippingList=getCurrentSession().createQuery(query).getResultList();
 		 if(shippingList!=null && !shippingList.isEmpty())
 		    	return shippingList.get(0);
 		    else return null;
@@ -138,7 +137,7 @@ public class UserDAOImpl implements UserDAO {
 	public BillingAddress getBillingAddressById(int userId)
 	{
 		String query ="from BillingAddress where userdetail_userId= "+userId;
-		List<BillingAddress> billingList=this.sessionFactory.getCurrentSession().createQuery(query).getResultList();
+		List<BillingAddress> billingList=getCurrentSession().createQuery(query).getResultList();
 		 if(billingList!=null && !billingList.isEmpty())
 		    	return billingList.get(0);
 		    else return null;

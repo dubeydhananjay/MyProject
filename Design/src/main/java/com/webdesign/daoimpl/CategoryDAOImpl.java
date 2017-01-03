@@ -22,7 +22,7 @@ import com.webdesign.dao.CategoryDAO;
 
 import com.webdesign.model.Category;
 @Repository
-public class CategoryDAOImpl implements CategoryDAO
+public class CategoryDAOImpl extends AbstractDaoImpl implements CategoryDAO
 {
 	private static final Logger logger =  LoggerFactory.getLogger(CategoryDAOImpl.class);
 	
@@ -34,7 +34,7 @@ public class CategoryDAOImpl implements CategoryDAO
 		
 		try
 		{
-			this.sessionFactory.getCurrentSession().saveOrUpdate(category);
+			getCurrentSession().saveOrUpdate(category);
 			return true;
 		}
 		catch(HibernateException e)
@@ -48,7 +48,7 @@ public class CategoryDAOImpl implements CategoryDAO
 	public String listCategories() {
 		
 		@SuppressWarnings({  "unchecked" })
-		List<Category> categoryList=this.sessionFactory.getCurrentSession().createQuery("from Category").getResultList();
+		List<Category> categoryList=getCurrentSession().createQuery("from Category").getResultList();
 		//return categoryList;
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		String json = gson.toJson(categoryList);
@@ -57,13 +57,13 @@ public class CategoryDAOImpl implements CategoryDAO
 
 	public List<Category> listCategory() {
 		@SuppressWarnings({  "unchecked" })
-		List<Category> categoryList=this.sessionFactory.getCurrentSession().createQuery("from Category").getResultList();
+		List<Category> categoryList=getCurrentSession().createQuery("from Category").getResultList();
 		return categoryList;
 	}
 	@SuppressWarnings({  "rawtypes", "unchecked", "deprecation" })
 	public Category getByName(String categoryName) throws IllegalStateException, SystemException
 	{
-		Session session =this.sessionFactory.getCurrentSession();
+		Session session =getCurrentSession();
 		Category category=null;
 		Transaction tx=null;
 		try
@@ -100,7 +100,7 @@ public class CategoryDAOImpl implements CategoryDAO
 	{
 		String editQuery="from Category where categoryId= "+categoryId;
 		@SuppressWarnings({  "unchecked" })
-		List<Category> categoryList=this.sessionFactory.getCurrentSession().createQuery(editQuery).getResultList();
+		List<Category> categoryList=getCurrentSession().createQuery(editQuery).getResultList();
 	    if(categoryList!=null && !categoryList.isEmpty())
 	    	return categoryList.get(0);
 	    else return null;
@@ -114,7 +114,7 @@ public class CategoryDAOImpl implements CategoryDAO
 			
 		Category removeCategory = new Category();
 		removeCategory.setCategoryId(categoryId);
-		this.sessionFactory.getCurrentSession().delete(removeCategory);
+		getCurrentSession().delete(removeCategory);
 		
 		return true;
 		}

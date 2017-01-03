@@ -15,13 +15,13 @@ import com.webdesign.model.UserDetail;
 import com.webdesign.model.UserRole;
 
 @Repository
-public class NewSupplierDAOImpl {
+public class NewSupplierDAOImpl extends AbstractDaoImpl {
 	
-		@Autowired
-		private SessionFactory sessionFactory;
+		/*@Autowired
+		private SessionFactory sessionFactory;*/
 
 		public void saveOrUpdateSupplier(UserDetail userDetail) {
-			Session session =this.sessionFactory.getCurrentSession();
+			Session session =getCurrentSession();
 			
 			User user  = new User();
 			//user.setUserId(userDetails.getUserId());
@@ -54,14 +54,14 @@ public class NewSupplierDAOImpl {
 		}
 		public List<UserDetail> listSupplier() {
 			@SuppressWarnings("unchecked")
-			List<UserDetail> listSupplier = this.sessionFactory.getCurrentSession().createQuery("from UserDetail where roleId=2").getResultList();
+			List<UserDetail> listSupplier = getCurrentSession().createQuery("from UserDetail where roleId=2").getResultList();
 			
 			return listSupplier;
 		}
 		public UserDetail getByRoleId() {
 			String editQuery="from UserDetail where roleId=2";
 			@SuppressWarnings({  "unchecked" })
-			List<UserDetail> listSupplier=this.sessionFactory.getCurrentSession().createQuery(editQuery).getResultList();
+			List<UserDetail> listSupplier=getCurrentSession().createQuery(editQuery).getResultList();
 		    if(listSupplier!=null && !listSupplier.isEmpty())
 		    	return listSupplier.get(0);
 		    else return null;
@@ -72,14 +72,16 @@ public class NewSupplierDAOImpl {
 		{
 			String query=" from UserDetail where username= '"+username+"'";
 			@SuppressWarnings({  "unchecked" })
-			List<UserDetail> listSupplier=this.sessionFactory.getCurrentSession().createQuery(query).getResultList();
+			List<UserDetail> listSupplier=getCurrentSession().createQuery(query).getResultList();
 		    if(listSupplier!=null && !listSupplier.isEmpty())
 		    	return listSupplier.get(0);
 		    else return null;
 		}
 		public void addSupplierAddress(Supplier supplier)
 		{
-			sessionFactory.getCurrentSession().saveOrUpdate(supplier);
+			getCurrentSession().saveOrUpdate(supplier);
 
 		}
+		
+	
 }

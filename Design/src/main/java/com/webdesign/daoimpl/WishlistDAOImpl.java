@@ -13,13 +13,12 @@ import com.webdesign.dao.WishlistDAO;
 
 import com.webdesign.model.Wishlist;
 @Repository
-public class WishlistDAOImpl implements WishlistDAO
+public class WishlistDAOImpl extends AbstractDaoImpl implements WishlistDAO
 {
-	@Autowired
-	private SessionFactory sessionFactory;
+	
 
 	public void addToWishlist(Wishlist wishlist) {
-		sessionFactory.getCurrentSession().saveOrUpdate(wishlist);
+		getCurrentSession().saveOrUpdate(wishlist);
 		
 	}
 	
@@ -27,7 +26,7 @@ public class WishlistDAOImpl implements WishlistDAO
 	public List<Wishlist> getByUserId(int userId)
 	{
 		String query = "from Wishlist where userId= "+userId;
-		List<Wishlist> wishlist=sessionFactory.getCurrentSession().createQuery(query).getResultList();
+		List<Wishlist> wishlist=getCurrentSession().createQuery(query).getResultList();
 		if(wishlist!=null && !wishlist.isEmpty())
 	    {
 	    	return wishlist;
@@ -42,7 +41,7 @@ public class WishlistDAOImpl implements WishlistDAO
 	@SuppressWarnings("unchecked")
 	public String stringWishList()
 	{
-		List<Wishlist> wishlist=sessionFactory.getCurrentSession().createQuery("from Wishlist").getResultList();
+		List<Wishlist> wishlist=getCurrentSession().createQuery("from Wishlist").getResultList();
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		String json = gson.toJson(wishlist);
 		return json;
@@ -54,7 +53,7 @@ public class WishlistDAOImpl implements WishlistDAO
 	{
 		String query = "from Wishlist where wishlistId= "+wishlistId;
 		@SuppressWarnings({  "unchecked" })
-		List<Wishlist> wishlist=sessionFactory.getCurrentSession().createQuery(query).getResultList();
+		List<Wishlist> wishlist=getCurrentSession().createQuery(query).getResultList();
 	    if(wishlist!=null && !wishlist.isEmpty())
 	    {
 	    	return wishlist.get(0);
@@ -68,13 +67,13 @@ public class WishlistDAOImpl implements WishlistDAO
 	{
 		Wishlist removeWishlist = new Wishlist();
 		removeWishlist.setWishListId(wishlistId);
-		this.sessionFactory.getCurrentSession().delete(removeWishlist);
+		getCurrentSession().delete(removeWishlist);
 	}
 	
 	public void setFlag(int wishlistId)
 	{
 		String query="update Wishlist set flag=true where wishlistId= "+wishlistId;
-		this.sessionFactory.getCurrentSession().createQuery(query).executeUpdate();
+		getCurrentSession().createQuery(query).executeUpdate();
 	}
 		
 

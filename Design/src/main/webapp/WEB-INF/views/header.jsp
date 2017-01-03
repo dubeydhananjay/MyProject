@@ -136,7 +136,7 @@ body { margin-top:20px; }
                     <li class="active"><a href="home">Home</a>
                     </li>
                     <!-- Start c:ForEach here -->
-			<c:forEach items="${listCategories}" var="category">
+			<c:forEach items="${listCategory}" var="category">
                     
                     <li class="dropdown yamm-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">${category.categoryName} <b class="caret"></b></a>

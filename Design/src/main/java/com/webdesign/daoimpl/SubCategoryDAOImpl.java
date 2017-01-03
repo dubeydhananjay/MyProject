@@ -13,18 +13,18 @@ import com.webdesign.model.SubCategoryModel;
 
 
 @Repository
-public class SubCategoryDAOImpl implements SubCategoryDao 
+public class SubCategoryDAOImpl extends AbstractDaoImpl implements SubCategoryDao 
 {
 	@Autowired
 	private SessionFactory sessionFactory;
 	public void createSubCategory(SubCategoryModel subCategory) {
 		
-		this.sessionFactory.getCurrentSession().saveOrUpdate(subCategory);
+		getCurrentSession().saveOrUpdate(subCategory);
 	}
 
 	public String subCategoryList() {
 		@SuppressWarnings({  "unchecked" })
-		List<SubCategoryModel> listSubCategories=this.sessionFactory.getCurrentSession().createQuery("from SubCategoryModel").getResultList();
+		List<SubCategoryModel> listSubCategories=getCurrentSession().createQuery("from SubCategoryModel").getResultList();
 		//return categoryList;
 		Gson gs=new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		String subcategoriesjson=gs.toJson(listSubCategories);
@@ -33,7 +33,7 @@ public class SubCategoryDAOImpl implements SubCategoryDao
 	}
 	public List<SubCategoryModel> listSubCategory() {
 		@SuppressWarnings({  "unchecked" })
-		List<SubCategoryModel> subCategoryList=this.sessionFactory.getCurrentSession().createQuery("from SubCategoryModel").getResultList();
+		List<SubCategoryModel> subCategoryList=getCurrentSession().createQuery("from SubCategoryModel").getResultList();
 		return subCategoryList;
 		
 	}
@@ -41,7 +41,7 @@ public class SubCategoryDAOImpl implements SubCategoryDao
 	{
 		String query=" from SubCategoryModel where subCategoryName= '"+subCategoryName+"'";
 		@SuppressWarnings({  "unchecked" })
-		List<SubCategoryModel> subCategoryList=this.sessionFactory.getCurrentSession().createQuery(query).getResultList();
+		List<SubCategoryModel> subCategoryList=getCurrentSession().createQuery(query).getResultList();
 	    if(subCategoryList!=null && !subCategoryList.isEmpty())
 	    	return subCategoryList.get(0);
 	    else return null;
@@ -50,7 +50,7 @@ public class SubCategoryDAOImpl implements SubCategoryDao
 	{
 		String editQuery="from SubCategoryModel where subCategoryId= "+subCategoryId;
 		@SuppressWarnings({  "unchecked" })
-		List<SubCategoryModel> subCategoryList=this.sessionFactory.getCurrentSession().createQuery(editQuery).getResultList();
+		List<SubCategoryModel> subCategoryList=getCurrentSession().createQuery(editQuery).getResultList();
 	    if(subCategoryList!=null && !subCategoryList.isEmpty())
 	    	return subCategoryList.get(0);
 	    else return null;
@@ -60,7 +60,7 @@ public class SubCategoryDAOImpl implements SubCategoryDao
 	{
 		SubCategoryModel removeSubCategory = new SubCategoryModel();
 		removeSubCategory.setSubCategoryId(subCategoryId);
-		this.sessionFactory.getCurrentSession().delete(removeSubCategory);
+		getCurrentSession().delete(removeSubCategory);
 	}
 }
 

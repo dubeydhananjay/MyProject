@@ -16,13 +16,11 @@ import com.webdesign.model.ShippingAddress;
 
 
 @Repository
-public class CartIemDAOImpl implements CartItemDAO
+public class CartIemDAOImpl extends AbstractDaoImpl implements CartItemDAO
 {
-	@Autowired
-	private SessionFactory sessionFactory;
 
 	public void addToBuyNow(CartItem cartItem) {
-		sessionFactory.getCurrentSession().saveOrUpdate(cartItem);
+		getCurrentSession().saveOrUpdate(cartItem);
 		
 	}
 	
@@ -31,7 +29,7 @@ public class CartIemDAOImpl implements CartItemDAO
 	@SuppressWarnings("unchecked")
 	public List<CartItem> listCartItem()
 	{
-		List<CartItem> listCartItem=sessionFactory.getCurrentSession().createQuery("from CartItem").getResultList();
+		List<CartItem> listCartItem=getCurrentSession().createQuery("from CartItem").getResultList();
 		return listCartItem;
 		
 	}
@@ -39,7 +37,7 @@ public class CartIemDAOImpl implements CartItemDAO
 	@SuppressWarnings("unchecked")
 	public String cartItemList()
 	{
-		List<CartItem> listCartItem=sessionFactory.getCurrentSession().createQuery("from CartItem").getResultList();
+		List<CartItem> listCartItem=getCurrentSession().createQuery("from CartItem").getResultList();
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		String json = gson.toJson(listCartItem);
 		return json;
@@ -51,7 +49,7 @@ public class CartIemDAOImpl implements CartItemDAO
 	{
 		String query = "from CartItem where cartItemId= "+cartItemId;
 		@SuppressWarnings({  "unchecked" })
-		List<CartItem> cartItemList=sessionFactory.getCurrentSession().createQuery(query).getResultList();
+		List<CartItem> cartItemList=getCurrentSession().createQuery(query).getResultList();
 	    if(cartItemList!=null && !cartItemList.isEmpty())
 	    {
 	    	return cartItemList.get(0);
@@ -65,20 +63,20 @@ public class CartIemDAOImpl implements CartItemDAO
 	{
 		CartItem removeCart = new CartItem();
 		removeCart.setCartItemId(cartItemId);
-		this.sessionFactory.getCurrentSession().delete(removeCart);
+		getCurrentSession().delete(removeCart);
 	}
 	
 	public void setFlag(int cartItemId)
 	{
 		String query="update CartItem set flag=true where cartItemId= "+cartItemId;
-		this.sessionFactory.getCurrentSession().createQuery(query).executeUpdate();
+		getCurrentSession().createQuery(query).executeUpdate();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<CartItem> cartList(int userId) 
 	{
 		String sql = "from CartItem where  flag = false and userId="+userId;
-		List<CartItem> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
+		List<CartItem> list = getCurrentSession().createQuery(sql).getResultList();
 		return list;
 		
 	}
@@ -87,7 +85,7 @@ public class CartIemDAOImpl implements CartItemDAO
 	public List<CartItem> orderedList(int userId) 
 	{
 		String sql = "from CartItem where flag = true and userId="+userId;
-		List<CartItem> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
+		List<CartItem> list = getCurrentSession().createQuery(sql).getResultList();
 		return list;
 	}
 	
@@ -96,7 +94,7 @@ public class CartIemDAOImpl implements CartItemDAO
 	public List<CartItem> cartListByCartItemId(int cartItemId) 
 	{
 		String sql = "from CartItem where  flag = false and cartItemId="+cartItemId;
-		List<CartItem> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
+		List<CartItem> list = getCurrentSession().createQuery(sql).getResultList();
 		return list;
 		
 	}
@@ -105,7 +103,7 @@ public class CartIemDAOImpl implements CartItemDAO
 	public List<ShippingAddress> getByUserId(int userId)
 	{
 		String sql = "from CartItem where  flag = false and cartItemId="+userId;
-		List<ShippingAddress> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
+		List<ShippingAddress> list = getCurrentSession().createQuery(sql).getResultList();
 		return list;
 	}
 		
