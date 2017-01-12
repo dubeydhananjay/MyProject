@@ -11,33 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> <meta name="keywords" content="">
-    <style type="text/css">
     
-  .carousel-inner > .item > img,
-  .carousel-inner > .item > a > img {
-      width: 100%;
-      margin: auto; height:500px;
-  }
-  #div2 {
-    width: 100px;
-    height: 100px;
-    background: red;
-    -webkit-transition: width 2s, height 4s; /* For Safari 3.1 to 6.0 */
-    transition: width 2s, height 4s;
-}
-
-#div2:hover {
-    width: 300px;
-    height: 300px;
-}
-
-body { margin-top:20px; }
-.panel-title {display: inline;font-weight: bold;}
-.checkbox.pull-right { margin: 0; }
-.pl-ziro { padding-left: 0px; }
-  
-
-    </style>
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
 
@@ -73,7 +47,7 @@ body { margin-top:20px; }
                  <div class="container">
            
             <div class="col-md-6 offer" data-animate="fadeInDown">
-                <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">Get flat 35% off on orders over $50!</a>
+                <a href="#" class="btn btn-success btn-sm"  data-animate-hover="shake"><img src="resources/image/logo.png"/></a>  <a href="#">Welcome TO Organic Soul</a>
             </div>
             <div class="col-md-6" data-animate="fadeInDown">
                 <ul class="menu">
@@ -110,10 +84,7 @@ body { margin-top:20px; }
         <div class="container">
              <div class="navbar-header">
 
-               <!--  <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
-                    <img src="resources/image/BoldMedia-flat-logo.png" alt="logo" class="hidden-xs" hidden="true">
-                    <img src="resources/image/BoldMedia-flat-logo.png" alt="logo" class="visible-xs" hidden="true"><span class="sr-only">go to homepage</span>
-                </a> -->
+               
                 <div class="navbar-buttons">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                         <span class="sr-only">Toggle navigation</span>
@@ -249,8 +220,8 @@ body { margin-top:20px; }
                 
     
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>   
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>   
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     
     <script src="resources/js/bootstrap.min.js"></script>
  
@@ -260,71 +231,10 @@ body { margin-top:20px; }
     <script src="resources/js/bootstrap-hover-dropdown.js"></script>
     <script src="resources/js/owl.carousel.min.js"></script>
     <script src="resources/js/front.js"></script>
+    <script src="resources/js/quantity.js"></script>
+    <script src="resources/js/productsearch.js"></script>
+    <script src="resources/js/scrolltotop.js"></script>
    <script src="resources/js/dirPagination.js"></script>
     
-  <script>
-  function filterredirect()
-  {
-  	window.location.href = "allproducts?search="+document.getElementById('searchItem').value;
-  };
-  
-  function enterfunction(e)
-  {
-	  if(e.keyCode==13)
-		  {
-		      window.location.href = "allproducts?search="+document.getElementById('searchItem').value;
-		  }
-  };
-  
-  $(document).ready(function() {
 
-	$('#searchItem').autocomplete({
-		serviceUrl: '${pageContext.request.contextPath}/getTags',
-		paramName: "subCategoryName",
-		delimiter: ",",
-	   transformResult: function(response) {
-
-		return {
-		  //must convert json to javascript object before process
-		  suggestions: $.map($.parseJSON(response), function(item) {
-
-		      return { value: item.subCategoryName, data: item.subCategoryId };
-		   })
-
-		 };
-
-            }
-
-		
-	 });
-	
-  });
-  
-  $(document).ready(function(){
-
-	  $(function(){
-	   
-	      $(document).on( 'scroll', function(){
-	   
-	      	if ($(window).scrollTop() > 100) {
-	  			$('.scroll-top-wrapper').addClass('show');
-	  		} else {
-	  			$('.scroll-top-wrapper').removeClass('show');
-	  		}
-	  	});
-	   
-	  	$('.scroll-top-wrapper').on('click', scrollToTop);
-	  });
-	   
-	  function scrollToTop() {
-	  	verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
-	  	element = $('body');
-	  	offset = element.offset();
-	  	offsetTop = offset.top;
-	  	$('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
-	  }
-
-	  });
-
-</script>
 

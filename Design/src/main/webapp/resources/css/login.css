@@ -36,5 +36,28 @@
     .btn-facebook.active {
         background-color: #0d2456 \9 !important;
     }
+    .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 100%;
+      margin: auto; height:500px;
+  }
+  #div2 {
+    width: 100px;
+    height: 100px;
+    background: red;
+    -webkit-transition: width 2s, height 4s; /* For Safari 3.1 to 6.0 */
+    transition: width 2s, height 4s;
+}
+
+#div2:hover {
+    width: 300px;
+    height: 300px;
+}
+
+body { margin-top:20px; }
+.panel-title {display: inline;font-weight: bold;}
+.checkbox.pull-right { margin: 0; }
+.pl-ziro { padding-left: 0px; }
+  
     
  
