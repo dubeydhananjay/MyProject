@@ -78,7 +78,7 @@
                             <strong>Mumbai</strong>
                         </p>
 
-                        <a href="contact.html">Go to contact page</a>
+                        <a href="contactus">Go to contact page</a>
 
                         <hr class="hidden-md hidden-lg">
 
@@ -127,7 +127,7 @@
         <div id="copyright">
             <div class="container">
                 <div class="col-md-6">
-                    <p class="pull-left">© 2015 Your name goes here.</p>
+                    <p class="pull-left">© Dhananjay J.Dubey</p>
 
                 </div>
                

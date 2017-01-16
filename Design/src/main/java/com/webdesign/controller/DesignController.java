@@ -53,8 +53,8 @@ private CartItemService cartItemService;
 
 @RequestMapping(value={"/","home"})
 	public String getHome(Model model) {
-		model.addAttribute("categoriesList" ,this.categoryService.listCategory());
-		model.addAttribute("listCategories", this.categoryService.listCategory());
+		
+		model.addAttribute("listCategories", categoryService.listCategory());
 		model.addAttribute("productList",this.productService.listProduct());
 		model.addAttribute("subCategoriesList", this.subCategoryService.subCategoryList());
 		model.addAttribute("productViewList", this.productService.productViewList());
@@ -96,25 +96,14 @@ private CartItemService cartItemService;
 		return pJson;
 	}
 	
-	@ModelAttribute
-	public void global(Model model,HttpSession session)
-	{
-		
-		model.addAttribute("listCategory",categoryService.listCategory());
-		model.addAttribute("listsubCategory",subCategoryService.listSubCategory());
-		
-	    try
-	    {
-	     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		    String user = authentication.getName();
-		    int userId = userService.getByName(user).getUserId();
-		
-		    session.setAttribute("cartListNo",this.cartItemService.cartList(userId).size());
-		}
-		catch(Exception e)
-		{
-			session.setAttribute("cartListNo",0);
-		}
+	@RequestMapping("/contactus")
+	public String contactUs() {
+		return "contactus";
+	}
+	
+	@RequestMapping("/aboutus")
+	public String aboutUs() {
+		return "aboutus";
 	}
 
 

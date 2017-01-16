@@ -26,8 +26,7 @@ public class CategoryDAOImpl extends AbstractDaoImpl implements CategoryDAO
 {
 	private static final Logger logger =  LoggerFactory.getLogger(CategoryDAOImpl.class);
 	
-@Autowired
-	private SessionFactory sessionFactory;
+
 
 	public boolean createCategory(Category category) 
 	{
@@ -98,12 +97,18 @@ public class CategoryDAOImpl extends AbstractDaoImpl implements CategoryDAO
 	}
 	public Category getById(int categoryId)
 	{
+		logger.debug("calling getById");
 		String editQuery="from Category where categoryId= "+categoryId;
+		logger.debug("query"+editQuery);
 		@SuppressWarnings({  "unchecked" })
 		List<Category> categoryList=getCurrentSession().createQuery(editQuery).getResultList();
 	    if(categoryList!=null && !categoryList.isEmpty())
 	    	return categoryList.get(0);
-	    else return null;
+	    
+	    else {
+	    	logger.debug("end getById");
+	    	return null;
+	    	}
 	
 	}
 	public boolean delete(int categoryId)
@@ -111,11 +116,11 @@ public class CategoryDAOImpl extends AbstractDaoImpl implements CategoryDAO
 		try
 		{
 			
-			
+		logger.debug("calling delete");	
 		Category removeCategory = new Category();
 		removeCategory.setCategoryId(categoryId);
 		getCurrentSession().delete(removeCategory);
-		
+		logger.debug("end delete");
 		return true;
 		}
 		catch(HibernateException e)

@@ -11,6 +11,6 @@
 <title>Error</title>
 </head>
 <body>
-Access denied
+<legend class="text-center"><strong><h1 text-align="centre">Access denied</h1></strong></legend>
 </body>
 </html>

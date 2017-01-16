@@ -74,7 +74,7 @@
                        </th>
                   <th>Image</th>
                   <th>Total Amount</th>
-                  <th>Buy Now</th>
+                  
                   <th>Remove</th>
                   
 				</tr>
@@ -91,7 +91,7 @@
 				  
 				  <td><a href="viewproduct-{{list.productId}}-product"><img src="resources/image/{{list.productId}}.jpg" width="100px" height="100px"></a></td>
 				  <td>{{list.amount * list.quantity}}</td>
-				  <td><a href="buynow-{{list.productId}}?userId=1"><button type="button" class="btn btn-warning">Buy Now</button></a></td>			 
+				  			 
 				  <td><a href="delete-{{list.cartItemId}}"><button type="button" class="btn btn-success">Remove</button></a></td>
 				  </tr>
 				  <tr>
@@ -102,7 +102,7 @@
                      <td></td>
                      <td></td>
                      <td></td>
-                     <td></td>
+                     
                       <td>Grand Total:Rs {{resultValue | totalAmtQty:'quantity':'amount'}}</td>
 				  </tr>
 				  </tbody></table>

@@ -7,22 +7,28 @@
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <address>
-                        <strong>Elf Cafe</strong>
+                        <strong>{{so.streetAddress1}}</strong>
                         <br>
-                        2135 Sunset Blvd
+                        <strong>{{so.streetAddress2}}</strong>
                         <br>
-                        Los Angeles, CA 90026
+                        <strong>{{so.landmark}}</strong>
                         <br>
-                        <abbr title="Phone">P:</abbr> (213) 484-6829
+                        <strong>{{so.city}}</strong>
+                        <br>
+                        <strong>{{so.district}} {{so.pinCode}}</strong>
+                        <br>
+                         <strong>{{so.city}}</strong>
+                        <br>
+                        
                     </address>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 text-right">
                     <p>
-                        <em>Date: 1st November, 2013</em>
+                        <em id="date">Date: 1st November, 2013</em>
                     </p>
-                    <p>
+                    <!-- <p>
                         <em>Receipt #: 34522677W</em>
-                    </p>
+                    </p> -->
                 </div>
             </div>
             <div class="row">
@@ -74,7 +80,7 @@
 				  angular.module('myNewApp',[]).controller('myNewController',function($scope)
 						  {   
 					  $scope.orders = ${placedOrder};
-						  
+					  $scope.so = ${listshippingaddress};	  
    
       $scope.calcTotal = function(){
     	    var total = 0;
@@ -88,7 +94,7 @@
    
 });
 
-
+				  document.getElementById("date").innerHTML = Date();
 </script>
 
 <%@include file="footer.jsp" %>

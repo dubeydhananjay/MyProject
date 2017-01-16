@@ -107,7 +107,7 @@
                     <li class="active"><a href="home">Home</a>
                     </li>
                     <!-- Start c:ForEach here -->
-			<c:forEach items="${listCategory}" var="category">
+			<c:forEach items="${listCategories}" var="category">
                     
                     <li class="dropdown yamm-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">${category.categoryName} <b class="caret"></b></a>
@@ -135,8 +135,8 @@
                                     </c:forEach><!-- End of second c:foreach  -->
                                     </ul>
                                     </li></c:forEach><!-- End of First c:foreach  -->
-                                    <li><a href="#">About Us</a></li>
-        							<li><a href="#">Contact Us</a></li>
+                                    <li><a href="aboutus">About Us</a></li>
+        							<li><a href="contactus">Contact Us</a></li>
         		
                                     </ul>
                                      
@@ -231,10 +231,49 @@
     <script src="resources/js/bootstrap-hover-dropdown.js"></script>
     <script src="resources/js/owl.carousel.min.js"></script>
     <script src="resources/js/front.js"></script>
-    <script src="resources/js/quantity.js"></script>
-    <script src="resources/js/productsearch.js"></script>
+    <!-- <script src="resources/js/quantity.js"></script> -->
+    <!-- <script src="resources/js/productsearch.js"></script> -->
     <script src="resources/js/scrolltotop.js"></script>
    <script src="resources/js/dirPagination.js"></script>
     
+<script type="text/javascript">
+function filterredirect()
+{
+	window.location.href = "allproducts?search="+document.getElementById('searchItem').value;
+};
 
+function enterfunction(e)
+{
+	  if(e.keyCode==13)
+		  {
+		      window.location.href = "allproducts?search="+document.getElementById('searchItem').value;
+		  }
+};
+
+$(document).ready(function() {
+
+	$('#searchItem').autocomplete({
+		serviceUrl: '${pageContext.request.contextPath}/getTags',
+		paramName: "subCategoryName",
+		delimiter: ",",
+	   transformResult: function(response) {
+
+		return {
+		  //must convert json to javascript object before process
+		  suggestions: $.map($.parseJSON(response), function(item) {
+
+		      return { value: item.subCategoryName, data: item.subCategoryId };
+		   })
+
+		 };
+
+          }
+
+		
+	 });
+	
+});
+
+
+</script>
 

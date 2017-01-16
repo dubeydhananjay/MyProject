@@ -64,16 +64,10 @@ public class CategoryController
 	@RequestMapping("/deleteCategory-{categoryId}")
 	public String deleteCategory(@PathVariable("categoryId") int categoryId, Model model,HttpServletRequest request)
 	{
-		try
-		{
+		
 		this.categoryService.delete(categoryId);
-		}
-		catch(DataIntegrityViolationException e)
-		{
-			HttpSession session= request.getSession();
-			session.setAttribute("Error", "<div class=\"alert\"><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Category Cannot Be Deleted!!Constraint Violation</div>");
-			 
-		}
+		
+		
 		return "redirect:/categories";
 	}
 

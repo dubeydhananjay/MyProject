@@ -65,19 +65,9 @@
                                 </p>
                                <!--  <p class="price">Rs.{{productList.productPrice}}</p> -->
                                 <p class="text-center buttons" ng-if="productList.productQuantity!=0">
-                                    <a id="quantityUrl" onclick="redirect()" dummyhref="addCart-{{productList.productId}}-" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add To Cart</a> 
+                                    <a href="addCart-{{productList.productId}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add To Cart</a> 
                                     <a href="wishlist-{{productList.productId}}" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
-                                 <div class="input-group">
-   <br>
-         <p>Quantity To Be Added in Cart</p>
-         
-        <div class="form-inline">
-         <input type="number" id="quantity" class="form-control input-number" value="1" min="1" max="3" maxlength="1">
-          <span style="color:red;">${sessionScope.Error} <c:set var="Error" value="" scope="session"/></span>
-        </div>
-      </div>   
-                                </p>
-         </div>
+                                
     
                             <div class="row" id="thumbs">
                                 <div class="col-xs-4">
@@ -99,7 +89,8 @@
                              </div>
 								</div><br>
                     <div class="box" id="details">
-<h6>Product ID: {{productList.productId}}</h6>
+                    
+<h6>Product ID:{{productList.productId}}</h6>
 <h6>Product Name:{{productList.productName}}</h6>
 <h6>Category Name:{{productList.categoryName}}</h6>
 <h6>SubCategory Name: {{productList.subCategoryName}}</h6>
@@ -118,7 +109,8 @@
                                 </p>
                             </div></div></div>
 </div></div> <br>
-  <script type="text/javascript">
+
+  <script>
 				  angular.module('myNewApp',[]).controller('myNewController',function($scope)
 						  {
 					  $scope.productList=${productView};
@@ -129,8 +121,9 @@
 				      
 						  });
 				  
-
+				  
 				  </script>
+				 
 
 
 

@@ -29,7 +29,7 @@
         				</button></a>
         			
         			<!-- <div class="options-cart"> -->
-        				<a href="addCart-{{list.productId}}-{{list.productQuantity}}"><button class="btn btn-default" title="Add to cart">
+        				<a href="addCart-{{list.productId}}"><button class="btn btn-default" title="Add to cart">
         					<span class="fa fa-shopping-cart"></span>
         				</button></a>
         			 </div> 

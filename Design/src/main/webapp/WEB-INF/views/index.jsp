@@ -104,16 +104,17 @@
                             
       <article class="col-item">
         		<div class="photo">
-        			<div class="options" ng-if="list.productQuantity!=0">
+        			<div class="options">
         				<a href="wishlist-{{list.productId}}"><button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
         					<i class="fa fa-heart"></i>
         				</button></a>
-        				<a href="buynow-{{list.productId}}?userId=1"><button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Buy Now">
+        				
+        				<a href="buynow-{{list.productId}}?userId=1"  ng-if="list.productQuantity!=0"><button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Buy Now">
         					<i class="fa fa-credit-card"></i>
         				</button></a>
         			
         			<!-- <div class="options-cart"> -->
-        				<a href="addCart-{{list.productId}}-1"><button class="btn btn-default" title="Add to cart">
+        				<a href="addCart-{{list.productId}}"  ng-if="list.productQuantity!=0"><button class="btn btn-default" title="Add to cart">
         					<span class="fa fa-shopping-cart"></span>
         				</button></a>
         			 </div> 

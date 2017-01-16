@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="error-template">
                 <h1>
-                    Oops!</h1>
+                   SORRY!!!</h1>
                 <h2>
                     404 Page Not Found</h2>
                 <div class="error-details">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="error-actions">
                     <a href="home" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
-                        Take Me Home </a>
+                        Go to Home </a>
                 </div>
             </div>
         </div>

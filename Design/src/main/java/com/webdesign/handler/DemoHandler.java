@@ -331,16 +331,28 @@ public class DemoHandler {
 	
 	
 	
-	public String saveOrUpdateSupplier(UserDetail userDetail, Supplier supplier)
+	public String saveOrUpdateSupplier(UserDetail userDetail, Supplier supplier,MessageContext messageContext)
 	{
-		
+		try
+		{
 		newSupplierService.saveOrUpdateSupplier(userDetail);
 		supplier.setUserDetail(userDetail);
 		userDetail.setSupplier(supplier);
 		this.supplier.setUserDetail(userDetail);
 		newSupplierService.addSupplierAddress(supplier);
-		//newSupplierService.savOrUpdateSupplier(userDetail);
-	
+		
+		SimpleMailMessage email = new SimpleMailMessage();
+		email.setTo(userDetail.getEmailId());
+		email.setSubject("Welocme to ORGANIC SOUL");
+		email.setText("Thank you for creating account at our website!!!\nUsername: "+userDetail.getUsername()+"\nPassword: "+userDetail.getPassword());
+		
+		mailSender.send(email);
+		}
+		catch (Exception e) {
+			
+			messageContext.addMessage(new MessageBuilder().error().build());
+			return "failure";
+		}
 		return "success";
 	}
 
